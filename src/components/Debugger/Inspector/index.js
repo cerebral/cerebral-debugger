@@ -10,7 +10,6 @@ import {
   isNull
 } from '../../../common/utils'
 import JSONInput from './JSONInput'
-import connector from 'connector'
 
 function isInPath (source, target) {
   if (!source || !target) {
@@ -266,11 +265,6 @@ class Value extends Inferno.Component {
       value
     })
     this.setState({isEditing: false})
-
-    connector.sendEvent('changeModel', {
-      path: this.state.path,
-      value: value
-    })
   }
   onBlur () {
     this.setState({isEditing: false})

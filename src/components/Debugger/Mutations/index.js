@@ -8,6 +8,7 @@ import Mutation from '../Signals/Signal/Action/Mutation'
 import connector from 'connector'
 
 export default connect({
+  port: state`port`,
   mutations: state`debugger.mutations`,
   currentRememberedMutationIndex: state`debugger.currentRememberedMutationIndex`,
   searchValue: state`debugger.searchValue`,
@@ -17,6 +18,7 @@ export default connect({
   signalClicked: signal`debugger.signalClicked`
 },
   function Mutations ({
+    port,
     mutations,
     currentRememberedMutationIndex,
     searchValue,
@@ -46,7 +48,7 @@ export default connect({
                   }
 
                   mutationDoubleClicked({index})
-                  connector.sendEvent('remember', index)
+                  connector.sendEvent(port, 'remember', index)
                 }}
                 className={classnames('list-item', {
                   'faded': searchValue && !isSearchHit
