@@ -1,3 +1,5 @@
+import Color from 'color'
+
 export function hashCode (str) { // java String#hashCode
   var hash = 0
   for (var i = 0; i < str.length; i++) {
@@ -53,8 +55,6 @@ export function ColorLuminance (hex, lum) {
 
   return rgb
 }
-
-import Color from 'color'
 
 const FNV1_32A_INIT = 0x811c9dc5
 function fnv32aHash (str) {
