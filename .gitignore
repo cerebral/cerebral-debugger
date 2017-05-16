@@ -1,12 +1,10 @@
 node_modules
 npm-debug.log
-lerna-debug.log
 coverage
 .nyc_output
 .DS_Store
 dist
 lib
-!build/
 electron/build
 website/builder/docs
 *darwin-x64
