@@ -24,7 +24,7 @@
     "url": "https://github.com/cerebral/cerebral-debugger/issues"
   },
   "homepage": "http://cerebraljs.com/docs/introduction/debugger.html",
-  "author": "Christian Alfoni <support@cerebraljs.com>",
+  "author": "Christian Alfoni <christianalfoni@gmail.com>",
   "build": {
     "productName": "Cerebral Debugger",
     "appId": "cerebral.debugger",

@@ -38,8 +38,8 @@ before_script:
 after_success:
 - |
   git remote add auth https://cerebraljs:${GH_TOKEN}@github.com/cerebral/cerebral-debugger;
-  git config --global user.email "cerebraljs@gmail.com";
-  git config --global user.name "Cerebral JS";
+  git config --global user.email "christianalfoni@gmail.com";
+  git config --global user.name "Christian Alfoni";
   if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then
     npm run build;
     if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
