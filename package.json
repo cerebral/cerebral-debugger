@@ -40,7 +40,8 @@
         "tar.gz",
         "deb",
         "rpm"
-      ]
+      ],
+      "category": "Development"
     },
     "mac": {
       "category": "public.app-category.developer-tools"
