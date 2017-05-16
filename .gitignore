@@ -6,7 +6,8 @@ coverage
 .DS_Store
 dist
 lib
-build
+!build/
+electron/build
 website/builder/docs
 *darwin-x64
 **/yarn.lock
