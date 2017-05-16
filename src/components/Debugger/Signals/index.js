@@ -9,6 +9,7 @@ import List from './List'
 import Signal from './Signal'
 
 export default connect({
+  port: state`port`,
   currentPage: state`debugger.currentPage`,
   signalsList: signalsList,
   useragent: state`useragent`,
@@ -33,7 +34,7 @@ export default connect({
     }
     onResetClick () {
       this.props.resetClicked()
-      connector.sendEvent('reset')
+      connector.sendEvent(this.props.port, 'reset')
     }
     onCopySignalsClick () {
       this.setState({copiedSignals: JSON.stringify(this.props.signalsList.reverse(), null, 2)}, () => {
