@@ -4,42 +4,42 @@
 	<title></title>
 	<meta charset="utf-8" />
 	<style>
-		html {
-			background-color: #ececec;
-			font-family: helvetica;
-			padding: 10px;
-		}
-		body {
-			margin: 0px;
-			text-align: center;
-		}
+    html, body {
+      font-family: sans-serif;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background-color: #FAFAFA;
+      text-align: center;
+    }
 		img {
-			height: 60px;
+			height: 200px;
 			margin-bottom: 10px;
 		}
 		table {
 			margin: 0 auto;
 		}
 		.update {
-			font-size: 15px;
-			font-weight: bold;
-			color: #fff;
-			background-color: #13679a;
-			border-width: 0;
-			padding: 6px 8px;
-			border-radius: 4px;
-			cursor: pointer;
-			position: fixed;
-			right: 10px;
-			bottom: 5px;
+      height: 40px;
+      border: 1px solid #333;
+      background-color: #78db27;
+      border-radius: 3px;
+      margin: 15px 5px;
+      padding: 5px 10px;
+      font-size: 16px;
+      color: #FFF;
+      cursor: pointer;
+      font-weight: bold;
 		}
 		.skip {
 			position: fixed;
 			left: 10px;
+      bottom: 0;
 		}
 		.remind {
 			position: fixed;
-			right: 150px;
+			right: 10px;
+      bottom: 0;
 		}
 		.controls {
 			font-size: 12px;
@@ -52,14 +52,28 @@
 		.old, .new {
 			font-weight: bold;
 		}
+    .skip, .remind {
+      height: 40px;
+      border: 1px solid #333;
+      background-color: #FFF;
+      border-radius: 3px;
+      margin: 15px 5px;
+      padding: 5px 10px;
+      font-size: 16px;
+      color: #333;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 	</style>
 </head>
 	<body>
-		<h3>New Update is Available</h3>
-		<hr />
+		<h1>Update is available</h1>
 		<div style="text-align:center;">
 			<img src="logo.png"/>
-			<p>A new version of the CerebralJS Debugger is available!</p>
+			<h3>A new version of the Cerebral Debugger is available!</h3>
 			<table>
 				<tr>
 					<td style="text-align:right;">Current Version:</td>
@@ -70,15 +84,15 @@
 					<td class="new"></td>
 				</tr>
 			</table>
+      <button class="update response" data-type="update">Install Update</button>
 			<h1>Release notes</h1>
 			<p class="notes">
 			</p>
 		</div>
-		<hr />
 		<p class="controls">
 			<a class="skip response" data-type="skip" href="#">Skip This Version</a>
 			<a class="remind response" data-type="remind" href="#">Remind Me Later</a>
-			<button class="update response" data-type="update">Install Update</button>
+
 		</p>
 		<script>
 			const remote = require('electron').remote;
