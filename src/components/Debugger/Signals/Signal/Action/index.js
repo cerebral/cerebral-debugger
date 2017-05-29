@@ -89,7 +89,7 @@ class Action extends Inferno.Component {
               <div className='action-inputValue'><Inspector value={execution.payload} /></div>
             </div>
             <div className='action-error-message'>
-              <strong>{error.name}:</strong> <Inspector value={error.message} />
+              <strong>{error.name}:</strong> <Inspector value={error} />
             </div>
             <pre data-line={getLineNumber(error) || null}>
               <code
