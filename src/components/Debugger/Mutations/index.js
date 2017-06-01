@@ -57,7 +57,7 @@ export default connect({
                 <Mutation mutation={mutation.data} onMutationClick={(path) => mutationClicked({path})} />
                 {currentRememberedMutationIndex === index ? (
                   <button disabled className='timetravel-button active'>now</button>
-                ): (
+                ) : (
                   <button disabled={executingSignalsCount} onClick={() => {
                     mutationDoubleClicked({index})
                     connector.sendEvent(port, 'remember', index)

@@ -84,7 +84,7 @@ export default connect({
       const data = this.props.signal.functionsRun[action.functionIndex] ? this.props.signal.functionsRun[action.functionIndex].data : null
 
       if (action._functionTreePrimitive && action.name && action.name.toLowerCase().indexOf(this.props.searchValue) >= 0) {
-        return true;
+        return true
       }
 
       return (data || []).reduce((currentHasSearchContent, dataItem) => {
