@@ -63,7 +63,7 @@ export default connect({
         const style = isOutput ? {cursor: 'pointer'} : {opacity: 0.3}
         let isExpanded = this.state.expandedOutputs[action.functionIndex] && this.state.expandedOutputs[action.functionIndex][output]
         isExpanded = typeof isExpanded === 'undefined' ? true : isExpanded
-        const outputs = action.outputs[output]._functionTreePrimitive ? action.outputs[output].items : action.outputs[output]
+        const outputs = action.outputs[output]
 
         return (
           <div className='signal-output' style={style} key={index}>
@@ -74,7 +74,7 @@ export default connect({
             )}
             <div className='signal-outputPath' onClick={(event) => this.toggleOutput(event, action, output)}>
               <div className={isOutput ? 'signal-outputName executed' : 'signal-outputName'}>{output}</div>
-              {isOutput && isExpanded ? outputs.map(this.renderAction) : null}
+              {isOutput && isExpanded ? this.renderAction(outputs, 0) : null}
             </div>
           </div>
         )
@@ -82,6 +82,10 @@ export default connect({
     }
     actionHasSearchContent (action) {
       const data = this.props.signal.functionsRun[action.functionIndex] ? this.props.signal.functionsRun[action.functionIndex].data : null
+
+      if (action._functionTreePrimitive && action.name && action.name.toLowerCase().indexOf(this.props.searchValue) >= 0) {
+        return true;
+      }
 
       return (data || []).reduce((currentHasSearchContent, dataItem) => {
         if (currentHasSearchContent) {
@@ -96,10 +100,15 @@ export default connect({
       }, false)
     }
     renderAction (action, index) {
-      if (action._functionTreePrimitive) {
+      const hasSearchContent = (
+        this.props.searchValue &&
+        this.actionHasSearchContent(action)
+      )
+
+      if (action._functionTreePrimitive && action.items && action.items.length) {
         return (
           <div key={index} onClick={(event) => event.stopPropagation()}>
-            <span className='signal-groupName'><strong>{action.type}</strong>{action.name && ': ' + action.name}</span>
+            <span className={hasSearchContent === false ? 'signal-groupName faded' : 'signal-groupName'}><strong>{action.type}</strong>{action.name && ': ' + action.name}</span>
             <div className='signal-groupHeader' key={index}>
               <div className='signal-group'>
                 {action.items.map(this.renderAction)}
@@ -107,12 +116,9 @@ export default connect({
             </div>
           </div>
         )
+      } else if (action._functionTreePrimitive && (!action.items || !action.items.length)) {
+        return null
       }
-
-      const hasSearchContent = (
-        this.props.searchValue &&
-        this.actionHasSearchContent(action)
-      )
 
       const isExecuted = Boolean(this.props.signal.functionsRun[action.functionIndex])
 
@@ -158,7 +164,7 @@ export default connect({
           {this.props.executedByColor ? <div className='executedByLine' style={{backgroundColor: this.props.executedByColor}} /> : null}
           <h3 className='signal-title'>{this.props.signal.name}</h3>
           <div className='signal-chain'>
-            {this.props.signal.staticTree.items.map((action, index) => this.renderAction(action, index))}
+            {this.renderAction(this.props.signal.staticTree, 0)}
           </div>
           {this.props.executedByColor ? <div className='executedByLine' style={{backgroundColor: this.props.executedByColor}} /> : null}
         </div>

@@ -106,6 +106,10 @@
   display: inline-block;
 }
 
+.signal-groupName.faded {
+  opacity: 0.5;
+}
+
 .signal-empty {
   display: flex;
   align-items: center;
