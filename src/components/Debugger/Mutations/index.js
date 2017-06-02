@@ -12,7 +12,7 @@ export default connect({
   mutations: state`debugger.mutations`,
   currentRememberedMutationIndex: state`debugger.currentRememberedMutationIndex`,
   searchValue: state`debugger.searchValue`,
-  isExecuting: state`debugger.isExecuting`,
+  executingSignalsCount: state`debugger.executingSignalsCount`,
   mutationDoubleClicked: signal`debugger.mutationDoubleClicked`,
   mutationClicked: signal`debugger.mutationClicked`,
   signalClicked: signal`debugger.signalClicked`
@@ -22,7 +22,7 @@ export default connect({
     mutations,
     currentRememberedMutationIndex,
     searchValue,
-    isExecuting,
+    executingSignalsCount,
     mutationDoubleClicked,
     mutationClicked,
     signalClicked
@@ -42,20 +42,11 @@ export default connect({
 
             return (
               <li
-                onDblClick={() => {
-                  if (isExecuting) {
-                    return
-                  }
-
-                  mutationDoubleClicked({index})
-                  connector.sendEvent(port, 'remember', index)
-                }}
                 className={classnames('list-item', {
                   'faded': searchValue && !isSearchHit
                 })}
                 key={index}
               >
-                {currentRememberedMutationIndex === index ? <div className='list-remembered' /> : null}
                 <div className='list-indicator' style={signalStyle} />
                 <div
                   className='signal-name'
@@ -64,6 +55,14 @@ export default connect({
                   {mutation.signalName}
                 </div>
                 <Mutation mutation={mutation.data} onMutationClick={(path) => mutationClicked({path})} />
+                {currentRememberedMutationIndex === index ? (
+                  <button disabled className='timetravel-button active'>now</button>
+                ) : (
+                  <button disabled={executingSignalsCount} onClick={() => {
+                    mutationDoubleClicked({index})
+                    connector.sendEvent(port, 'remember', index)
+                  }} className='timetravel-button'>travel</button>
+                )}
               </li>
             )
           })}
