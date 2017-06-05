@@ -1,5 +1,6 @@
 sudo: false
-
+env:
+    - DEBUG: "*"
 language: node_js
 node_js: '6'
 cache:
@@ -42,10 +43,10 @@ after_success:
   if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then
     npm run build;
     if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
-      travis_wait 600 DEBUG="*" npm run package:linux --verbose;
+      npm run package:linux --verbose;
     fi
     if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-      travis_wait 600 DEBUG="*" npm run package:mac_and_win --verbose;
+      npm run package:mac_and_win --verbose;
     fi
     if [[ $? -ne 0 ]] ; then
      exit 1
