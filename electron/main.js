@@ -2,6 +2,7 @@
 const electron = require('electron')
 const WebSocketServer = require('ws').Server
 const app = electron.app
+const appVersion = app.getVersion()
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
@@ -29,7 +30,34 @@ function createWindow () {
     {
       label: 'Application',
       submenu: [
-        { label: 'Quit', accelerator: 'Command+Q', click: function () { app.quit() } }
+        { label: 'Cerebral Debugger v' + appVersion },
+        { type: 'separator' },
+        {
+          label: 'Learn More',
+          click () {
+            require('electron').shell.openExternal(
+              'http://cerebraljs.com/docs/introduction/debugger.html'
+            )
+          }
+        },
+        {
+          label: 'Release Notes',
+          click () {
+            require('electron').shell.openExternal(
+              'https://github.com/cerebral/cerebral-debugger/releases/tag/v' + appVersion
+            )
+          }
+        },
+        {
+          label: 'License',
+          click () {
+            require('electron').shell.openExternal(
+              'https://github.com/cerebral/cerebral-debugger/blob/master/LICENSE'
+            )
+          }
+        },
+        { type: 'separator' },
+        { label: 'Quit', accelerator: 'CmdOrCtrl+Q', click: function () { app.quit() } }
       ]
     },
     {
