@@ -34,6 +34,7 @@
       ]
     },
     "linux": {
+      "packageCategory": "devel",
       "target": [
         "AppImage",
         "tar.gz",
