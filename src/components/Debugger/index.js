@@ -1,17 +1,18 @@
 import './styles.css'
-import Inferno from 'inferno'
+import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
 import jsonStorage from 'electron-json-storage'
 import connector from 'connector'
 import {Controller} from 'cerebral'
 import {Container} from 'cerebral/inferno'
-import UserAgent from 'cerebral-module-useragent'
+import UserAgent from '@cerebral/useragent'
 import DebuggerModule from '../../modules/Debugger'
 
 import AddApp from './AddApp'
 import App from './App'
 import Apps from './Apps'
 
-class Debugger extends Inferno.Component {
+class Debugger extends Component {
   constructor (props) {
     super(props)
     this.state = {

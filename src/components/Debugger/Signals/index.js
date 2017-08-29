@@ -1,5 +1,6 @@
 import './styles.css'
-import Inferno from 'inferno'
+import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
 import {connect} from 'cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import signalsList from '../../../common/computed/signalsList'
@@ -17,7 +18,7 @@ export default connect({
   isExecuting: state`debugger.isExecuting`,
   resetClicked: signal`debugger.resetClicked`
 },
-  class Signals extends Inferno.Component {
+  class Signals extends Component {
     constructor (props) {
       super(props)
       this.state = {copiedSignals: null}

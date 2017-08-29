@@ -1,5 +1,6 @@
 import './styles.css'
-import Inferno from 'inferno'
+import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
 import {connect} from 'cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import Inspector from '../Inspector'
@@ -15,7 +16,7 @@ export default connect({
   modelChanged: signal`debugger.modelChanged`,
   modelClicked: signal`debugger.modelClicked`
 },
-  class Model extends Inferno.Component {
+  class Model extends Component {
     constructor (props) {
       super(props)
       this.onModelChange = this.onModelChange.bind(this)

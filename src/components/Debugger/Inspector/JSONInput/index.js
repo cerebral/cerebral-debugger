@@ -1,5 +1,6 @@
 import './styles.css'
-import Inferno from 'inferno'
+import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
 import {connect} from 'cerebral/inferno'
 import {
   isObject,
@@ -7,7 +8,7 @@ import {
 } from '../../../../common/utils'
 
 export default connect({},
-  class JSONInput extends Inferno.Component {
+  class JSONInput extends Component {
     constructor (props) {
       super(props)
       this.state = {

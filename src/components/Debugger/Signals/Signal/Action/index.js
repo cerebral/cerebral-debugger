@@ -1,7 +1,7 @@
 /* global Prism */
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
-
+import Component from 'inferno-component' // eslint-disable-line
 import Inspector from '../../../Inspector'
 import Mutation from './Mutation'
 import Service from './Service'
@@ -43,7 +43,7 @@ function renderCode (error) {
   return error.func.split('\n').map((line) => line.replace(/\t/, '')).join('\n')
 }
 
-class Action extends Inferno.Component {
+class Action extends Component {
   constructor (props) {
     super(props)
     this.isHighlighted = false

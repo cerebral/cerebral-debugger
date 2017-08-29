@@ -1,5 +1,6 @@
 import './styles.css'
-import Inferno from 'inferno'
+import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
 import {connect} from 'cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import classnames from 'classnames'
@@ -14,7 +15,7 @@ export default connect({
   searchValue: state`debugger.searchValue`,
   mutationClicked: signal`debugger.mutationClicked`
 },
-  class Signal extends Inferno.Component {
+  class Signal extends Component {
     constructor (props) {
       super()
       this.renderAction = this.renderAction.bind(this)

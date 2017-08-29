@@ -1,5 +1,6 @@
 import './styles.css'
-import Inferno from 'inferno'
+import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
 import {connect} from 'cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import {nameToColors} from '../../../../common/utils'
@@ -15,7 +16,7 @@ export default connect({
   searchValue: state`debugger.searchValue`,
   signalClicked: signal`debugger.signalClicked`
 },
-  class SignalsList extends Inferno.Component {
+  class SignalsList extends Component {
     onSignalClick (event, signal, index) {
       this.props.signalClicked({
         executionId: signal.executionId,
