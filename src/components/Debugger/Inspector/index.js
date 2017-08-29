@@ -1,5 +1,6 @@
 import './styles.css'
-import Inferno from 'inferno'
+import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
 
 import {
   isObject,
@@ -62,7 +63,7 @@ function renderType (value, hasNext, path, propertyKey, highlightPath, modelChan
   )
 }
 
-class ObjectValue extends Inferno.Component {
+class ObjectValue extends Component {
   constructor (props, context) {
     super(props)
     const isHighlightPath = !!(this.props.highlightPath && isInPath(this.props.highlightPath, this.props.path))
@@ -150,7 +151,7 @@ class ObjectValue extends Inferno.Component {
   }
 }
 
-class ArrayValue extends Inferno.Component {
+class ArrayValue extends Component {
   constructor (props) {
     super(props)
     const isHighlightPath = this.props.highlightPath && isInPath(this.props.highlightPath, this.props.path)
@@ -224,7 +225,7 @@ class ArrayValue extends Inferno.Component {
   }
 }
 
-class Value extends Inferno.Component {
+class Value extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -319,7 +320,7 @@ class Value extends Inferno.Component {
   }
 }
 
-class Inspector extends Inferno.Component {
+class Inspector extends Component {
   getChildContext () {
     return {
       options: {

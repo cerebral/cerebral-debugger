@@ -1,5 +1,6 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
 import classNames from 'classnames'
 import connector from 'connector'
 import {connect} from 'cerebral/inferno'
@@ -23,7 +24,7 @@ export default connect({
   payloadReceived: signal`debugger.payloadReceived`,
   addPortErrored: signal`debugger.addPortErrored`
 },
-  class App extends Inferno.Component {
+  class App extends Component {
     componentDidMount () {
       document.body.addEventListener('keydown', (event) => {
         if (event.keyCode === 27) {

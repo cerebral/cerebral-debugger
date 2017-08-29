@@ -1,8 +1,9 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
 import {shell} from 'electron'
 
-class AddApp extends Inferno.Component {
+class AddApp extends Component {
   constructor (props) {
     super(props)
     this.state = {

@@ -48,8 +48,8 @@
     }
   },
   "dependencies": {
-    "cerebral": "2.0.0-b-alpha.c00bd8f2",
-    "cerebral-module-useragent": "1.0.0-b-alpha.c00bd8f2",
+    "@cerebral/useragent": "^1.0.0",
+    "cerebral": "^2.0.0",
     "classnames": "^2.2.5",
     "color": "^0.11.4",
     "electron-default-menu": "^1.0.0",

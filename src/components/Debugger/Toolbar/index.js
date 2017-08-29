@@ -1,5 +1,6 @@
 import './styles.css'
-import Inferno from 'inferno'
+import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
 import classNames from 'classnames'
 import {connect} from 'cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
@@ -14,7 +15,7 @@ export default connect({
   pageChanged: signal`debugger.pageChanged`,
   searchValueChanged: signal`debugger.searchValueChanged`
 },
-  class Toolbar extends Inferno.Component {
+  class Toolbar extends Component {
     constructor (props) {
       super(props)
       this.state = {
