@@ -12,6 +12,10 @@ init:
   - git config --global user.email "christianalfoni@gmail.com"
   - git config --global user.name "Christian Alfoni"
 
+environment:
+  GH_TOKEN:
+    secure: f7JcLMFYeXPM3PzwuvdkyJAHaq4gSEZo4X6cicLG1WShNe1CDKPiRXnT27e/t5Gf
+
 install:
   - ps: Install-Product node 8 x64
   - set CI=true
