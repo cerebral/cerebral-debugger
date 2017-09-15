@@ -105,7 +105,7 @@ class ObjectValue extends Component {
     this.props.path.push(key)
     const property = (
       <div className='inspector-objectProperty' key={index}>
-        <div className='inspector-bjectPropertyValue'>{renderType(value, hasNext, path.slice(), key, this.props.highlightPath, this.props.modelChanged)}</div>
+        <div className='inspector-objectPropertyValue'>{renderType(value, hasNext, path.slice(), key, this.props.highlightPath, this.props.modelChanged)}</div>
       </div>
     )
     this.props.path.pop()
