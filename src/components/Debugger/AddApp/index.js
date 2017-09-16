@@ -93,7 +93,7 @@ class AddApp extends Component {
                   this.onTypeChange('cft')
                 }}
               />
-              Both
+              Client (C) + Server (FT)
             </label>
           </div>
           <div>
