@@ -40,7 +40,7 @@ class AddApp extends Component {
     }
   }
   openDocs () {
-    shell.openExternal('https://cerebral.github.io/docs/get_started/debugger.html')
+    shell.openExternal('https://cerebraljs.com/docs/introduction/debugger.html')
   }
   render () {
     return (
