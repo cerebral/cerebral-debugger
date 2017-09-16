@@ -24,7 +24,15 @@ function isInPath (source, target) {
   }, true)
 }
 
-function renderType (value, hasNext, path, propertyKey, highlightPath, modelChanged) {
+function isInExpandedPath (expandedPaths, path) {
+  if (!expandedPaths || !path) {
+    return false
+  }
+  const pathIndex = expandedPaths.indexOf(path.join('.'))
+  return pathIndex > -1
+}
+
+function renderType (value, hasNext, path, propertyKey, highlightPath, modelChanged, pathClicked, expandedPaths) {
   if (value === undefined) {
     return null
   }
@@ -36,8 +44,10 @@ function renderType (value, hasNext, path, propertyKey, highlightPath, modelChan
         hasNext={hasNext}
         modelChanged={modelChanged}
         path={path}
+        pathClicked={pathClicked}
         propertyKey={propertyKey}
-        highlightPath={highlightPath} />
+        highlightPath={highlightPath}
+        expandedPaths={expandedPaths} />
     )
   }
   if (isObject(value)) {
@@ -47,8 +57,10 @@ function renderType (value, hasNext, path, propertyKey, highlightPath, modelChan
         hasNext={hasNext}
         modelChanged={modelChanged}
         path={path}
+        pathClicked={pathClicked}
         propertyKey={propertyKey}
-        highlightPath={highlightPath} />
+        highlightPath={highlightPath}
+        expandedPaths={expandedPaths} />
     )
   }
 
@@ -57,9 +69,11 @@ function renderType (value, hasNext, path, propertyKey, highlightPath, modelChan
       value={value}
       hasNext={hasNext}
       path={path}
+      pathClicked={pathClicked}
       modelChanged={modelChanged}
       propertyKey={propertyKey}
-      highlightPath={highlightPath} />
+      highlightPath={highlightPath}
+      expandedPaths={expandedPaths} />
   )
 }
 
@@ -67,10 +81,11 @@ class ObjectValue extends Component {
   constructor (props, context) {
     super(props)
     const isHighlightPath = !!(this.props.highlightPath && isInPath(this.props.highlightPath, this.props.path))
+    const isExpanded = this.props.expandedPaths && isInExpandedPath(this.props.expandedPaths, this.props.path)
     const preventCollapse = (this.props.path.length === 0) && context.options.expanded
 
     this.state = {
-      isCollapsed: !preventCollapse && !isHighlightPath
+      isCollapsed: !preventCollapse && !isHighlightPath && !isExpanded
     }
 
     this.onCollapseClick = this.onCollapseClick.bind(this)
@@ -80,11 +95,12 @@ class ObjectValue extends Component {
     const context = this.context
     const props = nextProps
     const isHighlightPath = !!(props.highlightPath && isInPath(props.highlightPath, props.path))
+    const isExpanded = props.expandedPaths && isInExpandedPath(props.expandedPaths, props.path)
     const preventCollapse = (props.path.length === 0) && context.options.expanded
 
     if (this.state.isCollapsed) {
       this.setState({
-        isCollapsed: !preventCollapse && !isHighlightPath
+        isCollapsed: !preventCollapse && !isHighlightPath && !isExpanded
       })
     }
   }
@@ -96,16 +112,18 @@ class ObjectValue extends Component {
   onExpandClick (event) {
     event.stopPropagation()
     this.setState({isCollapsed: false})
+    this.props.pathClicked({ path: this.props.path, expanded: true })
   }
   onCollapseClick (event) {
     event.stopPropagation()
     this.setState({isCollapsed: true})
+    this.props.pathClicked({ path: this.props.path, expanded: false })
   }
   renderProperty (key, value, index, hasNext, path) {
     this.props.path.push(key)
     const property = (
       <div className='inspector-objectProperty' key={index}>
-        <div className='inspector-objectPropertyValue'>{renderType(value, hasNext, path.slice(), key, this.props.highlightPath, this.props.modelChanged)}</div>
+        <div className='inspector-objectPropertyValue'>{renderType(value, hasNext, path.slice(), key, this.props.highlightPath, this.props.modelChanged, this.props.pathClicked, this.props.expandedPaths)}</div>
       </div>
     )
     this.props.path.pop()
@@ -155,8 +173,9 @@ class ArrayValue extends Component {
   constructor (props) {
     super(props)
     const isHighlightPath = this.props.highlightPath && isInPath(this.props.highlightPath, this.props.path)
+    const isExpanded = this.props.expandedPaths && isInExpandedPath(this.props.expandedPaths, this.props.path)
     this.state = {
-      isCollapsed: !isHighlightPath
+      isCollapsed: !isHighlightPath && !isExpanded
     }
     this.onCollapseClick = this.onCollapseClick.bind(this)
     this.onExpandClick = this.onExpandClick.bind(this)
@@ -164,9 +183,10 @@ class ArrayValue extends Component {
   componentWillReceiveProps (nextProps) {
     const props = nextProps
     const isHighlightPath = props.highlightPath && isInPath(props.highlightPath, props.path)
+    const isExpanded = props.expandedPaths && isInExpandedPath(props.expandedPaths, props.path)
     if (this.state.isCollapsed) {
       this.setState({
-        isCollapsed: !isHighlightPath
+        isCollapsed: !isHighlightPath && !isExpanded
       })
     }
   }
@@ -178,16 +198,18 @@ class ArrayValue extends Component {
   onExpandClick (event) {
     event.stopPropagation()
     this.setState({isCollapsed: false})
+    this.props.pathClicked({ path: this.props.path, expanded: true })
   }
   onCollapseClick (event) {
     event.stopPropagation()
     this.setState({isCollapsed: true})
+    this.props.pathClicked({ path: this.props.path, expanded: false })
   }
   renderItem (item, index, hasNext, path) {
     this.props.path.push(index)
     const arrayItem = (
       <div className='inspector-arrayItem' key={index}>
-        {renderType(item, hasNext, path.slice(), null, this.props.highlightPath, this.props.modelChanged)}
+        {renderType(item, hasNext, path.slice(), null, this.props.highlightPath, this.props.modelChanged, this.props.pathClicked, this.props.expandedPaths)}
       </div>
     )
     this.props.path.pop()
@@ -330,7 +352,7 @@ class Inspector extends Component {
     }
   }
   render () {
-    return renderType(this.props.value, false, [], null, this.props.path, this.props.modelChanged)
+    return renderType(this.props.value, false, [], null, this.props.path, this.props.modelChanged, this.props.pathClicked, this.props.expandedPaths)
   }
 }
 

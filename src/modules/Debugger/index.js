@@ -9,6 +9,7 @@ import modelClicked from './signals/modelClicked'
 import searchValueChanged from './signals/searchValueChanged'
 import escPressed from './signals/escPressed'
 import addPortErrored from './signals/addPortErrored'
+import pathClicked from './signals/pathClicked'
 
 export default () => ({
   state: {
@@ -28,7 +29,8 @@ export default () => ({
     componentsMap: {},
     renders: [],
     mutationsError: false,
-    searchValue: ''
+    searchValue: '',
+    expandedPaths: []
   },
   signals: {
     pageChanged,
@@ -41,6 +43,7 @@ export default () => ({
     mutationClicked,
     resetClicked,
     modelClicked,
-    addPortErrored
+    addPortErrored,
+    pathClicked
   }
 })
