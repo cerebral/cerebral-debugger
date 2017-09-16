@@ -1,3 +1,7 @@
+branches:
+  only:
+    - master
+
 version: 1.0.{build}
 
 platform:
@@ -22,7 +26,8 @@ install:
   - npm install
 
 build_script:
-  - npm run build
-  - npm run package:win
+  - if "%APPVEYOR_REPO_BRANCH%"=="master" if "%APPVEYOR_PULL_REQUEST_NUMBER%"=="" set PUBLISH=true
+  - if defined PUBLISH npm run build
+  - if defined PUBLISH npm run package:win
 
 test: off
