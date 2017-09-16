@@ -12,9 +12,11 @@ export default connect({
   useragent: state`useragent`,
   model: state`debugger.model`,
   path: state`debugger.currentMutationPath`,
+  pathClicked: signal`debugger.pathClicked`,
   searchValue: state`debugger.searchValue`,
   modelChanged: signal`debugger.modelChanged`,
-  modelClicked: signal`debugger.modelClicked`
+  modelClicked: signal`debugger.modelClicked`,
+  expandedPaths: state`debugger.expandedPaths`
 },
   class Model extends Component {
     constructor (props) {
@@ -38,6 +40,8 @@ export default connect({
               canEdit
               path={this.props.searchValue ? this.props.searchValue.split('.') : this.props.path}
               modelChanged={this.onModelChange}
+              pathClicked={this.props.pathClicked}
+              expandedPaths={this.props.expandedPaths}
             />
           </div>
         </div>
