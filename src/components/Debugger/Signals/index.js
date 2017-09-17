@@ -45,7 +45,6 @@ export default connect({
     }
     onToggleFullPathNamesClick () {
       this.props.toggleFullPathNamesClicked()
-      connector.sendEvent(this.props.port, 'toggleFullPathNames')
     }
     render () {
       const currentSignalExecutionId = this.props.currentSignalExecutionId
