@@ -118,7 +118,7 @@ export default connect({
           className={className}
           key={index}
         >
-          {isInOpenGroup && prevSignal && prevSignal.groupId === signal.groupId ? null : <div className={indicatorClassname} style={signalStyle}/>}
+          {isInOpenGroup && prevSignal && prevSignal.groupId === signal.groupId ? null : <div className={indicatorClassname} style={signalStyle} />}
           <div className='list-groupCount'>{isGrouped ? ` (${groupCount})` : null}</div>
           <span className='list-name'>
             {this.props.showFullPathNames ? signal.name : name}

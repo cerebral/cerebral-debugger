@@ -1,4 +1,4 @@
-import {set, toggle} from 'cerebral/operators'
+import {toggle} from 'cerebral/operators'
 import {state} from 'cerebral/tags'
 
 export default [

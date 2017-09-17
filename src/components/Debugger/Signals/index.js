@@ -57,7 +57,7 @@ export default connect({
               onClick={() => this.onToggleFullPathNamesClick()}
               className='signals-toggleFullPathNames'
               disabled={!currentSignalExecutionId}>
-              Toggle Full Path Names
+              Toggle full pathnames
             </button>
             <button
               onClick={() => this.onCopySignalsClick()}
