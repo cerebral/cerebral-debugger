@@ -14,6 +14,7 @@ export default connect({
   isExecuting: state`debugger.isExecuting`,
   executedBySignals: state`debugger.executedBySignals`,
   searchValue: state`debugger.searchValue`,
+  showFullPathNames: state`debugger.showFullPathNames`,
   signalClicked: signal`debugger.signalClicked`
 },
   class SignalsList extends Component {
@@ -80,18 +81,7 @@ export default connect({
         }, false)
       )
 
-      const className = classnames({
-        'list-item': true,
-        'list-activeItem': isActive,
-        'list-grouped': signal.isGrouped,
-        'list-item-error': hasError,
-        pulse: isExecuting
-      })
-      const indicatorClassname = classnames('list-indicator', {
-        'list-fadedItem': hasSearchContent === false
-      })
       const isInOpenGroup = this.props.debugger.expandedSignalGroups.indexOf(signal.groupId) !== -1
-
       if (
         prevSignal &&
         prevSignal.groupId === signal.groupId &&
@@ -99,7 +89,6 @@ export default connect({
       ) {
         return null
       }
-
       let groupCount = 1
       for (let x = index + 1; x < this.props.signalsList.length - 1; x++) {
         if (this.props.signalsList[x].groupId === signal.groupId) {
@@ -108,15 +97,32 @@ export default connect({
           break
         }
       }
+      const isGrouped = (!prevSignal || prevSignal.groupId !== signal.groupId) && groupCount > 1
+
+      const className = classnames({
+        'list-item': true,
+        'list-activeItem': isActive,
+        'list-grouped': signal.isGrouped,
+        'list-item-error': hasError,
+        'list-item-grouped': isGrouped,
+        pulse: isExecuting
+      })
+
+      const indicatorClassname = classnames('list-indicator', {
+        'list-fadedItem': hasSearchContent === false
+      })
 
       return (
         <li
           onClick={(event) => this.onSignalClick(event, signal, index)}
           className={className}
-          key={index}>
-          {isInOpenGroup && prevSignal && prevSignal.groupId === signal.groupId ? null : <div className={indicatorClassname} style={signalStyle} />}
+          key={index}
+        >
+          {isInOpenGroup && prevSignal && prevSignal.groupId === signal.groupId ? null : <div className={indicatorClassname} style={signalStyle}/>}
+          <div className='list-groupCount'>{isGrouped ? ` (${groupCount})` : null}</div>
           <span className='list-name'>
-            {name} <small>{(!prevSignal || prevSignal.groupId !== signal.groupId) && groupCount > 1 ? ` (${groupCount})` : null}</small> {this.props.type === 'cft' && signal.source === 'ft' ? <small className='ft-indication'>FT</small> : null}
+            {this.props.showFullPathNames ? signal.name : name}
+            {this.props.type === 'cft' && signal.source === 'ft' ? <small className='ft-indication'>FT</small> : null}
           </span>
         </li>
       )
