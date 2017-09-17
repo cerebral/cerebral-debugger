@@ -47,6 +47,6 @@ export default () => ({
     modelClicked,
     addPortErrored,
     pathClicked,
-    toggleFullPathNamesClicked,
+    toggleFullPathNamesClicked
   }
 })
