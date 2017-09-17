@@ -16,7 +16,8 @@ export default connect({
   useragent: state`useragent`,
   currentSignalExecutionId: state`debugger.currentSignalExecutionId`,
   isExecuting: state`debugger.isExecuting`,
-  resetClicked: signal`debugger.resetClicked`
+  resetClicked: signal`debugger.resetClicked`,
+  toggleFullPathNamesClicked: signal`debugger.toggleFullPathNamesClicked`
 },
   class Signals extends Component {
     constructor (props) {
@@ -42,6 +43,9 @@ export default connect({
         this.textarea.select()
       })
     }
+    onToggleFullPathNamesClick () {
+      this.props.toggleFullPathNamesClicked()
+    }
     render () {
       const currentSignalExecutionId = this.props.currentSignalExecutionId
 
@@ -49,6 +53,12 @@ export default connect({
         <div className='signals'>
           <div className='signals-list'>
             <List />
+            <button
+              onClick={() => this.onToggleFullPathNamesClick()}
+              className='signals-toggleFullPathNames'
+              disabled={!currentSignalExecutionId}>
+              Toggle Full Path Names
+            </button>
             <button
               onClick={() => this.onCopySignalsClick()}
               className='signals-rewrite'
