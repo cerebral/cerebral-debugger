@@ -3,7 +3,7 @@ import Inferno from 'inferno' // eslint-disable-line
 
 import Inspector from '../../../../Inspector'
 
-function Service ({service}) {
+function Service ({service, pathClicked}) {
   const serviceNameStyle = {
     color: '#28a0aa'
   }
@@ -13,7 +13,7 @@ function Service ({service}) {
       <span className='service-serviceName' style={serviceNameStyle}>{service.method}</span>
       <span className='service-serviceArgs'>
         {service.args.map((arg, index) => {
-          return <Inspector key={index} value={arg} />
+          return <Inspector key={index} value={arg} pathClicked={pathClicked} />
         })}
       </span>
     </div>
