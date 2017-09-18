@@ -64,7 +64,7 @@ class Action extends Component {
     })
   }
   render () {
-    const {action, faded, execution, children, onMutationClick, executed} = this.props
+    const {action, faded, execution, children, onMutationClick, executed, pathClicked} = this.props
 
     const error = execution && execution.error
     const titleClassname = classnames({
@@ -86,10 +86,10 @@ class Action extends Component {
           <div className='action-error'>
             <div className='action-actionInput'>
               <div className='action-inputLabel'>props:</div>
-              <div className='action-inputValue'><Inspector value={execution.payload} /></div>
+              <div className='action-inputValue'><Inspector value={execution.payload} pathClicked={pathClicked} /></div>
             </div>
             <div className='action-error-message'>
-              <strong>{error.name}:</strong> <Inspector value={error} />
+              <strong>{error.name}:</strong> <Inspector value={error} pathClicked={pathClicked} />
             </div>
             <pre data-line={getLineNumber(error) || null}>
               <code
@@ -105,16 +105,16 @@ class Action extends Component {
             <div className={faded ? 'action-faded' : null}>
               <div className='action-actionInput'>
                 <div className='action-inputLabel'>props:</div>
-                <div className='action-inputValue'><Inspector value={execution.payload} /></div>
+                <div className='action-inputValue'><Inspector value={execution.payload} pathClicked={pathClicked} /></div>
               </div>
               <div className='action-mutations'>
-                {execution.data.filter((data) => Boolean(data)).map((data, index) => data.type === 'mutation' ? <Mutation mutation={data} key={index} onMutationClick={onMutationClick} /> : <Service service={data} key={index} />)}
+                {execution.data.filter((data) => Boolean(data)).map((data, index) => data.type === 'mutation' ? <Mutation mutation={data} key={index} onMutationClick={onMutationClick} pathClicked={pathClicked} /> : <Service service={data} key={index} pathClicked={pathClicked} />)}
               </div>
               {executed}
               {execution.output && (
                 <div className='action-actionInput'>
                   <div className='action-inputLabel'>output:</div>
-                  <div className='action-inputValue'><Inspector value={execution.output} /></div>
+                  <div className='action-inputValue'><Inspector value={execution.output} pathClicked={pathClicked} /></div>
                 </div>
               )}
             </div>

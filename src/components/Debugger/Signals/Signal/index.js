@@ -13,7 +13,8 @@ export default connect({
   signal: state`debugger.signals.${state`debugger.currentSignalExecutionId`}`,
   executedBySignals: state`debugger.executedBySignals`,
   searchValue: state`debugger.searchValue`,
-  mutationClicked: signal`debugger.mutationClicked`
+  mutationClicked: signal`debugger.mutationClicked`,
+  pathClicked: signal`debugger.pathClicked`
 },
   class Signal extends Component {
     constructor (props) {
@@ -134,6 +135,7 @@ export default connect({
           execution={this.props.signal.functionsRun[action.functionIndex]}
           key={index}
           onMutationClick={this.onMutationClick}
+          pathClicked={this.props.pathClicked}
           executed={executedBySignals.map((executedBySignal, index) => (
             <Signal
               key={index}
