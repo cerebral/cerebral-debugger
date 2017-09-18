@@ -15,7 +15,8 @@ export default connect({
   executingSignalsCount: state`debugger.executingSignalsCount`,
   mutationDoubleClicked: signal`debugger.mutationDoubleClicked`,
   mutationClicked: signal`debugger.mutationClicked`,
-  signalClicked: signal`debugger.signalClicked`
+  signalClicked: signal`debugger.signalClicked`,
+  pathClicked: signal`debugger.pathClicked`
 },
   function Mutations ({
     port,
@@ -25,7 +26,8 @@ export default connect({
     executingSignalsCount,
     mutationDoubleClicked,
     mutationClicked,
-    signalClicked
+    signalClicked,
+    pathClicked
   }) {
     return (
       <div className='mutations'>
@@ -54,7 +56,7 @@ export default connect({
                 >
                   {mutation.signalName}
                 </div>
-                <Mutation mutation={mutation.data} onMutationClick={(path) => mutationClicked({path})} />
+                <Mutation mutation={mutation.data} onMutationClick={(path) => mutationClicked({path})} pathClicked={pathClicked} />
                 {currentRememberedMutationIndex === index ? (
                   <button disabled className='timetravel-button active'>now</button>
                 ) : (
