@@ -12,8 +12,7 @@ import Components from '../Components'
 import Model from '../Model'
 
 export default connect({
-  port: state`port`,
-  type: state`type`,
+  config: state`config`,
   error: state`error`,
   currentPage: state`debugger.currentPage`,
   executingSignalsCount: state`debugger.executingSignalsCount`,
@@ -32,7 +31,7 @@ export default connect({
         }
       })
 
-      connector.addPort(this.props.port, (payload) => {
+      connector.addPort(this.props.config, (payload) => {
         if (payload instanceof Error) {
           this.props.addPortErrored({error: payload.message})
         } else {
@@ -93,7 +92,7 @@ export default connect({
           case 'model':
             return (
               <div className='app-content'>
-                {this.props.type === 'c' || this.props.type === 'cft' ? <Model /> : null}
+                {this.props.config.type === 'c' || this.props.config.type === 'cft' ? <Model /> : null}
               </div>
             )
           default:

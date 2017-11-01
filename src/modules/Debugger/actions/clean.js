@@ -1,5 +1,5 @@
 function clean ({props, state}) {
-  const debuggerType = state.get('type')
+  const debuggerType = state.get('config.type')
   const messageSource = props.source
 
   if (

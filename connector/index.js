@@ -10,33 +10,33 @@ const connector = {
       data: payload
     })
   },
-  addPort (port, eventCallback) {
-    if (addedPorts.indexOf(port) >= 0) {
+  addPort (config, eventCallback) {
+    if (addedPorts.indexOf(config.port) >= 0) {
       return
     }
 
-    addedPorts.push(port)
+    addedPorts.push(config.port)
     ipcRenderer.on('port:added', function onPortAdded (event, addedPort) {
-      if (addedPort === port) {
+      if (addedPort === config.port) {
         ipcRenderer.on('message', (event, message) => {
-          if (message.port !== port) {
+          if (message.port !== config.port) {
             return
           }
 
           if (message.type === 'ping') {
-            connector.sendEvent(port, 'pong')
+            connector.sendEvent(config.port, 'pong')
             return
           }
 
           eventCallback(message)
         })
-        connector.sendEvent(port, 'ping')
+        connector.sendEvent(config.port, 'ping')
       }
     })
     ipcRenderer.on('port:exists', function onPortExists () {
       eventCallback(new Error('Something running on this port already'))
     })
-    ipcRenderer.send('port:add', port)
+    ipcRenderer.send('port:add', config)
   },
   onPortFocus (cb) {
     ipcRenderer.on('port:focus', function onPortAdded (event, port) {

@@ -7,7 +7,7 @@ import {state, signal} from 'cerebral/tags'
 import signalsList from '../../../common/computed/signalsList'
 
 export default connect({
-  type: state`type`,
+  type: state`config.type`,
   currentPage: state`debugger.currentPage`,
   searchValue: state`debugger.searchValue`,
   isSmall: state`useragent.media.small`,
