@@ -7,7 +7,7 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 const checkForUpdates = require('./autoUpdate')
-const https = require('https');
+const https = require('https')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -119,10 +119,10 @@ function createWindow () {
       const server = https.createServer({
         cert: options.ssl.cert,
         key: options.ssl.key
-      });
+      })
 
       server.listen(Number(options.port), function () {
-        addClient(options.port, new WebSocketServer({ server }))
+        addClient(options.port, new WebSocketServer({ server }))
       })
     } else {
       addClient(options.port, new WebSocketServer({ port: Number(options.port) }))

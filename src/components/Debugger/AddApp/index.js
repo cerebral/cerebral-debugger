@@ -49,18 +49,18 @@ class AddApp extends Component {
   openDocs () {
     shell.openExternal('https://cerebraljs.com/docs/introduction/debugger.html')
   }
-  openSsl() {
+  openSsl () {
     shell.openExternal('https://github.com/christianalfoni/create-ssl-certificate')
   }
-  onDrop(event) {
-    event.preventDefault();
+  onDrop (event) {
+    event.preventDefault()
     const sslFiles = Array.prototype.reduce.call(event.dataTransfer.files, (files, file) => {
       if (path.extname(file.name) === '.crt') {
         files.cert = file
       } else if (path.extname(file.name) === '.key') {
         files.key = file
       } else {
-        alert(`Sorry, ${file.name} is not a valid file`)
+        alert(`Sorry, ${file.name} is not a valid file`) // eslint-disable-line
       }
 
       return files
@@ -81,8 +81,8 @@ class AddApp extends Component {
         this.setState({ ssl })
       })
   }
-  readFile(file) {
-    const reader = new FileReader()
+  readFile (file) {
+    const reader = new FileReader() // eslint-disable-line
 
     return new Promise((resolve, reject) => {
       reader.onload = (event) => resolve(event.target.result)
@@ -91,9 +91,9 @@ class AddApp extends Component {
     })
   }
   onDragOver (event) {
-    event.preventDefault();
+    event.preventDefault()
   }
-  getSslText() {
+  getSslText () {
     if (!this.state.ssl || !Object.keys(this.state.ssl).length) {
       return <span><b>ssl.crt</b> and <b>ssl.key</b> files here</span>
     }
@@ -161,13 +161,13 @@ class AddApp extends Component {
             </div>
             {
               this.state.ssl && this.state.ssl.cert && this.state.ssl.key ? (
-                <div className="app-drop-ssl-ready">HTTPS Ready!</div>
+                <div className='app-drop-ssl-ready'>HTTPS Ready!</div>
               ) : (
-                <div className="app-drop-ssl" onDrop={(event) => this.onDrop(event)} onDragOver={this.onDragOver}>
+                <div className='app-drop-ssl' onDrop={(event) => this.onDrop(event)} onDragOver={this.onDragOver}>
                   <span>
                     <b>If app running on HTTPS</b>
                     <ol>
-                      <li>Go to <a href="#" onClick={this.openSsl}>create-ssl-certificate</a></li>
+                      <li>Go to <a href='#' onClick={this.openSsl}>create-ssl-certificate</a></li>
                       <li>Create certificate on hostname: <b>cerebral-debugger</b></li>
                       <li>Drop the created {this.getSslText()}</li>
                       <li>Connect with host: <b>cerebral-debugger.dev</b> and port</li>
