@@ -47,15 +47,59 @@
 }
 
 .app-type-wrapper {
+  display: flex;
   padding: 10px;
+  justify-content: center;
+}
+
+.app-type-wrapper > div {
+  text-align: left;
+  width: 250px;
+  margin: 0 10px;
 }
 
 .app-type-wrapper label {
-  margin: 0 5px;
+  display: block;
+  margin: 5px;
   cursor: pointer;
 }
 
 .app-type-wrapper input {
   margin: 0 5px;
   cursor: pointer;
+}
+
+.app-drop-ssl {
+  background-color: #EAEAEA;
+  border: 2px dotted #DADADA;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.app-drop-ssl-ready {
+  background-color: #EAEAEA;
+  border: 2px solid green;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  height: 50px;
+}
+
+.app-drop-ssl span {
+  text-align: center;
+  font-size: 11px;
+}
+
+.app-drop-ssl ol {
+  padding: 0;
+  padding-left: 15px;
+}
+
+.app-drop-ssl li {
+  text-align: left;
 }

@@ -63,8 +63,11 @@ class Debugger extends Component {
             apps[port] = Object.assign(storedApps[port], {
               controller: Controller({
                 state: {
-                  port,
-                  type: storedApps[port].type,
+                  config: {
+                    port,
+                    type: storedApps[port].type,
+                    ssl: storedApps[port].ssl
+                  },
                   error: null
                 },
                 modules: {
@@ -96,7 +99,7 @@ class Debugger extends Component {
       jsonStorage.set('currentPort', this.state.currentPort)
     }
   }
-  addPort (type, name, port) {
+  addPort ({ type, name, port, ssl = null }) {
     if (this.state.apps[port]) {
       return false
     }
@@ -105,10 +108,15 @@ class Debugger extends Component {
       [port]: {
         name,
         type,
+        ssl,
         controller: Controller({
           state: {
-            port,
-            type
+            config: {
+              port,
+              type,
+              ssl
+            },
+            error: null
           },
           modules: {
             debugger: DebuggerModule,
@@ -134,7 +142,8 @@ class Debugger extends Component {
     jsonStorage.set('apps', Object.keys(apps).reduce((appsToStore, port) => {
       appsToStore[port] = {
         name: apps[port].name,
-        type: apps[port].type
+        type: apps[port].type,
+        ssl: apps[port].ssl
       }
 
       return appsToStore

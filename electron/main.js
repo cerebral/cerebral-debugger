@@ -7,12 +7,39 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 const checkForUpdates = require('./autoUpdate')
+const https = require('https');
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 function createWindow () {
   checkForUpdates()
   const clients = {}
+
+  function addClient (port, client) {
+    clients[port] = {
+      wss: client
+    }
+
+    clients[port].wss.on('connection', function (ws) {
+      clients[port].ws = ws
+      ws.on('message', function (message) {
+        const parsedMessage = JSON.parse(message)
+
+        if (parsedMessage.type === 'focusApp') {
+          mainWindow.webContents.send('port:focus', port)
+        } else {
+          mainWindow.webContents.send('message', Object.assign(parsedMessage, {
+            port
+          }))
+        }
+      })
+    })
+    clients[port].wss.on('error', function (ws) {
+      mainWindow.webContents.send('port:exists', port)
+    })
+    mainWindow.webContents.send('port:added', port)
+  }
 
   mainWindow = new BrowserWindow({icon: path.resolve('icons', 'icon.png'), width: 800, height: 600})
   mainWindow.on('closed', function () { mainWindow = null })
@@ -82,34 +109,24 @@ function createWindow () {
     clients[payload.port].ws.send(JSON.stringify(payload))
   })
 
-  electron.ipcMain.on('port:add', function (event, port) {
-    if (clients[port]) {
-      mainWindow.webContents.send('port:added', port)
+  electron.ipcMain.on('port:add', function (event, options) {
+    if (clients[options.port]) {
+      mainWindow.webContents.send('port:added', options.port)
       return
     }
 
-    clients[port] = {
-      wss: new WebSocketServer({ port: Number(port) })
-    }
-    clients[port].wss.on('connection', function (ws) {
-      clients[port].ws = ws
+    if (options.ssl) {
+      const server = https.createServer({
+        cert: options.ssl.cert,
+        key: options.ssl.key
+      });
 
-      ws.on('message', function (message) {
-        const parsedMessage = JSON.parse(message)
-
-        if (parsedMessage.type === 'focusApp') {
-          mainWindow.webContents.send('port:focus', port)
-        } else {
-          mainWindow.webContents.send('message', Object.assign(parsedMessage, {
-            port
-          }))
-        }
+      server.listen(Number(options.port), function () {
+        addClient(options.port, new WebSocketServer({ server }))
       })
-    })
-    clients[port].wss.on('error', function (ws) {
-      mainWindow.webContents.send('port:exists', port)
-    })
-    mainWindow.webContents.send('port:added', port)
+    } else {
+      addClient(options.port, new WebSocketServer({ port: Number(options.port) }))
+    }
   })
 
   electron.ipcMain.on('port:remove', function (event, port) {

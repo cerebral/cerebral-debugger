@@ -1,5 +1,5 @@
 function endSignalExecution ({props, state}) {
-  const type = state.get('type')
+  const type = state.get('config.type')
   const execution = props.data.execution
   const signalPath = state.get(`debugger.executedBySignals.${execution.executionId}`) ? (
     `debugger.executedBySignals.${execution.executionId}`
