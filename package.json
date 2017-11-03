@@ -1,6 +1,6 @@
 {
   "name": "cerebral-debugger",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Cerebral Debugger",
   "private": true,
   "main": "electron/main.js",
