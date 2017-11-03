@@ -7,7 +7,7 @@ import Inspector from '../Inspector'
 import connector from 'connector'
 
 export default connect({
-  port: state`port`,
+  port: state`config.port`,
   currentPage: state`debugger.currentPage`,
   useragent: state`useragent`,
   model: state`debugger.model`,
