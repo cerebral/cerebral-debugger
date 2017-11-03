@@ -16,7 +16,7 @@ function addSignal ({props, state, resolve}) {
     executedBy: execution.executedBy || null
   }
 
-  if (newSignal.executedBy) {
+  if (newSignal.executedBy && (state.get(`debugger.signals.${newSignal.executedBy.id}`) || state.get(`debugger.executedBySignals.${newSignal.executedBy.id}`))) {
     const executedByPath = state.get(`debugger.signals.${newSignal.executedBy.id}`) ? `debugger.signals.${newSignal.executedBy.id}` : `debugger.executedBySignals.${newSignal.executedBy.id}`
 
     state.set(`debugger.executedBySignals.${execution.executionId}`, newSignal)
