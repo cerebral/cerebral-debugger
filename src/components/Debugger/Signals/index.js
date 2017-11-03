@@ -10,7 +10,7 @@ import List from './List'
 import Signal from './Signal'
 
 export default connect({
-  port: state`port`,
+  port: state`config.port`,
   currentPage: state`debugger.currentPage`,
   signalsList: signalsList,
   useragent: state`useragent`,

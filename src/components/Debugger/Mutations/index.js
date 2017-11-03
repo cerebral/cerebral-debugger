@@ -8,7 +8,7 @@ import Mutation from '../Signals/Signal/Action/Mutation'
 import connector from 'connector'
 
 export default connect({
-  port: state`port`,
+  port: state`config.port`,
   mutations: state`debugger.mutations`,
   currentRememberedMutationIndex: state`debugger.currentRememberedMutationIndex`,
   searchValue: state`debugger.searchValue`,
