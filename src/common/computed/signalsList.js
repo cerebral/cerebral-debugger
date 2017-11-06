@@ -5,6 +5,7 @@ export default compute(
   state`debugger.signals`,
   (signals) => {
     return Object.keys(signals)
+      .filter(id => Boolean(signals[id].name))
       .sort((keyA, keyB) => {
         if (signals[keyA].datetime > signals[keyB].datetime) {
           return -1
