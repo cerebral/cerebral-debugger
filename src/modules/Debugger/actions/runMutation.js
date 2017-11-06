@@ -7,7 +7,7 @@ function runMutation ({props, state}) {
       const args = data.args.slice()
       const path = ['debugger', 'model'].concat(args.shift()).join('.')
 
-      state[data.method].apply(null, [path, ...args])
+      state[data.method].apply(null, [path, ...JSON.parse(JSON.stringify(args))])
     } catch (e) {
       state.set('mutationsError', {
         signalName: execution.name,

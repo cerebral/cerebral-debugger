@@ -29,7 +29,7 @@ class Debugger extends Component {
     this.removePort = this.removePort.bind(this)
   }
   componentDidMount () {
-    window.onerror = (error, mip, mop, stack) => {
+    window.onerror = (_, _2, _3, _4, error) => {
       this.setState({error})
     }
 
@@ -186,12 +186,12 @@ class Debugger extends Component {
       return (
         <div class='error'>
           <h1>Ops, something bad happened :(</h1>
-          <h4>{this.state.error}</h4>
-          <button onClick={() => window.location.reload()}>restart debugger</button>
+          <h4>{this.state.error.message}</h4>
+          {this.state.error.stack.split('\n').map((line) => <div style={{fontSize: '10px', textAlign: 'left'}}>{line}</div>)}
+          <button style={{marginTop: '10px'}}onClick={() => window.location.reload()}>restart debugger</button>
         </div>
       )
     }
-
     if (this.state.isLoading) {
       return null
     }
