@@ -15,7 +15,7 @@ export default connect({
   useragent: state`useragent`,
   signal: state`debugger.signals.${state`debugger.currentSignalExecutionId`}`,
   executedBySignals: state`debugger.executedBySignals`,
-  showProps: state`debugger.showProps`,
+  showProps: state`storage.showProps`,
   searchValue: state`debugger.searchValue`,
   showPropsToggled: signal`debugger.showPropsToggled`,
   actionsToggled: signal`debugger.actionsToggled`,

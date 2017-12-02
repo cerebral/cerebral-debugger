@@ -7,6 +7,7 @@ import {Controller} from 'cerebral'
 import {Container} from 'cerebral/inferno'
 import UserAgent from '@cerebral/useragent'
 import DebuggerModule from '../../modules/Debugger'
+import StorageModule from '../../modules/Storage'
 
 import AddApp from './AddApp'
 import App from './App'
@@ -72,6 +73,7 @@ class Debugger extends Component {
                 },
                 modules: {
                   debugger: DebuggerModule(),
+                  storage: StorageModule(),
                   useragent: UserAgent({
                     media: {
                       small: '(max-width: 1270px)'

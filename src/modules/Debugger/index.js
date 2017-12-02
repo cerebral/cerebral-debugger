@@ -35,9 +35,7 @@ export default () => ({
     renders: [],
     mutationsError: false,
     searchValue: '',
-    expandedPaths: [],
-    showFullPathNames: false,
-    showProps: true
+    expandedPaths: []
   },
   signals: {
     pageChanged,

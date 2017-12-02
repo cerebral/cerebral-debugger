@@ -16,7 +16,7 @@ export default connect({
   useragent: state`useragent`,
   currentSignalExecutionId: state`debugger.currentSignalExecutionId`,
   isExecuting: state`debugger.isExecuting`,
-  showFullPathNames: state`debugger.showFullPathNames`,
+  showFullPathNames: state`storage.showFullPathNames`,
   resetClicked: signal`debugger.resetClicked`,
   toggleFullPathNamesClicked: signal`debugger.toggleFullPathNamesClicked`
 },
