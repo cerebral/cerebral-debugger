@@ -6,13 +6,21 @@ import {state, signal} from 'cerebral/tags'
 import classnames from 'classnames'
 
 import Action from './Action'
+import Props from './Props'
+import Path from './Path'
+import Sequence from './Sequence'
 
 export default connect({
   currentPage: state`debugger.currentPage`,
   useragent: state`useragent`,
   signal: state`debugger.signals.${state`debugger.currentSignalExecutionId`}`,
   executedBySignals: state`debugger.executedBySignals`,
+  showProps: state`debugger.showProps`,
   searchValue: state`debugger.searchValue`,
+  showPropsToggled: signal`debugger.showPropsToggled`,
+  actionsToggled: signal`debugger.actionsToggled`,
+  actionToggled: signal`debugger.actionToggled`,
+  propsToggled: signal`debugger.propsToggled`,
   mutationClicked: signal`debugger.mutationClicked`,
   pathClicked: signal`debugger.pathClicked`
 },
@@ -21,65 +29,16 @@ export default connect({
       super()
       this.renderAction = this.renderAction.bind(this)
       this.onMutationClick = this.onMutationClick.bind(this)
-      this.state = {expandedOutputs: {}}
     }
     shouldComponentUpdate (nextProps, nextState) {
       return (
         nextProps.currentPage === 'signals' ||
-        !nextProps.useragent.media.small ||
-        this.state.expandedOutputs !== nextState.expandedOutputs
+        !nextProps.useragent.media.small
       )
     }
     onMutationClick (path) {
       this.props.mutationClicked({
         path
-      })
-    }
-    toggleOutput (event, action, output) {
-      const expandedOutputs = Object.assign({}, this.state.expandedOutputs)
-
-      event.stopPropagation()
-
-      if (!expandedOutputs[action.functionIndex]) {
-        expandedOutputs[action.functionIndex] = {}
-      }
-
-      if (!(output in expandedOutputs[action.functionIndex])) {
-        expandedOutputs[action.functionIndex][output] = true
-      }
-
-      if (expandedOutputs[action.functionIndex][output]) {
-        expandedOutputs[action.functionIndex][output] = false
-      } else {
-        expandedOutputs[action.functionIndex][output] = true
-      }
-
-      this.setState({expandedOutputs})
-    }
-    renderOutputs (action) {
-      return Object.keys(action.outputs).map((output, index) => {
-        const isOutput = (
-          this.props.signal.functionsRun[action.functionIndex] &&
-          this.props.signal.functionsRun[action.functionIndex].path === output
-        )
-        const style = isOutput ? {cursor: 'pointer'} : {opacity: 0.3}
-        let isExpanded = this.state.expandedOutputs[action.functionIndex] && this.state.expandedOutputs[action.functionIndex][output]
-        isExpanded = typeof isExpanded === 'undefined' ? true : isExpanded
-        const outputs = action.outputs[output]
-
-        return (
-          <div className='signal-output' style={style} key={index}>
-            {isOutput && isExpanded ? (
-              <i className='icon signal-outputIcon icon-down' onClick={(event) => this.toggleOutput(event, action, output)} />
-            ) : (
-              <i className='icon signal-outputIcon icon-right' onClick={(event) => this.toggleOutput(event, action, output)} />
-            )}
-            <div className='signal-outputPath' onClick={(event) => this.toggleOutput(event, action, output)}>
-              <div className={isOutput ? 'signal-outputName executed' : 'signal-outputName'}>{output}</div>
-              {isOutput && isExpanded ? this.renderAction(outputs, 0) : null}
-            </div>
-          </div>
-        )
       })
     }
     actionHasSearchContent (action) {
@@ -101,6 +60,17 @@ export default connect({
         return false
       }, false)
     }
+    renderSequence(sequence, index) {
+      if (sequence.items.length === 1) {
+        return this.renderAction(sequence.items[0])
+      }
+
+      return (
+        <Sequence key={index} sequence={sequence}>
+          {sequence.items.map(this.renderAction)}
+        </Sequence>
+      )
+    }
     renderAction (action, index) {
       const hasSearchContent = (
         this.props.searchValue &&
@@ -108,53 +78,65 @@ export default connect({
       )
 
       if (action._functionTreePrimitive && action.items && action.items.length) {
-        return (
-          <div key={index} onClick={(event) => event.stopPropagation()}>
-            <span className={hasSearchContent === false ? 'signal-groupName faded' : 'signal-groupName'}><strong>{action.type}</strong>{action.name && ': ' + action.name}</span>
-            <div className='signal-groupHeader' key={index}>
-              <div className='signal-group'>
-                {action.items.map(this.renderAction)}
-              </div>
-            </div>
-          </div>
-        )
+        return this.renderSequence(action, index)
       } else if (action._functionTreePrimitive && (!action.items || !action.items.length)) {
         return null
       }
 
       const isExecuted = Boolean(this.props.signal.functionsRun[action.functionIndex])
-
       const executedBySignals = (
         this.props.signal.functionsRun[action.functionIndex] && this.props.signal.functionsRun[action.functionIndex].executedIds.length
       ) ? this.props.signal.functionsRun[action.functionIndex].executedIds.map((executedId) => this.props.executedBySignals[executedId]) : []
+      const execution = this.props.signal.functionsRun[action.functionIndex];
+      const output = Object.keys(action.outputs || {}).reduce((currentOutput, output) => {
+        const isOutput = execution && execution.path === output
+
+        if (isOutput) {
+          return output
+        }
+
+        return currentOutput
+      }, null)
+      const isPropsExpanded = Boolean(this.props.signal.expandedProps[action.functionIndex])
 
       return (
-        <Action
-          action={action}
-          faded={(hasSearchContent === false) || !isExecuted}
-          execution={this.props.signal.functionsRun[action.functionIndex]}
-          key={index}
-          onMutationClick={this.onMutationClick}
-          pathClicked={this.props.pathClicked}
-          executed={executedBySignals.map((executedBySignal, index) => (
-            <Signal
-              key={index}
-              className={'executedBy'}
-              style={{
-                backgroundColor: '#FAFAFA'
-              }}
-              executedByColor='#EAEAEA'
-              signal={executedBySignal}
-              useragent={this.props.useragent}
-              currentPage={this.props.currentPage}
-              executedBySignals={this.props.executedBySignals}
-              searchValue={this.props.searchValue}
-              mutationClicked={() => {}}
-            />
-          ))}
-        >
-          {action.outputs && this.renderOutputs(action)}
-        </Action>
+        <div className='action-container'>
+          {this.props.showProps && execution && execution.payload && Object.keys(execution.payload).length ? <Props
+            payload={execution.payload}
+            pathClicked={this.props.pathClicked}
+            isExpanded={isPropsExpanded}
+            onExpand={() => this.props.propsToggled({action, executionId: this.props.signal.executionId, expanded: true})}
+            onCollapse={() => this.props.propsToggled({action, executionId: this.props.signal.executionId, expanded: false})}
+          /> : null}
+          <Action
+            action={action}
+            actionToggled={() => this.props.actionToggled({action, executionId: this.props.signal.executionId})}
+            isExpanded={Boolean(this.props.signal.expandedActions[action.functionIndex])}
+            faded={(hasSearchContent === false) || !isExecuted}
+            execution={execution}
+            key={index}
+            onMutationClick={this.onMutationClick}
+            pathClicked={this.props.pathClicked}
+            executed={executedBySignals.map((executedBySignal, index) => (
+              <Signal
+                key={index}
+                className={'executedBy'}
+                style={{
+                  backgroundColor: '#FAFAFA'
+                }}
+                executedByColor='#EAEAEA'
+                signal={executedBySignal}
+                useragent={this.props.useragent}
+                currentPage={this.props.currentPage}
+                executedBySignals={this.props.executedBySignals}
+                searchValue={this.props.searchValue}
+                mutationClicked={() => {}}
+              />
+            ))}
+          />
+          {output ? <Path output={output} /> : null}
+          {output ? this.renderAction(action.outputs[output], 0) : null}
+        </div>
       )
     }
     render () {
@@ -165,10 +147,16 @@ export default connect({
       return (
         <div className={classnames('signal', this.props.className)} style={this.props.style}>
           {this.props.executedByColor ? <div className='executedByLine' style={{backgroundColor: this.props.executedByColor}} /> : null}
-          <h3 className='signal-title'>{this.props.signal.name}</h3>
-          <div className='signal-chain'>
-            {this.renderAction(this.props.signal.staticTree, 0)}
-          </div>
+          <h3 className='signal-title'>
+            {this.props.signal.name}
+            <div className='signal-settingsContainer'>
+              <button onClick={() => this.props.actionsToggled()}>
+                {Object.keys(this.props.signal.expandedActions).length ? 'Collapse actions' : 'Expand actions'}
+              </button>
+              <label>props: <input type="checkbox" onChange={() => this.props.showPropsToggled()} checked={this.props.showProps}/></label>
+            </div>
+          </h3>
+          <div id="signal" className='signal-container'>{this.renderSequence(this.props.signal.staticTree)}</div>
           {this.props.executedByColor ? <div className='executedByLine' style={{backgroundColor: this.props.executedByColor}} /> : null}
         </div>
       )

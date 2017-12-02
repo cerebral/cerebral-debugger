@@ -29,6 +29,10 @@
   background-color: #FAFAFA;
 }
 
+.signals-list label {
+  cursor: pointer;
+}
+
 .signals-reset {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;

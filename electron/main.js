@@ -13,7 +13,10 @@ const https = require('https')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 function createWindow () {
-  checkForUpdates()
+  if (process.env.NODE_ENV === 'production') {
+    checkForUpdates()
+  }
+  
   const clients = {}
 
   function addClient (port, client) {

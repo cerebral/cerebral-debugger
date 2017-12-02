@@ -16,6 +16,7 @@ export default connect({
   useragent: state`useragent`,
   currentSignalExecutionId: state`debugger.currentSignalExecutionId`,
   isExecuting: state`debugger.isExecuting`,
+  showFullPathNames: state`debugger.showFullPathNames`,
   resetClicked: signal`debugger.resetClicked`,
   toggleFullPathNamesClicked: signal`debugger.toggleFullPathNamesClicked`
 },
@@ -57,7 +58,7 @@ export default connect({
               onClick={() => this.onToggleFullPathNamesClick()}
               className='signals-toggleFullPathNames'
               disabled={!currentSignalExecutionId}>
-              Toggle full pathnames
+              <label>Full pathnames <input type="checkbox" checked={this.props.showFullPathNames}/></label>
             </button>
             <button
               onClick={() => this.onCopySignalsClick()}

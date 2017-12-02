@@ -1,0 +1,27 @@
+.signal-sequence {
+  display: flex;
+  flex: 1;
+}
+
+.signal-sequenceContainer {
+  flex: 1;
+  width: 0;
+  padding-top: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.signal-sequenceNameContainer {
+  flex: 0 0 30px;
+  text-align: center;
+  border-right: 1px solid #F0F0F0;
+}
+
+.signal-sequenceName {
+  display: inline-block;
+  font-size: 10px;
+  color: #999;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  text-indent: 5px;
+}
