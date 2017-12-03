@@ -80,6 +80,11 @@
     content: "\e5cc";
 }
 
+.icon-up {}
+.icon-up:before {
+  content: "\e5ce";
+}
+
 .icon-runningAction {}
 .icon-runningAction:before {
   content: "\e5d5";

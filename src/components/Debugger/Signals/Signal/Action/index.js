@@ -40,7 +40,7 @@ function renderActionTitle (action) {
   )
 }
 
-function renderDetails (execution) {
+function renderDetails (execution, isExpanded) {
   const hasMutation = execution && execution.data.filter((data) => Boolean(data) && data.type === 'mutation').length
   const hasService = execution && execution.data.filter((data) => Boolean(data) && data.type !== 'mutation').length
   const hasOutput = execution && execution.output
@@ -50,7 +50,7 @@ function renderDetails (execution) {
       {hasMutation ? <span className='action-hasMutation'>mutation</span> : null}
       {hasService ? <span className='action-hasService'>provider</span> : null}
       {hasOutput ? <span className='action-hasOutput'>output</span> : null}
-      <span className='icon icon-down'></span>
+      <span className={`icon icon-${isExpanded ? 'up' : 'down'}`}></span>
     </div>
   )
 }
@@ -133,7 +133,7 @@ class Action extends Component {
               {action.isAsync && <i className='icon icon-asyncAction' />}
               {renderActionTitle(action)}
             </div>
-            {renderDetails(execution)}
+            {renderDetails(execution, isExpanded)}
           </div>
           {execution ? (
             <div>
@@ -166,7 +166,7 @@ class Action extends Component {
             {action.isAsync && <i className='icon icon-asyncAction' />}
             {renderActionTitle(action)}
           </div>
-          {renderDetails(execution)}
+          {renderDetails(execution, isExpanded)}
         </div>
       </div>
     )
