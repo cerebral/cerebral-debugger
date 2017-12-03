@@ -16,7 +16,7 @@ function createWindow () {
   if (process.env.NODE_ENV === 'production') {
     checkForUpdates()
   }
-  
+
   const clients = {}
 
   function addClient (port, client) {
@@ -44,7 +44,11 @@ function createWindow () {
     mainWindow.webContents.send('port:added', port)
   }
 
-  mainWindow = new BrowserWindow({icon: path.resolve('icons', 'icon.png'), width: 800, height: 600})
+  mainWindow = new BrowserWindow({
+    icon: path.resolve('icons', 'icon.png'),
+    minHeight: 768,
+    minWidth: 1024
+  })
   mainWindow.on('closed', function () { mainWindow = null })
   mainWindow.loadURL(url.format({
     pathname: __dirname + '/index.html', // eslint-disable-line
