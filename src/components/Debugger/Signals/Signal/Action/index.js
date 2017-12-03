@@ -145,7 +145,7 @@ class Action extends Component {
                 {execution.output && (
                   <div className='action-actionInput'>
                     <div className='action-inputLabel'>output:</div>
-                    <div className='action-inputValue'><Inspector value={execution.output} pathClicked={pathClicked} /></div>
+                    <div className='action-inputValue'><Inspector value={execution.output.payload && execution.output.path ? execution.output.payload : execution.output} pathClicked={pathClicked} /></div>
                   </div>
                 )}
               </div>
