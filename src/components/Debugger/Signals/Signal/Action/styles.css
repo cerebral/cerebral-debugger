@@ -25,6 +25,7 @@
 .action-actionError {
   border: 1px solid #F44336;
   border-radius: 2px;
+  padding-left: 0;
 }
 
 .action-actionDetails {

@@ -124,8 +124,14 @@ export default connect({
                 style={{
                   backgroundColor: '#FAFAFA'
                 }}
-                executedByColor='#EAEAEA'
+                executedBy
                 signal={executedBySignal}
+                pathClicked={this.props.pathClicked}
+                showPropsToggled={this.props.showPropsToggled}
+                actionsToggled={this.props.actionsToggled}
+                actionToggled={this.props.actionToggled}
+                propsToggled={this.props.propsToggled}
+                showProps={this.props.showProps}
                 useragent={this.props.useragent}
                 currentPage={this.props.currentPage}
                 executedBySignals={this.props.executedBySignals}
@@ -146,18 +152,21 @@ export default connect({
 
       return (
         <div className={classnames('signal', this.props.className)} style={this.props.style}>
-          {this.props.executedByColor ? <div className='executedByLine' style={{backgroundColor: this.props.executedByColor}} /> : null}
-          <h3 className='signal-title'>
+          {this.props.executedBy ? <div className='executedByLine' style={{backgroundColor: '#EAEAEA'}} /> : null}
+          <h3 className='signal-title' style={{
+            backgroundColor: this.props.executedBy ? '#333' : null,
+            color: this.props.executedBy ? '#f0f0f0' : null
+          }}>
             {this.props.signal.name}
             <div className='signal-settingsContainer'>
-              <button onClick={() => this.props.actionsToggled()}>
+              <button onClick={() => this.props.actionsToggled({ executionId: this.props.signal.executionId })}>
                 {Object.keys(this.props.signal.expandedActions).length ? 'Collapse actions' : 'Expand actions'}
               </button>
-              <label>props: <input type="checkbox" onChange={() => this.props.showPropsToggled()} checked={this.props.showProps}/></label>
+              {this.props.executedBy ? null : <label>props: <input type="checkbox" onChange={() => this.props.showPropsToggled()} checked={this.props.showProps}/></label>}
             </div>
           </h3>
           <div id="signal" className='signal-container'>{this.renderSequence(this.props.signal.staticTree)}</div>
-          {this.props.executedByColor ? <div className='executedByLine' style={{backgroundColor: this.props.executedByColor}} /> : null}
+          {this.props.executedBy ? <div className='executedByLine' style={{backgroundColor: '#EAEAEA'}} /> : null}
         </div>
       )
     }

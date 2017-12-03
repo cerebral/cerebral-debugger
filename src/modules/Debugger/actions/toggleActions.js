@@ -1,13 +1,13 @@
-function toggleActions ({ state }) {
-  const executionId = state.get('debugger.currentSignalExecutionId')
-  const expandedActions = state.get(`debugger.signals.${executionId}.expandedActions`)
+function toggleActions ({ props, state }) {
+  const signalsKey = state.get(`debugger.signals.${props.executionId}`) ? 'signals' : 'executedBySignals'
+  const expandedActions = state.get(`debugger.${signalsKey}.${props.executionId}.expandedActions`)
 
   if (Object.keys(expandedActions).length) {
-    state.set(`debugger.signals.${executionId}.expandedActions`, {})
+    state.set(`debugger.${signalsKey}.${props.executionId}.expandedActions`, {})
   } else {
-    const functionsRun = state.get(`debugger.signals.${executionId}.functionsRun`)
+    const functionsRun = state.get(`debugger.${signalsKey}.${props.executionId}.functionsRun`)
     Object.keys(functionsRun).forEach((key) => {
-      state.set(`debugger.signals.${executionId}.expandedActions.${key}`, true)
+      state.set(`debugger.${signalsKey}.${props.executionId}.expandedActions.${key}`, true)
     })
   }
 }

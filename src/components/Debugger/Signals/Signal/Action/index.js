@@ -110,6 +110,12 @@ class Action extends Component {
                 className='language-javascript'
                 dangerouslySetInnerHTML={{__html: renderCode(error)}} />
             </pre>
+            <div>
+              <strong>Stack:</strong>
+              <pre>
+                {error.stack}
+              </pre>
+            </div>
             {executed}
           </div>
         </div>
