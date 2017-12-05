@@ -118,6 +118,11 @@ function createWindow () {
     clients[payload.port].ws.send(JSON.stringify(payload))
   })
 
+  electron.ipcMain.on('relaunch', function (event, payload) {
+    app.relaunch()
+    app.quit()
+  })
+
   electron.ipcMain.on('port:add', function (event, options) {
     if (clients[options.port]) {
       mainWindow.webContents.send('port:added', options.port)

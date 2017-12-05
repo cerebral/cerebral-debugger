@@ -139,6 +139,8 @@ class Debugger extends Component {
     })
 
     this.storeCurrentApps(apps)
+
+    return true;
   }
   storeCurrentApps (apps) {
     jsonStorage.set('apps', Object.keys(apps).reduce((appsToStore, port) => {
