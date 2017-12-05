@@ -78,6 +78,9 @@ class Sequence extends Component {
             style={this.state.nameStyle}
           >
             {this.props.sequence.name || this.props.sequence.type}
+            <span className='signal-sequenceNameHorizontal'>
+              {this.props.sequence.name || this.props.sequence.type}
+            </span>
           </div>
         </div>
         <div className='signal-sequenceContainer'>

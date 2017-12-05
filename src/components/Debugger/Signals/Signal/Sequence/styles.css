@@ -16,10 +16,35 @@
 }
 
 .signal-sequenceName {
+  position: relative;
   display: inline-block;
   font-size: 10px;
   color: #999;
   writing-mode: vertical-rl;
   text-orientation: upright;
   text-indent: 5px;
+  cursor: default;
+}
+
+.signal-sequenceNameHorizontal {
+  position: absolute;
+  background-color: #333;
+  padding: 5px;
+  color: #F7F7F7;
+  border-radius: 2px;
+  top: 10px;
+  left: 10px;
+  writing-mode: horizontal-tb;
+  text-align: left;
+  display: none;
+  text-indent: 0;
+  font-size: 12px;
+}
+
+.signal-sequenceNameContainer:hover .signal-sequenceName {
+  z-index: 999999;
+  color: transparent;
+}
+.signal-sequenceNameContainer:hover .signal-sequenceNameHorizontal {
+  display: block;
 }
