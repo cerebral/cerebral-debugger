@@ -2,6 +2,21 @@ import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
 
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+};
+
 class Sequence extends Component {
   constructor(props) {
     super(props)
@@ -11,7 +26,7 @@ class Sequence extends Component {
   }
   componentDidMount() {
     const signalEl = document.querySelector('#signal')
-    signalEl.addEventListener('scroll', this.toggleStickyName)
+    signalEl.addEventListener('scroll', debounce(this.toggleStickyName, 5))
     const bounds = signalEl.getBoundingClientRect()
     this.signalLeft = bounds.left
   }
@@ -32,19 +47,16 @@ class Sequence extends Component {
       bottom: this.name.parentNode.offsetTop + this.name.parentNode.offsetHeight,
     }
 
-    if (!this.state.containerStyle && this.state.nameStyle && signalEl.scrollTop > this.state.scrollTo) {
-      this.setState({
-        containerStyle: {
-          position: 'relative'
-        },
-        nameStyle: {
-          position: 'absolute',
-          left: '10px',
-          bottom: '5px'
-        }
-      })
-    } else if (nameBounds.top < signalEl.scrollTop && !this.state.nameStyle) {
-      this.setState({
+    let change = {
+      type: 'default',
+      containerStyle: null,
+      nameStyle: null
+    }
+
+
+    if (nameBounds.top < signalEl.scrollTop) {
+      change = {
+        type: 'initialMoving',
         containerStyle: null,
         nameStyle: {
           position: 'fixed',
@@ -54,18 +66,41 @@ class Sequence extends Component {
         originalNameTop: nameBounds.top,
         originalNameLeft: nameBounds.left,
         scrollTo: nameParentBounds.bottom - nameBounds.height - 5
-      })
-    } else if (this.state.scrollTo > signalEl.scrollTop && this.state.nameStyle && this.state.containerStyle) {
-      this.setState({
+      }
+    }
+
+    if (this.state.scrollTo > signalEl.scrollTop) {
+      change = {
+        type: 'moving',
         containerStyle: null,
         nameStyle: {
           position: 'fixed',
           left: (this.state.originalNameLeft + this.signalLeft) + 'px',
           top: '122px'
         }
-      })
-    } else if (this.state.nameStyle && !this.state.containerStyle && this.state.originalNameTop > signalEl.scrollTop) {
-      this.setState({containerStyle: null, nameStyle: null})
+      }
+    }
+
+    if (signalEl.scrollTop > this.state.scrollTo) {
+      change = {
+        type: 'bottom',
+        containerStyle: {
+          position: 'relative'
+        },
+        nameStyle: {
+          position: 'absolute',
+          left: '10px',
+          bottom: '5px'
+        }
+      }
+    }
+
+    if (this.state.originalNameTop > signalEl.scrollTop) {
+      change = {type: 'default', containerStyle: null, nameStyle: null}
+    }
+
+    if (this.state.type !== change.type) {
+      this.setState(change)
     }
   }
   render () {
