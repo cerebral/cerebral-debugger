@@ -35,6 +35,10 @@ class Sequence extends Component {
     signalEl.removeEventListener('scroll', this.toggleStickyName)
   }
   toggleStickyName(event) {
+		if (!this.name) {
+			return
+		}
+		
     const signalEl = event.target;
     const nameBounds = {
       top: this.name.offsetTop,
