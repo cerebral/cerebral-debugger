@@ -62,7 +62,7 @@ export default connect({
     }
     renderSequence(sequence, index) {
       if (sequence.items.length === 1) {
-        return this.renderAction(sequence.items[0])
+        return this.renderAction(sequence.items[0], 0)
       }
 
       return (
@@ -142,7 +142,7 @@ export default connect({
             ))}
           />
           {output ? <Path output={output} /> : null}
-          {output ? this.renderAction(action.outputs[output], 0) : null}
+          {output ? this.renderAction(action.outputs[output], index + 1) : null}
         </div>
       )
     }

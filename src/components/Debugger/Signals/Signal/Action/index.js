@@ -112,7 +112,7 @@ class Action extends Component {
             </pre>
             <div>
               <strong>Stack:</strong>
-              <pre>
+              <pre style={{overflowX: 'scroll'}}>
                 {error.stack}
               </pre>
             </div>
