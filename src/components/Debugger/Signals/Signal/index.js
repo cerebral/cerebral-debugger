@@ -110,6 +110,7 @@ export default connect({
           /> : null}
           <Action
             action={action}
+            output={output}
             actionToggled={() => this.props.actionToggled({action, executionId: this.props.signal.executionId})}
             isExpanded={Boolean(this.props.signal.expandedActions[action.functionIndex])}
             faded={(hasSearchContent === false) || !isExecuted}

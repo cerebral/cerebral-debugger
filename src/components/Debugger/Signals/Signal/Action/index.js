@@ -80,7 +80,7 @@ class Action extends Component {
     })
   }
   render () {
-    const {action, actionToggled, isExpanded, faded, execution, children, onMutationClick, executed, pathClicked} = this.props
+    const {action, output, actionToggled, isExpanded, faded, execution, children, onMutationClick, executed, pathClicked} = this.props
 
     const error = execution && execution.error
     const titleClassname = classnames({
@@ -144,8 +144,15 @@ class Action extends Component {
                 {executed}
                 {execution.output && (
                   <div className='action-actionInput'>
-                    <div className='action-inputLabel'>output:</div>
-                    <div className='action-inputValue'><Inspector value={execution.output.payload && execution.output.path ? execution.output.payload : execution.output} pathClicked={pathClicked} /></div>
+                    <div className='action-inputLabel'>{execution.output.path === output ? `path.${output}:` : 'output:'}</div>
+                    <div className='action-inputValue'>
+                      {
+                        execution.output.path === output ? (
+                          <Inspector value={execution.output.payload || {}} pathClicked={pathClicked} />
+                        ) : (
+                          <Inspector value={execution.output} pathClicked={pathClicked} />
+                        )}
+                    </div>
                   </div>
                 )}
               </div>
