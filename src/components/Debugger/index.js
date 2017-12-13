@@ -122,6 +122,7 @@ class Debugger extends Component {
           },
           modules: {
             debugger: DebuggerModule,
+            storage: StorageModule(),
             useragent: UserAgent({
               media: {
                 small: '(max-width: 1270px)'
