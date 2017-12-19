@@ -3,22 +3,9 @@ import Inferno from 'inferno' // eslint-disable-line
 
 import Inspector from '../../../../Inspector'
 
-const colors = {
-  set: '#dc6428',
-  import: '',
-  unset: '#872841',
-  push: '#004b87',
-  splice: '#eb1e64',
-  merge: '#007355',
-  concat: '#1eaa6e',
-  pop: '#872841',
-  shift: '#4b2332',
-  unshift: '#28a0aa'
-}
-
 function Mutation ({mutation, onMutationClick, pathClicked}) {
   const mutationNameStyle = {
-    color: colors[mutation.method]
+    color: '#dc6428'
   }
   const args = mutation.args.slice(1)
 

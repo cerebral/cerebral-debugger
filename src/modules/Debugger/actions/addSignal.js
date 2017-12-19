@@ -13,7 +13,9 @@ function addSignal ({props, state, resolve}) {
     staticTree: execution.staticTree,
     groupId: prevSignal && prevSignal.name === execution.name ? prevSignal.groupId : execution.name,
     functionsRun: {},
-    executedBy: execution.executedBy || null
+    executedBy: execution.executedBy || null,
+    expandedProps: {},
+    expandedActions: {}
   }
 
   if (newSignal.executedBy && (state.get(`debugger.signals.${newSignal.executedBy.id}`) || state.get(`debugger.executedBySignals.${newSignal.executedBy.id}`))) {

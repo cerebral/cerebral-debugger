@@ -1,5 +1,4 @@
 .mutation {
-  margin-left: 2px;
   display: flex;
   align-items: center;
   height: 100%;
@@ -13,7 +12,6 @@
 
 .mutation-mutationName {
   font-weight: bold;
-  margin-left: 5px;
   flex: 0 0 auto;
   font-size: 12px;
   line-height: 20px;

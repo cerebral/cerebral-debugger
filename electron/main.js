@@ -13,7 +13,10 @@ const https = require('https')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 function createWindow () {
-  checkForUpdates()
+  if (process.env.NODE_ENV === 'production') {
+    checkForUpdates()
+  }
+
   const clients = {}
 
   function addClient (port, client) {
@@ -41,7 +44,13 @@ function createWindow () {
     mainWindow.webContents.send('port:added', port)
   }
 
-  mainWindow = new BrowserWindow({icon: path.resolve('icons', 'icon.png'), width: 800, height: 600})
+  mainWindow = new BrowserWindow({
+    icon: path.resolve('icons', 'icon.png'),
+    height: 768,
+    width: 1024,
+    minHeight: 768,
+    minWidth: 1024
+  })
   mainWindow.on('closed', function () { mainWindow = null })
   mainWindow.loadURL(url.format({
     pathname: __dirname + '/index.html', // eslint-disable-line
@@ -107,6 +116,11 @@ function createWindow () {
     }
 
     clients[payload.port].ws.send(JSON.stringify(payload))
+  })
+
+  electron.ipcMain.on('relaunch', function (event, payload) {
+    app.relaunch()
+    app.quit()
   })
 
   electron.ipcMain.on('port:add', function (event, options) {

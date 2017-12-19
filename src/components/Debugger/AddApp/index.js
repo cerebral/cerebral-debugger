@@ -2,6 +2,7 @@ import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
 import {shell} from 'electron'
+import connector from 'connector'
 import path from 'path'
 
 class AddApp extends Component {
@@ -39,6 +40,11 @@ class AddApp extends Component {
       port: this.state.port,
       ssl: this.state.ssl
     })
+
+    if (isAdded && this.state.ssl) {
+      alert('When adding SSL the debugger needs to restart') // eslint-disable-line
+      connector.relaunch()
+    }
 
     if (!isAdded) {
       this.setState({

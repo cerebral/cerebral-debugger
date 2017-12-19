@@ -248,7 +248,7 @@
       (function() {
         const app = document.createElement('script');
         app.src = process.env.NODE_ENV !== 'development' ? './build/bundle.js' : 'http://localhost:9000/dist/bundle.js';
-        document.write(app.outerHTML);
+        document.body.appendChild(app);
       }());
     </script>
   </body>

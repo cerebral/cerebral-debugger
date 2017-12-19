@@ -45,6 +45,9 @@ const connector = {
   },
   removePort (port) {
     ipcRenderer.send('port:remove', port)
+  },
+  relaunch () {
+    ipcRenderer.send('relaunch')
   }
 }
 

@@ -113,11 +113,17 @@ class ObjectValue extends Component {
     event.stopPropagation()
     this.setState({isCollapsed: false})
     this.props.pathClicked({ path: this.props.path, expanded: true })
+    if (!this.props.path.length && this.context.options.onExpand) {
+      this.context.options.onExpand()
+    }
   }
   onCollapseClick (event) {
     event.stopPropagation()
     this.setState({isCollapsed: true})
     this.props.pathClicked({ path: this.props.path, expanded: false })
+    if (!this.props.path.length && this.context.options.onCollapse) {
+      this.context.options.onCollapse()
+    }
   }
   renderProperty (key, value, index, hasNext, path) {
     this.props.path.push(key)
@@ -346,6 +352,8 @@ class Inspector extends Component {
   getChildContext () {
     return {
       options: {
+        onExpand: this.props.onExpand,
+        onCollapse: this.props.onCollapse,
         expanded: this.props.expanded || false,
         canEdit: this.props.canEdit || false
       }

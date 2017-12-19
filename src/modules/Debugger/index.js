@@ -11,6 +11,10 @@ import escPressed from './signals/escPressed'
 import addPortErrored from './signals/addPortErrored'
 import pathClicked from './signals/pathClicked'
 import toggleFullPathNamesClicked from './signals/toggleFullPathNamesClicked'
+import actionToggled from './signals/actionToggled'
+import propsToggled from './signals/propsToggled'
+import actionsToggled from './signals/actionsToggled'
+import showPropsToggled from './signals/showPropsToggled'
 
 export default () => ({
   state: {
@@ -31,8 +35,7 @@ export default () => ({
     renders: [],
     mutationsError: false,
     searchValue: '',
-    expandedPaths: [],
-    showFullPathNames: false
+    expandedPaths: []
   },
   signals: {
     pageChanged,
@@ -47,6 +50,10 @@ export default () => ({
     modelClicked,
     addPortErrored,
     pathClicked,
-    toggleFullPathNamesClicked
+    toggleFullPathNamesClicked,
+    actionToggled,
+    propsToggled,
+    actionsToggled,
+    showPropsToggled
   }
 })
