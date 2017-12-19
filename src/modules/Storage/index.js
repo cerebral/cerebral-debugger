@@ -15,9 +15,9 @@ export default () => {
       signals: {
         initialized
       },
-      provider(context) {
+      provider (context) {
         context.storage = {
-          get(key) {
+          get (key) {
             return new Promise((resolve, reject) => {
               jsonStorage.get(key, (error, data) => {
                 if (error) {
@@ -28,7 +28,7 @@ export default () => {
               })
             })
           },
-          set(key, value) {
+          set (key, value) {
             return new Promise((resolve, reject) => {
               jsonStorage.set(key, value, (error) => {
                 if (error) {

@@ -2,44 +2,45 @@ import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
 
-function debounce(func, wait, immediate) {
-	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
-	};
+function debounce (func, wait, immediate) {
+  var timeout
+  return function () {
+    var context = this
+    var args = arguments
+    var later = function () {
+      timeout = null
+      if (!immediate) func.apply(context, args)
+    }
+    var callNow = immediate && !timeout
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+    if (callNow) func.apply(context, args)
+  }
 };
 
 class Sequence extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.toggleStickyName = this.toggleStickyName.bind(this)
     this.state = { containerStyle: null, nameStyle: null }
     this.signalLeft = 0
   }
-  componentDidMount() {
+  componentDidMount () {
     const signalEl = document.querySelector('#signal')
     signalEl.addEventListener('scroll', debounce(this.toggleStickyName, 5))
     const bounds = signalEl.getBoundingClientRect()
     this.signalLeft = bounds.left
   }
-  componentWillUnmount() {
+  componentWillUnmount () {
     const signalEl = document.querySelector('#signal')
     signalEl.removeEventListener('scroll', this.toggleStickyName)
   }
-  toggleStickyName(event) {
-		if (!this.name) {
-			return
-		}
-		
-    const signalEl = event.target;
+  toggleStickyName (event) {
+    if (!this.name) {
+      return
+    }
+
+    const signalEl = event.target
     const nameBounds = {
       top: this.name.offsetTop,
       left: this.name.offsetLeft,
@@ -48,7 +49,7 @@ class Sequence extends Component {
     }
     const nameParentBounds = {
       top: this.name.parentNode.offsetTop,
-      bottom: this.name.parentNode.offsetTop + this.name.parentNode.offsetHeight,
+      bottom: this.name.parentNode.offsetTop + this.name.parentNode.offsetHeight
     }
 
     let change = {
@@ -56,7 +57,6 @@ class Sequence extends Component {
       containerStyle: null,
       nameStyle: null
     }
-
 
     if (nameBounds.top < signalEl.scrollTop) {
       change = {
@@ -112,7 +112,7 @@ class Sequence extends Component {
       <div className='signal-sequence' onClick={(event) => event.stopPropagation()}>
         <div style={this.state.containerStyle} className='signal-sequenceNameContainer'>
           <div
-            ref={(node) => this.name = node}
+            ref={(node) => { this.name = node }}
             className='signal-sequenceName'
             style={this.state.nameStyle}
           >

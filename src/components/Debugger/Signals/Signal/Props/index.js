@@ -8,11 +8,11 @@ function Props ({isExpanded, payload = {}, pathClicked, onExpand, onCollapse}) {
     <div className='action-props'>
       <div className='action-propsValue'>
         <Inspector
-            onExpand={onExpand}
-            onCollapse={onCollapse}
-            value={payload}
-            pathClicked={pathClicked}
-            expandedPaths={isExpanded ? [''] : []} />
+          onExpand={onExpand}
+          onCollapse={onCollapse}
+          value={payload}
+          pathClicked={pathClicked}
+          expandedPaths={isExpanded ? [''] : []} />
       </div>
     </div>
   )

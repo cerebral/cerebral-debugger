@@ -60,7 +60,7 @@ export default connect({
         return false
       }, false)
     }
-    renderSequence(sequence, index) {
+    renderSequence (sequence, index) {
       if (sequence.items.length === 1) {
         return this.renderAction(sequence.items[0], 0)
       }
@@ -87,7 +87,7 @@ export default connect({
       const executedBySignals = (
         this.props.signal.functionsRun[action.functionIndex] && this.props.signal.functionsRun[action.functionIndex].executedIds.length
       ) ? this.props.signal.functionsRun[action.functionIndex].executedIds.map((executedId) => this.props.executedBySignals[executedId]) : []
-      const execution = this.props.signal.functionsRun[action.functionIndex];
+      const execution = this.props.signal.functionsRun[action.functionIndex]
       const output = Object.keys(action.outputs || {}).reduce((currentOutput, output) => {
         const isOutput = execution && execution.path === output
 
@@ -163,10 +163,10 @@ export default connect({
               <button onClick={() => this.props.actionsToggled({ executionId: this.props.signal.executionId })}>
                 {Object.keys(this.props.signal.expandedActions).length ? 'Collapse actions' : 'Expand actions'}
               </button>
-              {this.props.executedBy ? null : <label>props: <input type="checkbox" onChange={() => this.props.showPropsToggled()} checked={this.props.showProps}/></label>}
+              {this.props.executedBy ? null : <label>props: <input type='checkbox' onChange={() => this.props.showPropsToggled()} checked={this.props.showProps} /></label>}
             </div>
           </h3>
-          <div id="signal" className='signal-container'>{this.renderSequence(this.props.signal.staticTree)}</div>
+          <div id='signal' className='signal-container'>{this.renderSequence(this.props.signal.staticTree)}</div>
           {this.props.executedBy ? <div className='executedByLine' style={{backgroundColor: '#EAEAEA'}} /> : null}
         </div>
       )

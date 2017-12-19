@@ -50,7 +50,7 @@ function renderDetails (execution, isExpanded) {
       {hasMutation ? <span className='action-hasMutation'>mutation</span> : null}
       {hasService ? <span className='action-hasService'>provider</span> : null}
       {hasOutput ? <span className='action-hasOutput'>output</span> : null}
-      <span className={`icon icon-${isExpanded ? 'up' : 'down'}`}></span>
+      <span className={`icon icon-${isExpanded ? 'up' : 'down'}`} />
     </div>
   )
 }
@@ -126,7 +126,7 @@ class Action extends Component {
       return (
         <div
           className='action action-expanded'
-          onClick={(event) => { event.stopPropagation(); actionToggled()}}
+          onClick={(event) => { event.stopPropagation(); actionToggled() }}
         >
           <div className='action-titleContainer'>
             <div className={titleClassname}>
@@ -166,7 +166,7 @@ class Action extends Component {
     return (
       <div
         className='action'
-        onClick={(event) => { event.stopPropagation(); actionToggled()}}
+        onClick={(event) => { event.stopPropagation(); actionToggled() }}
       >
         <div className='action-titleContainer'>
           <div className={titleClassname}>

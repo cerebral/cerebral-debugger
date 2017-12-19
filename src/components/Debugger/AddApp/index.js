@@ -42,7 +42,7 @@ class AddApp extends Component {
     })
 
     if (isAdded && this.state.ssl) {
-      alert('When adding SSL the debugger needs to restart')
+      alert('When adding SSL the debugger needs to restart') // eslint-disable-line
       connector.relaunch()
     }
 

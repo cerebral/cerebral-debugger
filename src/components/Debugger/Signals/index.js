@@ -58,7 +58,7 @@ export default connect({
               onClick={() => this.onToggleFullPathNamesClick()}
               className='signals-toggleFullPathNames'
               disabled={!currentSignalExecutionId}>
-              <label>Full pathnames <input type="checkbox" checked={this.props.showFullPathNames}/></label>
+              <label>Full pathnames <input type='checkbox' checked={this.props.showFullPathNames} /></label>
             </button>
             <button
               onClick={() => this.onCopySignalsClick()}
