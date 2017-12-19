@@ -55,7 +55,7 @@
     "electron-default-menu": "^1.0.0",
     "electron-json-storage": "^4.0.2",
     "electron-log": "^2.2.2",
-    "electron-updater": "^1.14.0",
+    "electron-updater": "^2.17.6",
     "function-tree": "0.5.0-b-alpha.c00bd8f2",
     "inferno": "^1.5.3",
     "inferno-component": "^1.5.3",
