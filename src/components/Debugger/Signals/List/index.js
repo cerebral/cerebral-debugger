@@ -14,7 +14,7 @@ export default connect({
   isExecuting: state`debugger.isExecuting`,
   executedBySignals: state`debugger.executedBySignals`,
   searchValue: state`debugger.searchValue`,
-  showFullPathNames: state`debugger.showFullPathNames`,
+  showFullPathNames: state`storage.showFullPathNames`,
   signalClicked: signal`debugger.signalClicked`
 },
   class SignalsList extends Component {

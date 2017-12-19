@@ -71,7 +71,7 @@ function updateAvailable ({version, releaseNotes}) {
   let window = new BrowserWindow({
     title: 'Update Available',
     width: 600,
-    height: 630,
+    height: 725,
     show: false,
     center: true,
     resizable: true,

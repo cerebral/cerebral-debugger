@@ -1,0 +1,15 @@
+.action-props {
+  background-color: #F0F0F0;
+  min-height: 25px;
+  margin-bottom: 1px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.action-propsValue {
+  flex: 1;
+}

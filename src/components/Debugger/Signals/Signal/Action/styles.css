@@ -1,18 +1,59 @@
 .action {
   font-size: 10px;
+  background-color: #FFF;
+  padding-left: 10px;
+  margin-bottom: 1px;
+  cursor: pointer;
 }
+
+.action-expanded {
+  padding-bottom: 10px;
+}
+
+.action-titleContainer {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
 
 .action-faded {
   opacity: 0.25;
 }
 
-.action:not(:last-child) {
-  margin-bottom: 10px;
-}
-
 .action-actionError {
   border: 1px solid #F44336;
   border-radius: 2px;
+  padding-left: 0;
+}
+
+.action-actionDetails {
+  margin-left: auto;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.action-actionDetails .icon {
+  top: 0;
+  color: #BABABA;
+  margin-left: 10px;
+}
+
+.action-hasMutation {
+  color: #dc6428;
+  margin-left: 10px;
+}
+
+.action-hasOutput {
+  color: #333;
+  margin-left: 10px;
+}
+
+.action-hasService {
+  color: #28a0aa;
+  margin-left: 10px;
 }
 
 .action-actionHeader {
@@ -70,15 +111,7 @@
   line-height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
-  cursor: pointer;
-}
-
-.action-actionName {
-  font-style: italic;
-}
-
-.action-actionTitle:hover {
-  color: #1e78c3;
+  font-weight: bold;
 }
 
 .action-actionNameParams {

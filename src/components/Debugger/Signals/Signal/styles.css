@@ -1,8 +1,14 @@
 .signal {
-  background-color: #FFF;
+  background-color: #F7F7F7;
   border-radius: 3px;
   border: 1px solid #DDD;
   height: calc(100vh - 106px);
+  display: flex;
+  flex-direction: column;
+}
+
+.signal-container {
+  position: relative;
   overflow-y: scroll;
 }
 
@@ -22,6 +28,7 @@
 }
 
 .signal-title {
+  flex: 0 0 30px;
   margin: 0;
   height: 30px;
   padding: 0 10px 0 10px;
@@ -32,18 +39,14 @@
   border-bottom: 1px solid #DDD;
 }
 
-.signal-chain {
-  padding: 10px;
-}
-
-.signal-groupHeader {
+.signal-settingsContainer {
   display: flex;
-  align-items: flex-start;
+  margin-left: auto;
 }
 
-.signal-groupHeader > i {
-  top: 0;
-  font-size: 20px;
+.signal-settingsContainer label {
+  margin-left: 10px;
+  font-size: 12px;
 }
 
 .signal-async {
@@ -52,14 +55,6 @@
   border-left: 5px solid #DDD;
   border-bottom: 1px solid #DDD;
   border-right: 1px solid #DDD;
-  border-radius: 2px;
-  padding: 5px;
-  margin-bottom: 10px;
-}
-
-.signal-group {
-  flex: 1;
-  border: 1px solid #DDD;
   border-radius: 2px;
   padding: 5px;
   margin-bottom: 10px;
@@ -92,22 +87,6 @@
 
 .signal-outputPath {
   flex: 1;
-}
-
-.signal-groupName {
-  font-size: 10px;
-  color: #777;
-  margin-left: 10px;
-  border: 1px solid #DDD;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  padding: 3px 10px;
-  background-color: #DDD;
-  display: inline-block;
-}
-
-.signal-groupName.faded {
-  opacity: 0.5;
 }
 
 .signal-empty {

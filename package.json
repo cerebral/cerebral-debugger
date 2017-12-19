@@ -1,6 +1,6 @@
 {
   "name": "cerebral-debugger",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "description": "Cerebral Debugger",
   "private": true,
   "main": "electron/main.js",
@@ -53,7 +53,7 @@
     "classnames": "^2.2.5",
     "color": "^0.11.4",
     "electron-default-menu": "^1.0.0",
-    "electron-json-storage": "^2.1.0",
+    "electron-json-storage": "^4.0.2",
     "electron-log": "^2.2.2",
     "electron-updater": "^1.14.0",
     "function-tree": "0.5.0-b-alpha.c00bd8f2",

@@ -31,10 +31,26 @@ function getLineNumber (error) {
 
 function renderActionTitle (action) {
   const actionName = getActionName(action)
+
   return (
     <div className='action-actionTitle'>
       <span className='action-actionName'>{actionName.name}</span>
       {actionName.params ? <span className='action-actionNameParams'>{actionName.params}</span> : null}
+    </div>
+  )
+}
+
+function renderDetails (execution, isExpanded) {
+  const hasMutation = execution && execution.data.filter((data) => Boolean(data) && data.type === 'mutation').length
+  const hasService = execution && execution.data.filter((data) => Boolean(data) && data.type !== 'mutation').length
+  const hasOutput = execution && execution.output
+
+  return (
+    <div className='action-actionDetails'>
+      {hasMutation ? <span className='action-hasMutation'>mutation</span> : null}
+      {hasService ? <span className='action-hasService'>provider</span> : null}
+      {hasOutput ? <span className='action-hasOutput'>output</span> : null}
+      <span className={`icon icon-${isExpanded ? 'up' : 'down'}`} />
     </div>
   )
 }
@@ -64,7 +80,7 @@ class Action extends Component {
     })
   }
   render () {
-    const {action, faded, execution, children, onMutationClick, executed, pathClicked} = this.props
+    const {action, output, actionToggled, isExpanded, faded, execution, children, onMutationClick, executed, pathClicked} = this.props
 
     const error = execution && execution.error
     const titleClassname = classnames({
@@ -72,22 +88,19 @@ class Action extends Component {
       'action-actionHeader': !error,
       'action-faded': faded
     })
-    return (
-      <div
-        className={error ? 'action action-actionError' : 'action'}
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className={titleClassname}>
-          {error && <i className='icon icon-warning' />}
-          {action.isAsync && <i className='icon icon-asyncAction' />}
-          {renderActionTitle(action)}
-        </div>
-        {error ? (
+
+    if (error) {
+      return (
+        <div
+          className='action action-actionError'
+          onClick={(event) => event.stopPropagation()}
+        >
+          <div className={titleClassname}>
+            <i className='icon icon-warning' />
+            {action.isAsync && <i className='icon icon-asyncAction' />}
+            {renderActionTitle(action)}
+          </div>
           <div className='action-error'>
-            <div className='action-actionInput'>
-              <div className='action-inputLabel'>props:</div>
-              <div className='action-inputValue'><Inspector value={execution.payload} pathClicked={pathClicked} /></div>
-            </div>
             <div className='action-error-message'>
               <strong>{error.name}:</strong> <Inspector value={error} pathClicked={pathClicked} />
             </div>
@@ -97,30 +110,71 @@ class Action extends Component {
                 className='language-javascript'
                 dangerouslySetInnerHTML={{__html: renderCode(error)}} />
             </pre>
+            <div>
+              <strong>Stack:</strong>
+              <pre style={{overflowX: 'scroll'}}>
+                {error.stack}
+              </pre>
+            </div>
             {executed}
           </div>
-        ) : null}
-        {!error && execution ? (
-          <div>
-            <div className={faded ? 'action-faded' : null}>
-              <div className='action-actionInput'>
-                <div className='action-inputLabel'>props:</div>
-                <div className='action-inputValue'><Inspector value={execution.payload} pathClicked={pathClicked} /></div>
-              </div>
-              <div className='action-mutations'>
-                {execution.data.filter((data) => Boolean(data)).map((data, index) => data.type === 'mutation' ? <Mutation mutation={data} key={index} onMutationClick={onMutationClick} pathClicked={pathClicked} /> : <Service service={data} key={index} pathClicked={pathClicked} />)}
-              </div>
-              {executed}
-              {execution.output && (
-                <div className='action-actionInput'>
-                  <div className='action-inputLabel'>output:</div>
-                  <div className='action-inputValue'><Inspector value={execution.output} pathClicked={pathClicked} /></div>
-                </div>
-              )}
+        </div>
+      )
+    }
+
+    if (isExpanded) {
+      return (
+        <div
+          className='action action-expanded'
+          onClick={(event) => { event.stopPropagation(); actionToggled() }}
+        >
+          <div className='action-titleContainer'>
+            <div className={titleClassname}>
+              {action.isAsync && <i className='icon icon-asyncAction' />}
+              {renderActionTitle(action)}
             </div>
-            {children}
+            {renderDetails(execution, isExpanded)}
           </div>
-          ) : null}
+          {execution ? (
+            <div>
+              <div className={faded ? 'action-faded' : null}>
+                <div className='action-mutations'>
+                  {execution.data.filter((data) => Boolean(data)).map((data, index) => data.type === 'mutation' ? <Mutation mutation={data} key={index} onMutationClick={onMutationClick} pathClicked={pathClicked} /> : <Service service={data} key={index} pathClicked={pathClicked} />)}
+                </div>
+                {executed}
+                {execution.output && (
+                  <div className='action-actionInput'>
+                    <div className='action-inputLabel'>{execution.output.path === output ? `path.${output}:` : 'output:'}</div>
+                    <div className='action-inputValue'>
+                      {
+                        execution.output.path === output ? (
+                          <Inspector value={execution.output.payload || {}} pathClicked={pathClicked} />
+                        ) : (
+                          <Inspector value={execution.output} pathClicked={pathClicked} />
+                        )}
+                    </div>
+                  </div>
+                )}
+              </div>
+              {children}
+            </div>
+            ) : null}
+        </div>
+      )
+    }
+
+    return (
+      <div
+        className='action'
+        onClick={(event) => { event.stopPropagation(); actionToggled() }}
+      >
+        <div className='action-titleContainer'>
+          <div className={titleClassname}>
+            {action.isAsync && <i className='icon icon-asyncAction' />}
+            {renderActionTitle(action)}
+          </div>
+          {renderDetails(execution, isExpanded)}
+        </div>
       </div>
     )
   }
