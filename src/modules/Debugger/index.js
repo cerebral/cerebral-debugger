@@ -15,6 +15,7 @@ import actionToggled from './signals/actionToggled'
 import propsToggled from './signals/propsToggled'
 import actionsToggled from './signals/actionsToggled'
 import showPropsToggled from './signals/showPropsToggled'
+import createSignalTestClicked from './signals/createSignalTestClicked'
 
 export default () => ({
   state: {
@@ -54,6 +55,7 @@ export default () => ({
     actionToggled,
     propsToggled,
     actionsToggled,
-    showPropsToggled
+    showPropsToggled,
+    createSignalTestClicked
   }
 })

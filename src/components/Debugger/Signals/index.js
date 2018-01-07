@@ -18,7 +18,8 @@ export default connect({
   isExecuting: state`debugger.isExecuting`,
   showFullPathNames: state`storage.showFullPathNames`,
   resetClicked: signal`debugger.resetClicked`,
-  toggleFullPathNamesClicked: signal`debugger.toggleFullPathNamesClicked`
+  toggleFullPathNamesClicked: signal`debugger.toggleFullPathNamesClicked`,
+  createSignalTestClicked: signal`debugger.createSignalTestClicked`
 },
   class Signals extends Component {
     constructor (props) {
@@ -44,6 +45,9 @@ export default connect({
         this.textarea.select()
       })
     }
+    onCreateSignalTestClick () {
+      this.props.createSignalTestClicked();
+    }
     onToggleFullPathNamesClick () {
       this.props.toggleFullPathNamesClicked()
     }
@@ -59,6 +63,12 @@ export default connect({
               className='signals-toggleFullPathNames'
               disabled={!currentSignalExecutionId}>
               <label>Full pathnames <input type='checkbox' checked={this.props.showFullPathNames} /></label>
+            </button>
+            <button
+              onClick={() => this.onCreateSignalTestClick()}
+              className='signals-rewrite'
+              disabled={!currentSignalExecutionId}>
+              Create signal test
             </button>
             <button
               onClick={() => this.onCopySignalsClick()}
