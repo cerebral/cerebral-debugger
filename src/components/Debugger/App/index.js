@@ -3,7 +3,7 @@ import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
 import classNames from 'classnames'
 import connector from 'connector'
-import {connect} from 'cerebral/inferno'
+import {connect} from '@cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import Toolbar from '../Toolbar'
 import Signals from '../Signals'
@@ -14,14 +14,14 @@ import Model from '../Model'
 export default connect({
   config: state`config`,
   error: state`error`,
-  currentPage: state`debugger.currentPage`,
-  executingSignalsCount: state`debugger.executingSignalsCount`,
-  settings: state`debugger.settings`,
+  currentPage: state`currentPage`,
+  executingSignalsCount: state`executingSignalsCount`,
+  settings: state`settings`,
   isSmall: state`useragent.media.small`,
-  mutationsError: state`debugger.mutationsError`,
-  escPressed: signal`debugger.escPressed`,
-  payloadReceived: signal`debugger.payloadReceived`,
-  addPortErrored: signal`debugger.addPortErrored`
+  mutationsError: state`mutationsError`,
+  escPressed: signal`escPressed`,
+  payloadReceived: signal`payloadReceived`,
+  addPortErrored: signal`addPortErrored`
 },
   class App extends Component {
     componentDidMount () {
@@ -117,7 +117,7 @@ export default connect({
             mutationsError
             ? <div className='app-mutationsError'>
               <h1>Ops!</h1>
-              <h4>Signal "{mutationsError.signalName}" causes an error doing <strong>{mutationsError.mutation.name}</strong>("{mutationsError.mutation.path.join('.')}", {JSON.stringify(mutationsError.mutation.args).replace(/^\[/, '').replace(/]$/, '')})</h4>
+              <h4>Signal "{mutationsError.signalName}" causes an error doing <strong>{mutationsError.mutation.name}</strong>("{mutationsError.mutation.args[0].join('.')}", {JSON.stringify(mutationsError.mutation.args).replace(/^\[/, '').replace(/]$/, '')})</h4>
             </div>
             : <div className='app-toolbar'>
               <Toolbar />

@@ -1,7 +1,7 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
-import {connect} from 'cerebral/inferno'
+import {connect} from '@cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import signalsList from '../../../common/computed/signalsList'
 import connector from 'connector'
@@ -11,15 +11,16 @@ import Signal from './Signal'
 
 export default connect({
   port: state`config.port`,
-  currentPage: state`debugger.currentPage`,
+  currentPage: state`currentPage`,
   signalsList: signalsList,
   useragent: state`useragent`,
-  currentSignalExecutionId: state`debugger.currentSignalExecutionId`,
-  isExecuting: state`debugger.isExecuting`,
+  currentSignalExecutionId: state`currentSignalExecutionId`,
+  isExecuting: state`isExecuting`,
+  hasCreatedSignalTest: state`hasCreatedSignalTest`,
   showFullPathNames: state`storage.showFullPathNames`,
-  resetClicked: signal`debugger.resetClicked`,
-  toggleFullPathNamesClicked: signal`debugger.toggleFullPathNamesClicked`,
-  createSignalTestClicked: signal`debugger.createSignalTestClicked`
+  resetClicked: signal`resetClicked`,
+  toggleFullPathNamesClicked: signal`toggleFullPathNamesClicked`,
+  createSignalTestClicked: signal`createSignalTestClicked`
 },
   class Signals extends Component {
     constructor (props) {
@@ -33,7 +34,8 @@ export default connect({
         this.props.currentSignalExecutionId !== nextProps.currentSignalExecutionId ||
         this.props.mutationsError !== nextProps.mutationsError ||
         this.state.copiedSignals !== nextState.copiedSignals ||
-        this.props.isExecuting !== nextProps.isExecuting
+        this.props.isExecuting !== nextProps.isExecuting ||
+        this.props.hasCreatedSignalTest !== nextProps.hasCreatedSignalTest
       )
     }
     onResetClick () {
@@ -92,6 +94,14 @@ export default connect({
                 <textarea ref={(node) => { this.textarea = node }} value={this.state.copiedSignals} onBlur={() => this.setState({copiedSignals: null})} />
               </li>
               : null
+          }
+          {
+            this.props.hasCreatedSignalTest ?
+              (
+                <div className='signals-test-copied'>Test copied to clipboard!</div>
+              )
+            :
+              null
           }
         </div>
       )

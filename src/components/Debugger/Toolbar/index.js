@@ -2,18 +2,18 @@ import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
 import classNames from 'classnames'
-import {connect} from 'cerebral/inferno'
+import {connect} from '@cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import signalsList from '../../../common/computed/signalsList'
 
 export default connect({
   type: state`config.type`,
-  currentPage: state`debugger.currentPage`,
-  searchValue: state`debugger.searchValue`,
+  currentPage: state`currentPage`,
+  searchValue: state`searchValue`,
   isSmall: state`useragent.media.small`,
   appSignals: signalsList,
-  pageChanged: signal`debugger.pageChanged`,
-  searchValueChanged: signal`debugger.searchValueChanged`
+  pageChanged: signal`pageChanged`,
+  searchValueChanged: signal`searchValueChanged`
 },
   class Toolbar extends Component {
     constructor (props) {
