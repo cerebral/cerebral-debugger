@@ -20,7 +20,7 @@ export function updateSignalPath ({props, state}) {
     ) : (
       `signals.${execution.executionId}`
     )
-  
+
     state.set(`${signalPath}.functionsRun.${execution.functionIndex}.path`, execution.path)
 }
 
@@ -31,9 +31,9 @@ export function updateSignal ({props, state}) {
     ) : (
       `signals.${execution.executionId}`
     )
-  
+
     const signal = state.get(signalPath)
-  
+
     if (signal.functionsRun[execution.functionIndex]) {
       state.push(`${signalPath}.functionsRun.${execution.functionIndex}.data`, execution.data)
     } else {
@@ -92,7 +92,7 @@ export function updateActionOutput ({props, state}) {
     ) : (
       `signals.${execution.executionId}`
     )
-  
+
     state.set(`${signalPath}.functionsRun.${execution.functionIndex}.output`, execution.output)
 }
 
@@ -103,7 +103,7 @@ export function updateActionError ({props, state}) {
     ) : (
       `signals.${execution.executionId}`
     )
-  
+
     state.set(`${signalPath}.isExecuting`, false)
     state.set(`${signalPath}.hasError`, true)
     state.set(`${signalPath}.functionsRun.${execution.functionIndex}.error`, execution.error)
@@ -112,7 +112,7 @@ export function updateActionError ({props, state}) {
 export function toggleActions ({ props, state }) {
     const signalsKey = state.get(`signals.${props.executionId}`) ? 'signals' : 'executedBySignals'
     const expandedActions = state.get(`${signalsKey}.${props.executionId}.expandedActions`)
-  
+
     if (Object.keys(expandedActions).length) {
       state.set(`${signalsKey}.${props.executionId}.expandedActions`, {})
     } else {
@@ -122,12 +122,12 @@ export function toggleActions ({ props, state }) {
       })
     }
 }
-  
+
 
 export function runRecordedMutation ({props, state}) {
     const args = props.data.args
     const path = ['model'].concat(props.data.path).join('.')
-  
+
     state.set.apply(null, [path, ...args])
 }
 
@@ -141,13 +141,13 @@ export function setInitialPayload ({props, state}) {
 export function setCurrentExecutionId ({props, state}) {
     const expandedSignalGroups = state.get('expandedSignalGroups')
     const currentSignalExecutionId = state.get('currentSignalExecutionId')
-  
+
     state.set('currentSignalExecutionId', props.executionId)
-  
+
     if (currentSignalExecutionId !== props.executionId) {
       return
     }
-  
+
     if (props.groupId && expandedSignalGroups.indexOf(props.groupId) === -1) {
       state.push('expandedSignalGroups', props.groupId)
     } else if (props.groupId) {
@@ -158,13 +158,14 @@ export function setCurrentExecutionId ({props, state}) {
 export function runMutation ({props, state}) {
     const execution = props.data.execution
     const data = execution.data
-  
+
     if (data && data.type === 'mutation') {
       try {
         const args = data.args.slice()
+        const method = data.method.split('.').pop()
         const path = ['model'].concat(args.shift()).join('.')
-        
-        state[data.method].apply(state, [path, ...JSON.parse(JSON.stringify(args))])
+
+        state[method].apply(state, [path, ...JSON.parse(JSON.stringify(args))])
       } catch (e) {
         state.set('mutationsError', {
           signalName: execution.name,
@@ -206,12 +207,12 @@ export function remember ({props, state}) {
     state.set('currentRememberedMutationIndex', props.index)
     const mutations = state.get('mutations')
     let lastMutationIndex = props.index
-  
+
     for (let x = mutations.length - 1; x >= lastMutationIndex; x--) {
       const mutation = mutations[x].data
       const args = mutation.args.slice()
       const path = args.shift()
-  
+
       state[mutation.method](['model', ...path].join('.'), ...args)
     }
 }
@@ -242,7 +243,7 @@ export function endSignalExecution ({props, state}) {
     ) : (
       `signals.${execution.executionId}`
     )
-  
+
     state.set(`${signalPath}.isExecuting`, false)
     if (
       (props.source === 'c' && (type === 'c' || type === 'cft')) ||
@@ -257,14 +258,14 @@ export function createSignalTest ({ state }) {
     const signal = state.get(`signals.${currentExecutionId}`);
     const mutations = state.get('mutations').reverse();
     const filteredMutations = []
-  
+
     for (let index = 0; index < mutations.length; index++) {
       const mutation = mutations[index];
-  
+
       if (mutation.executionId === signal.executionId) {
         break;
       }
-  
+
       filteredMutations.push({
         method: mutation.data.method,
         args: mutation.data.args
@@ -275,7 +276,7 @@ export function createSignalTest ({ state }) {
       .sort()
       .reduce((mocks, functionRunKey) => {
         const operation = signal.functionsRun[functionRunKey]
-  
+
         operation.data.forEach((data) => {
           if (data.type !== 'mutation') {
             mocks.push({
@@ -287,10 +288,10 @@ export function createSignalTest ({ state }) {
             })
           }
         })
-  
+
         return mocks;
       }, [])
-  
+
     const test = `return Snapshot(app)${
       filteredMutations.length ?
         `\n  ${
