@@ -36,9 +36,9 @@ function filterRenderByPath(pathFilter, render) {
   }
 }
 
-function filterRenderByComponentName(nameFilter, render) {
-  if (nameFilter) {
-    return render.components.reduce((hasPath, component) => hasPath || component.toLowerCase().indexOf(nameFilter.toLowerCase()) >= 0, false)
+function filterRenderByComponentName(componentNameFilter, render) {
+  if (componentNameFilter) {
+    return render.components.reduce((hasPath, component) => hasPath || component.toLowerCase().indexOf(componentNameFilter.toLowerCase()) >= 0, false)
   } else {
     return true
   }
@@ -49,7 +49,7 @@ export default function Renders (props) {
     <div className='renders-wrapper'>
       <div className='renders-renderWrapper'>
         {props.renders.filter((render) =>
-          filterRenderByPath(props.filter, render) && filterRenderByComponentName(props.nameFilter, render)
+          filterRenderByPath(props.pathFilter, render) && filterRenderByComponentName(props.componentNameFilter, render)
         ).map((render, index) => {
           const date = new Date(render.start)
 

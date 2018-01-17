@@ -29,7 +29,7 @@ export default function StatePaths (props) {
         </div>
         {Object.keys(componentsWithStatePaths).filter((key) => {
           const component = componentsWithStatePaths[key]
-          return filterComponentByPath(props.filter, component) && filterComponentByName(props.nameFilter, component)
+          return filterComponentByPath(props.pathFilter, component) && filterComponentByName(props.componentNameFilter, component)
         }).map((key) => {
           return (
             <div key={key} className='statePaths-item'>
@@ -57,9 +57,9 @@ function filterComponentByPath(pathFilter, component) {
   }
 }
 
-function filterComponentByName(nameFilter, component) {
-  if (nameFilter) {
-    return component.name.toLowerCase().indexOf(nameFilter.toLowerCase()) >= 0
+function filterComponentByName(componentNameFilter, component) {
+  if (componentNameFilter) {
+    return component.name.toLowerCase().indexOf(componentNameFilter.toLowerCase()) >= 0
   } else {
     return true
   }

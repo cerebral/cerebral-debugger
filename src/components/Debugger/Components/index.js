@@ -16,13 +16,13 @@ export default connect({
       <div className='components-wrapper'>
         <StatePaths
           map={props.map}
-          filter={props.searchValue}
-          nameFilter={props.searchComponentValue}
+          pathFilter={props.searchValue}
+          componentNameFilter={props.searchComponentValue}
         />
         <Renders
           renders={props.renders}
-          filter={props.searchValue}
-          nameFilter={props.searchComponentValue}
+          pathFilter={props.searchValue}
+          componentNameFilter={props.searchComponentValue}
         />
       </div>
     )
