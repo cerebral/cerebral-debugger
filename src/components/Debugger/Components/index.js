@@ -19,7 +19,11 @@ export default connect({
           filter={props.searchValue}
           nameFilter={props.searchComponentValue}
         />
-        <Renders renders={props.renders} filter={props.searchValue} />
+        <Renders
+          renders={props.renders}
+          filter={props.searchValue}
+          nameFilter={props.searchComponentValue}
+        />
       </div>
     )
   }

@@ -36,11 +36,21 @@ function filterRenderByPath(pathFilter, render) {
   }
 }
 
+function filterRenderByComponentName(nameFilter, render) {
+  if (nameFilter) {
+    return render.components.reduce((hasPath, component) => hasPath || component.toLowerCase().indexOf(nameFilter.toLowerCase()) >= 0, false)
+  } else {
+    return true
+  }
+}
+
 export default function Renders (props) {
   return (
     <div className='renders-wrapper'>
       <div className='renders-renderWrapper'>
-        {props.renders.filter((render) => filterRenderByPath(props.filter, render)).map((render, index) => {
+        {props.renders.filter((render) =>
+          filterRenderByPath(props.filter, render) && filterRenderByComponentName(props.nameFilter, render)
+        ).map((render, index) => {
           const date = new Date(render.start)
 
           return (
