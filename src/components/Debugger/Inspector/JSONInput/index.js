@@ -1,7 +1,7 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
-import {connect} from 'cerebral/inferno'
+import {connect} from '@cerebral/inferno'
 import {
   isObject,
   isArray

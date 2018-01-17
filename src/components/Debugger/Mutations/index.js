@@ -1,6 +1,6 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
-import {connect} from 'cerebral/inferno'
+import {connect} from '@cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import classnames from 'classnames'
 import {nameToColors} from '../../../common/utils'
@@ -9,14 +9,14 @@ import connector from 'connector'
 
 export default connect({
   port: state`config.port`,
-  mutations: state`debugger.mutations`,
-  currentRememberedMutationIndex: state`debugger.currentRememberedMutationIndex`,
-  searchValue: state`debugger.searchValue`,
-  executingSignalsCount: state`debugger.executingSignalsCount`,
-  mutationDoubleClicked: signal`debugger.mutationDoubleClicked`,
-  mutationClicked: signal`debugger.mutationClicked`,
-  signalClicked: signal`debugger.signalClicked`,
-  pathClicked: signal`debugger.pathClicked`
+  mutations: state`mutations`,
+  currentRememberedMutationIndex: state`currentRememberedMutationIndex`,
+  searchValue: state`searchValue`,
+  executingSignalsCount: state`executingSignalsCount`,
+  mutationDoubleClicked: signal`mutationDoubleClicked`,
+  mutationClicked: signal`mutationClicked`,
+  signalClicked: signal`signalClicked`,
+  pathClicked: signal`pathClicked`
 },
   function Mutations ({
     port,

@@ -1,7 +1,7 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
-import {connect} from 'cerebral/inferno'
+import {connect} from '@cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import {nameToColors} from '../../../../common/utils'
 import classnames from 'classnames'
@@ -9,13 +9,14 @@ import signalsList from '../../../../common/computed/signalsList'
 
 export default connect({
   type: state`type`,
-  debugger: state`debugger`,
   signalsList: signalsList,
-  isExecuting: state`debugger.isExecuting`,
-  executedBySignals: state`debugger.executedBySignals`,
-  searchValue: state`debugger.searchValue`,
+  isExecuting: state`isExecuting`,
+  executedBySignals: state`executedBySignals`,
+  searchValue: state`searchValue`,
+  expandedSignalGroups: state`expandedSignalGroups`,
   showFullPathNames: state`storage.showFullPathNames`,
-  signalClicked: signal`debugger.signalClicked`
+  currentSignalExecutionId: state`currentSignalExecutionId`,
+  signalClicked: signal`signalClicked`,
 },
   class SignalsList extends Component {
     onSignalClick (event, signal, index) {
@@ -47,7 +48,7 @@ export default connect({
     }
     renderSignal (signal, index) {
       const prevSignal = this.props.signalsList[index - 1]
-      const currentSignalExecutionId = this.props.debugger.currentSignalExecutionId
+      const currentSignalExecutionId = this.props.currentSignalExecutionId
       const namePath = signal.name.split('.')
       const name = namePath.pop()
       const colors = nameToColors(signal.name, name)
@@ -81,7 +82,7 @@ export default connect({
         }, false)
       )
 
-      const isInOpenGroup = this.props.debugger.expandedSignalGroups.indexOf(signal.groupId) !== -1
+      const isInOpenGroup = this.props.expandedSignalGroups.indexOf(signal.groupId) !== -1
       if (
         prevSignal &&
         prevSignal.groupId === signal.groupId &&

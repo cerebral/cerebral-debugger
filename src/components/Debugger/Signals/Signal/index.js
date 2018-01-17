@@ -1,7 +1,7 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
-import {connect} from 'cerebral/inferno'
+import {connect} from '@cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import classnames from 'classnames'
 
@@ -11,18 +11,18 @@ import Path from './Path'
 import Sequence from './Sequence'
 
 export default connect({
-  currentPage: state`debugger.currentPage`,
+  currentPage: state`currentPage`,
   useragent: state`useragent`,
-  signal: state`debugger.signals.${state`debugger.currentSignalExecutionId`}`,
-  executedBySignals: state`debugger.executedBySignals`,
+  signal: state`signals.${state`currentSignalExecutionId`}`,
+  executedBySignals: state`executedBySignals`,
   showProps: state`storage.showProps`,
-  searchValue: state`debugger.searchValue`,
-  showPropsToggled: signal`debugger.showPropsToggled`,
-  actionsToggled: signal`debugger.actionsToggled`,
-  actionToggled: signal`debugger.actionToggled`,
-  propsToggled: signal`debugger.propsToggled`,
-  mutationClicked: signal`debugger.mutationClicked`,
-  pathClicked: signal`debugger.pathClicked`
+  searchValue: state`searchValue`,
+  showPropsToggled: signal`showPropsToggled`,
+  actionsToggled: signal`actionsToggled`,
+  actionToggled: signal`actionToggled`,
+  propsToggled: signal`propsToggled`,
+  mutationClicked: signal`mutationClicked`,
+  pathClicked: signal`pathClicked`
 },
   class Signal extends Component {
     constructor (props) {
@@ -61,10 +61,6 @@ export default connect({
       }, false)
     }
     renderSequence (sequence, index) {
-      if (sequence.items.length === 1) {
-        return this.renderAction(sequence.items[0], 0)
-      }
-
       return (
         <Sequence key={index} sequence={sequence}>
           {sequence.items.map(this.renderAction)}

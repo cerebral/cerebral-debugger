@@ -5,6 +5,24 @@
   overflow: hidden;
 }
 
+.signals-test-copied {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 50px;
+  margin-left: -150px;
+  margin-top: -25px;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border: 1px solid #EAEAEA;
+}
+
 .signals-list {
   flex: 1;
   min-width: 200px;

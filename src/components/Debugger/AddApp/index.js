@@ -53,7 +53,7 @@ class AddApp extends Component {
     }
   }
   openDocs () {
-    shell.openExternal('https://cerebraljs.com/docs/introduction/debugger.html')
+    shell.openExternal('https://cerebraljs.com/docs/introduction/html')
   }
   openSsl () {
     shell.openExternal('https://github.com/christianalfoni/create-ssl-certificate')
@@ -176,7 +176,7 @@ class AddApp extends Component {
                       <li>Go to <a href='#' onClick={this.openSsl}>create-ssl-certificate</a></li>
                       <li>Create certificate on hostname: <b>cerebral-debugger</b></li>
                       <li>Drop the created {this.getSslText()}</li>
-                      <li>Connect with host: <b>cerebral-debugger.dev</b> and port</li>
+                      <li>Connect with host: <b>cerebral-dev</b> and port</li>
                     </ol>
                   </span>
                 </div>
