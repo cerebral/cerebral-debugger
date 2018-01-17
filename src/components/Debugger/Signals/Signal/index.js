@@ -61,10 +61,6 @@ export default connect({
       }, false)
     }
     renderSequence (sequence, index) {
-      if (sequence.items.length === 1) {
-        return this.renderAction(sequence.items[0], 0)
-      }
-
       return (
         <Sequence key={index} sequence={sequence}>
           {sequence.items.map(this.renderAction)}
