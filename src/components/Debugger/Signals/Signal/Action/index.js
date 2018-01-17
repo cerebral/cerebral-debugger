@@ -147,7 +147,7 @@ class Action extends Component {
                     <div className='action-inputLabel'>{execution.output.path === output ? `path.${output}:` : 'output:'}</div>
                     <div className='action-inputValue'>
                       {
-                        execution.output.path === output ? (
+                        execution.output._functionTreePath && execution.output.path === output ? (
                           <Inspector value={execution.output.payload || {}} pathClicked={pathClicked} />
                         ) : (
                           <Inspector value={execution.output} pathClicked={pathClicked} />

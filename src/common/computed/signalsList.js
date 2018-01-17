@@ -1,8 +1,8 @@
-import {compute} from 'cerebral'
+import {Compute} from 'cerebral'
 import {state} from 'cerebral/tags'
 
-export default compute(
-  state`debugger.signals`,
+export default Compute(
+  state`signals`,
   (signals) => {
     return Object.keys(signals)
       .filter(id => Boolean(signals[id].name))

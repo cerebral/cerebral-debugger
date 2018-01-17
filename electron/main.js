@@ -47,9 +47,9 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     icon: path.resolve('icons', 'icon.png'),
     height: 768,
-    width: 1024,
+    width: 768,
     minHeight: 768,
-    minWidth: 1024
+    minWidth: 768
   })
   mainWindow.on('closed', function () { mainWindow = null })
   mainWindow.loadURL(url.format({

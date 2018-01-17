@@ -4,10 +4,9 @@ import Component from 'inferno-component' // eslint-disable-line
 import jsonStorage from 'electron-json-storage'
 import connector from 'connector'
 import {Controller} from 'cerebral'
-import {Container} from 'cerebral/inferno'
+import {Container} from '@cerebral/inferno'
 import UserAgent from '@cerebral/useragent'
-import DebuggerModule from '../../modules/Debugger'
-import StorageModule from '../../modules/Storage'
+import app from '../../app'
 
 import AddApp from './AddApp'
 import App from './App'
@@ -62,25 +61,11 @@ class Debugger extends Component {
         this.setState({
           apps: ports.reduce((apps, port) => {
             apps[port] = Object.assign(storedApps[port], {
-              controller: Controller({
-                state: {
-                  config: {
-                    port,
-                    type: storedApps[port].type,
-                    ssl: storedApps[port].ssl
-                  },
-                  error: null
-                },
-                modules: {
-                  debugger: DebuggerModule(),
-                  storage: StorageModule(),
-                  useragent: UserAgent({
-                    media: {
-                      small: '(max-width: 1270px)'
-                    }
-                  })
-                }
-              })
+              controller: Controller(app({
+                port,
+                type: storedApps[port].type,
+                ssl: storedApps[port].ssl
+              }))
             })
 
             return apps
@@ -111,25 +96,11 @@ class Debugger extends Component {
         name,
         type,
         ssl,
-        controller: Controller({
-          state: {
-            config: {
-              port,
-              type,
-              ssl
-            },
-            error: null
-          },
-          modules: {
-            debugger: DebuggerModule,
-            storage: StorageModule(),
-            useragent: UserAgent({
-              media: {
-                small: '(max-width: 1270px)'
-              }
-            })
-          }
-        })
+        controller: Controller(app({
+          port,
+          type,
+          ssl
+        }))
       }
     })
 

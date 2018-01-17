@@ -1,22 +1,22 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
-import {connect} from 'cerebral/inferno'
+import {connect} from '@cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import Inspector from '../Inspector'
 import connector from 'connector'
 
 export default connect({
   port: state`config.port`,
-  currentPage: state`debugger.currentPage`,
+  currentPage: state`currentPage`,
   useragent: state`useragent`,
-  model: state`debugger.model`,
-  path: state`debugger.currentMutationPath`,
-  pathClicked: signal`debugger.pathClicked`,
-  searchValue: state`debugger.searchValue`,
-  modelChanged: signal`debugger.modelChanged`,
-  modelClicked: signal`debugger.modelClicked`,
-  expandedPaths: state`debugger.expandedPaths`
+  model: state`model`,
+  path: state`currentMutationPath`,
+  pathClicked: signal`pathClicked`,
+  searchValue: state`searchValue`,
+  modelChanged: signal`modelChanged`,
+  modelClicked: signal`modelClicked`,
+  expandedPaths: state`expandedPaths`
 },
   class Model extends Component {
     constructor (props) {
