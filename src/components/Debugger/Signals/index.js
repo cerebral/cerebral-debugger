@@ -48,7 +48,7 @@ export default connect({
       })
     }
     onCreateSignalTestClick () {
-      this.props.createSignalTestClicked();
+      this.props.createSignalTestClicked()
     }
     onToggleFullPathNamesClick () {
       this.props.toggleFullPathNamesClicked()
@@ -96,12 +96,11 @@ export default connect({
               : null
           }
           {
-            this.props.hasCreatedSignalTest ?
-              (
+            this.props.hasCreatedSignalTest
+              ? (
                 <div className='signals-test-copied'>Test copied to clipboard!</div>
               )
-            :
-              null
+            : null
           }
         </div>
       )

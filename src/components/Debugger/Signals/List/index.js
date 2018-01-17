@@ -16,7 +16,7 @@ export default connect({
   expandedSignalGroups: state`expandedSignalGroups`,
   showFullPathNames: state`storage.showFullPathNames`,
   currentSignalExecutionId: state`currentSignalExecutionId`,
-  signalClicked: signal`signalClicked`,
+  signalClicked: signal`signalClicked`
 },
   class SignalsList extends Component {
     onSignalClick (event, signal, index) {

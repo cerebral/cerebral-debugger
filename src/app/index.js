@@ -37,7 +37,7 @@ export default (config) => Module({
   signals: {
     pageChanged: sequences.changePage,
     escPressed: sequences.emptySearchValue,
-    searchValueChanged:sequences.changeSearchValue,
+    searchValueChanged: sequences.changeSearchValue,
     signalClicked: sequences.setSignal,
     payloadReceived: sequences.handlePayload,
     modelChanged: sequences.updateModel,

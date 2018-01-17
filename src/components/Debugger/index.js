@@ -5,7 +5,6 @@ import jsonStorage from 'electron-json-storage'
 import connector from 'connector'
 import {Controller} from 'cerebral'
 import {Container} from '@cerebral/inferno'
-import UserAgent from '@cerebral/useragent'
 import app from '../../app'
 
 import AddApp from './AddApp'
