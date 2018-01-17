@@ -53,6 +53,8 @@ export const reset = actions.reset
 
 export const changeSearchValue = set(state`searchValue`, props`value`)
 
+export const changeSearchComponentValue = set(state`searchComponentValue`, props`value`)
+
 export const toggleShowProps = [toggle(state`storage.showProps`), actions.storeOptions]
 
 export const setSignal = [

@@ -10,10 +10,12 @@ export default connect({
   type: state`config.type`,
   currentPage: state`currentPage`,
   searchValue: state`searchValue`,
+  searchComponentValue: state`searchComponentValue`,
   isSmall: state`useragent.media.small`,
   appSignals: signalsList,
   pageChanged: signal`pageChanged`,
-  searchValueChanged: signal`searchValueChanged`
+  searchValueChanged: signal`searchValueChanged`,
+  searchComponentValueChanged: signal`searchComponentValueChanged`
 },
   class Toolbar extends Component {
     constructor (props) {
@@ -55,7 +57,16 @@ export default connect({
                       placeholder='Search path...'
                       value={this.props.searchValue}
                       onInput={(event) => this.props.searchValueChanged({value: event.target.value})} />
-                  </li>
+                  </li>,
+                  this.props.currentPage === "components" ?
+                    <li className='toolbar-search'>
+                      <input
+                        type='text'
+                        placeholder='Search component...'
+                        value={this.props.searchComponentValue}
+                        onInput={(event) => this.props.searchComponentValueChanged({value: event.target.value})} />
+                    </li> :
+                    null
                 ] : null
               }
             </ul>

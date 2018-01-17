@@ -31,6 +31,7 @@ export default (config) => Module({
     renders: [],
     mutationsError: false,
     searchValue: '',
+    searchComponentValue: '',
     expandedPaths: [],
     hasCreatedSignalTest: false
   },
@@ -38,6 +39,7 @@ export default (config) => Module({
     pageChanged: sequences.changePage,
     escPressed: sequences.emptySearchValue,
     searchValueChanged: sequences.changeSearchValue,
+    searchComponentValueChanged: sequences.changeSearchComponentValue,
     signalClicked: sequences.setSignal,
     payloadReceived: sequences.handlePayload,
     modelChanged: sequences.updateModel,
