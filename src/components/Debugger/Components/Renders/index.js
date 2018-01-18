@@ -28,7 +28,7 @@ function unique (array) {
   }, [])
 }
 
-function filterRenderByPath(pathFilter, render) {
+function filterRenderByPath (pathFilter, render) {
   if (pathFilter) {
     return extractPaths(render.changes).reduce((hasPath, path) => hasPath || path.indexOf(pathFilter) >= 0, false)
   } else {
@@ -36,7 +36,7 @@ function filterRenderByPath(pathFilter, render) {
   }
 }
 
-function filterRenderByComponentName(componentNameFilter, render) {
+function filterRenderByComponentName (componentNameFilter, render) {
   if (componentNameFilter) {
     return render.components.reduce((hasPath, component) => hasPath || component.toLowerCase().indexOf(componentNameFilter.toLowerCase()) >= 0, false)
   } else {

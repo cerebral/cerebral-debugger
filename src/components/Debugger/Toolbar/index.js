@@ -58,15 +58,15 @@ export default connect({
                       value={this.props.searchValue}
                       onInput={(event) => this.props.searchValueChanged({value: event.target.value})} />
                   </li>,
-                  this.props.currentPage === "components" ?
-                    <li className='toolbar-search'>
+                  this.props.currentPage === 'components'
+                    ? <li className='toolbar-search'>
                       <input
                         type='text'
                         placeholder='Search component...'
                         value={this.props.searchComponentValue}
                         onInput={(event) => this.props.searchComponentValueChanged({value: event.target.value})} />
-                    </li> :
-                    null
+                    </li>
+                    : null
                 ] : null
               }
             </ul>

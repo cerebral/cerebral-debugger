@@ -49,7 +49,7 @@ export default function StatePaths (props) {
   )
 }
 
-function filterComponentByPath(pathFilter, component) {
+function filterComponentByPath (pathFilter, component) {
   if (pathFilter) {
     return component.paths.reduce((hasPath, path) => hasPath || path.indexOf(pathFilter) >= 0, false)
   } else {
@@ -57,7 +57,7 @@ function filterComponentByPath(pathFilter, component) {
   }
 }
 
-function filterComponentByName(componentNameFilter, component) {
+function filterComponentByName (componentNameFilter, component) {
   if (componentNameFilter) {
     return component.name.toLowerCase().indexOf(componentNameFilter.toLowerCase()) >= 0
   } else {
