@@ -3,10 +3,10 @@ git config --global user.email "christianalfoni@gmail.com"
 git config --global user.name "Christian Alfoni"
 if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then npm run build;
   if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
-    npm run package:linux --verbose;
+    npm run package:linux -- --publish=always;
   fi
   if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-    npm run package:mac  --verbose;
+    npm run package:mac  -- --publish=always;
   fi
   if [[ $? -ne 0 ]] ; then
    exit 1;
