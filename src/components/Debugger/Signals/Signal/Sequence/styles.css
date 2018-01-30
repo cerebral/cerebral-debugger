@@ -10,7 +10,8 @@
 }
 
 .signal-sequenceNameContainer {
-  flex: 0 0 30px;
+  flex: 0 0;
+  color: #999;
   text-align: center;
   border-right: 1px solid #F0F0F0;
 }
@@ -19,7 +20,7 @@
   position: relative;
   display: inline-block;
   font-size: 10px;
-  color: #999;
+  color: 'inherit';
   writing-mode: vertical-rl;
   letter-spacing: 0.25em;
   text-indent: 5px;

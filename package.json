@@ -53,6 +53,7 @@
     "cerebral": "^4.0.1",
     "classnames": "^2.2.5",
     "color": "^0.11.4",
+    "color-hash": "^1.0.3",
     "electron-default-menu": "^1.0.0",
     "electron-json-storage": "^4.0.2",
     "electron-log": "^2.2.2",

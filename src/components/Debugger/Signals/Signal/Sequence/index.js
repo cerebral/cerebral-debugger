@@ -1,6 +1,7 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
+import { nameToColors } from '../../../../../common/utils'
 
 function debounce (func, wait, immediate) {
   var timeout
@@ -22,8 +23,17 @@ class Sequence extends Component {
   constructor (props) {
     super(props)
     this.toggleStickyName = this.toggleStickyName.bind(this)
-    this.state = { containerStyle: null, nameStyle: null }
     this.signalLeft = 0
+    this.baseContainerStyle = {
+      flexBasis: '20px'
+    }
+    this.baseNameStyle = {}
+    if (this.props.sequence.name) {
+      this.baseContainerStyle.flexBasis = '30px'
+      this.baseContainerStyle.backgroundColor = nameToColors(this.props.sequence.name, this.props.sequence.name, 0.9, 0.2).backgroundColor
+      this.baseContainerStyle.color = nameToColors(this.props.sequence.name, this.props.sequence.name).backgroundColor
+    }
+    this.state = { containerStyle: this.baseContainerStyle, nameStyle: this.baseNameStyle }
   }
   componentDidMount () {
     const signalEl = document.querySelector('#signal')
@@ -54,19 +64,19 @@ class Sequence extends Component {
 
     let change = {
       type: 'default',
-      containerStyle: null,
-      nameStyle: null
+      containerStyle: Object.assign({}, this.baseContainerStyle),
+      nameStyle: Object.assign({}, this.baseNameStyle)
     }
 
     if (nameBounds.top < signalEl.scrollTop) {
       change = {
         type: 'initialMoving',
-        containerStyle: null,
-        nameStyle: {
+        containerStyle: Object.assign({}, this.baseContainerStyle),
+        nameStyle: Object.assign({}, this.baseNameStyle, {
           position: 'fixed',
           left: (nameBounds.left + this.signalLeft) + 'px',
           top: '122px'
-        },
+        }),
         originalNameTop: nameBounds.top,
         originalNameLeft: nameBounds.left,
         scrollTo: nameParentBounds.bottom - nameBounds.height - 5
@@ -76,31 +86,35 @@ class Sequence extends Component {
     if (this.state.scrollTo > signalEl.scrollTop) {
       change = {
         type: 'moving',
-        containerStyle: null,
-        nameStyle: {
+        containerStyle: Object.assign({}, this.baseContainerStyle),
+        nameStyle: Object.assign({}, this.baseNameStyle, {
           position: 'fixed',
           left: (this.state.originalNameLeft + this.signalLeft) + 'px',
           top: '122px'
-        }
+        })
       }
     }
 
     if (signalEl.scrollTop > this.state.scrollTo) {
       change = {
         type: 'bottom',
-        containerStyle: {
+        containerStyle: Object.assign({}, this.baseContainerStyle, {
           position: 'relative'
-        },
-        nameStyle: {
+        }),
+        nameStyle: Object.assign({}, this.baseNameStyle, {
           position: 'absolute',
-          left: '10px',
+          left: this.props.sequence.name ? '10px' : '5px',
           bottom: '5px'
-        }
+        })
       }
     }
 
     if (this.state.originalNameTop > signalEl.scrollTop) {
-      change = {type: 'default', containerStyle: null, nameStyle: null}
+      change = {
+        type: 'default',
+        containerStyle: Object.assign({}, this.baseContainerStyle),
+        nameStyle: Object.assign({}, this.baseNameStyle)
+      }
     }
 
     if (this.state.type !== change.type) {
