@@ -27,13 +27,7 @@ class Sequence extends Component {
     this.baseContainerStyle = {
       flexBasis: '20px'
     }
-    this.baseNameStyle = {}
-    if (this.props.sequence.name) {
-      this.baseContainerStyle.flexBasis = '30px'
-      this.baseContainerStyle.backgroundColor = nameToColors(this.props.sequence.name, this.props.sequence.name, 0.9, 0.2).backgroundColor
-      this.baseContainerStyle.color = nameToColors(this.props.sequence.name, this.props.sequence.name).backgroundColor
-    }
-    this.state = { containerStyle: this.baseContainerStyle, nameStyle: this.baseNameStyle }
+    this.state = { containerStyle: this.baseContainerStyle, nameStyle: {} }
   }
   componentDidMount () {
     const signalEl = document.querySelector('#signal')
@@ -65,18 +59,18 @@ class Sequence extends Component {
     let change = {
       type: 'default',
       containerStyle: Object.assign({}, this.baseContainerStyle),
-      nameStyle: Object.assign({}, this.baseNameStyle)
+      nameStyle: {}
     }
 
     if (nameBounds.top < signalEl.scrollTop) {
       change = {
         type: 'initialMoving',
         containerStyle: Object.assign({}, this.baseContainerStyle),
-        nameStyle: Object.assign({}, this.baseNameStyle, {
+        nameStyle: {
           position: 'fixed',
           left: (nameBounds.left + this.signalLeft) + 'px',
           top: '122px'
-        }),
+        },
         originalNameTop: nameBounds.top,
         originalNameLeft: nameBounds.left,
         scrollTo: nameParentBounds.bottom - nameBounds.height - 5
@@ -87,11 +81,11 @@ class Sequence extends Component {
       change = {
         type: 'moving',
         containerStyle: Object.assign({}, this.baseContainerStyle),
-        nameStyle: Object.assign({}, this.baseNameStyle, {
+        nameStyle: {
           position: 'fixed',
           left: (this.state.originalNameLeft + this.signalLeft) + 'px',
           top: '122px'
-        })
+        }
       }
     }
 
@@ -101,11 +95,12 @@ class Sequence extends Component {
         containerStyle: Object.assign({}, this.baseContainerStyle, {
           position: 'relative'
         }),
-        nameStyle: Object.assign({}, this.baseNameStyle, {
+        nameStyle: {
           position: 'absolute',
+          // If sequence has name, adjust for thicker width
           left: this.props.sequence.name ? '10px' : '5px',
           bottom: '5px'
-        })
+        }
       }
     }
 
@@ -113,7 +108,7 @@ class Sequence extends Component {
       change = {
         type: 'default',
         containerStyle: Object.assign({}, this.baseContainerStyle),
-        nameStyle: Object.assign({}, this.baseNameStyle)
+        nameStyle: {}
       }
     }
 
@@ -122,9 +117,27 @@ class Sequence extends Component {
     }
   }
   render () {
+
+    // Alter style based on sequence name
+    const containerStyle = Object.assign({}, this.state.containerStyle)
+    if (this.props.sequence.name) {
+      Object.assign(containerStyle, {
+        flexBasis: '30px',
+        backgroundColor: nameToColors(this.props.sequence.name, this.props.sequence.name, 0.9, 0.2).backgroundColor,
+        color: nameToColors(this.props.sequence.name, this.props.sequence.name).backgroundColor
+      })
+    }
+    else {
+      Object.assign(containerStyle, {
+        flexBasis: '20px',
+        backgroundColor: 'inherit',
+        color: '#999'
+      })
+    }
+
     return (
       <div className='signal-sequence' onClick={(event) => event.stopPropagation()}>
-        <div style={this.state.containerStyle} className='signal-sequenceNameContainer'>
+        <div style={containerStyle} className='signal-sequenceNameContainer'>
           <div
             ref={(node) => { this.name = node }}
             className='signal-sequenceName'
