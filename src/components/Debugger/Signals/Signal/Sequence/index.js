@@ -117,7 +117,6 @@ class Sequence extends Component {
     }
   }
   render () {
-
     // Alter style based on sequence name
     const containerStyle = Object.assign({}, this.state.containerStyle)
     if (this.props.sequence.name) {
@@ -126,8 +125,7 @@ class Sequence extends Component {
         backgroundColor: nameToColors(this.props.sequence.name, this.props.sequence.name, 0.9, 0.2).backgroundColor,
         color: nameToColors(this.props.sequence.name, this.props.sequence.name).backgroundColor
       })
-    }
-    else {
+    } else {
       Object.assign(containerStyle, {
         flexBasis: '20px',
         backgroundColor: 'inherit',
