@@ -111,11 +111,11 @@ export function updateActionError ({props, state}) {
   state.set(`${signalPath}.functionsRun.${execution.functionIndex}.error`, execution.error)
 }
 
-export function toggleActions ({ props, state }) {
+export function showHideAllActions ({props, state}) {
+  const showActions = state.get('storage.showActions')
   const signalsKey = state.get(`signals.${props.executionId}`) ? 'signals' : 'executedBySignals'
-  const expandedActions = state.get(`${signalsKey}.${props.executionId}.expandedActions`)
 
-  if (Object.keys(expandedActions).length) {
+  if (!showActions) {
     state.set(`${signalsKey}.${props.executionId}.expandedActions`, {})
   } else {
     const functionsRun = state.get(`${signalsKey}.${props.executionId}.functionsRun`)

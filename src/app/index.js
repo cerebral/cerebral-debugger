@@ -50,7 +50,7 @@ export default (config) => Module({
     toggleFullPathNamesClicked: sequences.toggleFullPathName,
     actionToggled: sequences.toggleAction,
     propsToggled: sequences.toggleProps,
-    actionsToggled: sequences.toggleActions,
+    showActionsToggled: sequences.toggleShowActions,
     showPropsToggled: sequences.toggleShowProps,
     createSignalTestClicked: sequences.createSignalTest
   }
