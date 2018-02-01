@@ -35,7 +35,7 @@ export const handlePayload = [
     init: [actions.clean, actions.setInitialPayload],
     bulk: [actions.clean, actions.parseAndRunMessages],
     executionStart: actions.addSignal,
-    execution: [actions.updateSignal, actions.runMutation],
+    execution: [actions.updateSignal, actions.runMutation, actions.showHideAllActions],
     executionFunctionEnd: actions.updateActionOutput,
     executionPathStart: actions.updateSignalPath,
     executionEnd: actions.endSignalExecution,
