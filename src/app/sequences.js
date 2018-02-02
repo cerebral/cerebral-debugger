@@ -51,6 +51,9 @@ export const reset = actions.reset
 
 export const changeSearchValue = set(state`searchValue`, props`value`)
 
+
+export const changeSearchComponentValue = set(state`searchComponentValue`, props`value`)
+
 export const toggleShowActions = [
   toggle(state`storage.showActions`),
   actions.showHideAllActions,

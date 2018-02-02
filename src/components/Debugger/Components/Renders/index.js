@@ -28,15 +28,29 @@ function unique (array) {
   }, [])
 }
 
+function filterRenderByPath (pathFilter, render) {
+  if (pathFilter) {
+    return extractPaths(render.changes).reduce((hasPath, path) => hasPath || path.indexOf(pathFilter) >= 0, false)
+  } else {
+    return true
+  }
+}
+
+function filterRenderByComponentName (componentNameFilter, render) {
+  if (componentNameFilter) {
+    return render.components.reduce((hasPath, component) => hasPath || component.toLowerCase().indexOf(componentNameFilter.toLowerCase()) >= 0, false)
+  } else {
+    return true
+  }
+}
+
 export default function Renders (props) {
   return (
     <div className='renders-wrapper'>
       <div className='renders-renderWrapper'>
-        {props.renders.filter((render) => {
-          return props.filter ? extractPaths(render.changes).reduce((hasPath, path) => {
-            return hasPath || path.indexOf(props.filter) >= 0
-          }, false) : true
-        }).map((render, index) => {
+        {props.renders.filter((render) =>
+          filterRenderByPath(props.pathFilter, render) && filterRenderByComponentName(props.componentNameFilter, render)
+        ).map((render, index) => {
           const date = new Date(render.start)
 
           return (
