@@ -26,6 +26,6 @@ install:
 build_script:
   - if "%APPVEYOR_REPO_BRANCH%"=="master" if "%APPVEYOR_PULL_REQUEST_NUMBER%"=="" set PUBLISH=true
   - if defined PUBLISH npm run build
-  - if defined PUBLISH npm run package:win
+  - if defined PUBLISH npm run package:win -- --publish=always
 
 test: off
