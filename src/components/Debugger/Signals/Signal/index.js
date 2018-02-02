@@ -16,9 +16,10 @@ export default connect({
   signal: state`signals.${state`currentSignalExecutionId`}`,
   executedBySignals: state`executedBySignals`,
   showProps: state`storage.showProps`,
+  showActions: state`storage.showActions`,
   searchValue: state`searchValue`,
   showPropsToggled: signal`showPropsToggled`,
-  actionsToggled: signal`actionsToggled`,
+  showActionsToggled: signal`showActionsToggled`,
   actionToggled: signal`actionToggled`,
   propsToggled: signal`propsToggled`,
   mutationClicked: signal`mutationClicked`,
@@ -125,7 +126,7 @@ export default connect({
                 signal={executedBySignal}
                 pathClicked={this.props.pathClicked}
                 showPropsToggled={this.props.showPropsToggled}
-                actionsToggled={this.props.actionsToggled}
+                showActionsToggled={this.props.showActionsToggled}
                 actionToggled={this.props.actionToggled}
                 propsToggled={this.props.propsToggled}
                 showProps={this.props.showProps}
@@ -156,9 +157,7 @@ export default connect({
           }}>
             {this.props.signal.name}
             <div className='signal-settingsContainer'>
-              <button onClick={() => this.props.actionsToggled({ executionId: this.props.signal.executionId })}>
-                {Object.keys(this.props.signal.expandedActions).length ? 'Collapse actions' : 'Expand actions'}
-              </button>
+              <label>actions: <input type='checkbox' onChange={() => this.props.showActionsToggled({ executionId: this.props.signal.executionId })} checked={this.props.showActions} /></label>
               {this.props.executedBy ? null : <label>props: <input type='checkbox' onChange={() => this.props.showPropsToggled()} checked={this.props.showProps} /></label>}
             </div>
           </h3>

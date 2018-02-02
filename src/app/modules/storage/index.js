@@ -35,7 +35,8 @@ export default Module(({ controller }) => {
   return {
     state: {
       showFullPathNames: false,
-      showProps: true
+      showProps: true,
+      showActions: false
     },
     signals: {
       initialized: sequences.initialize
