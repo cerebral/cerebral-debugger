@@ -111,16 +111,18 @@ export function updateActionError ({props, state}) {
   state.set(`${signalPath}.functionsRun.${execution.functionIndex}.error`, execution.error)
 }
 
-export function toggleActions ({ props, state }) {
-  const signalsKey = state.get(`signals.${props.executionId}`) ? 'signals' : 'executedBySignals'
-  const expandedActions = state.get(`${signalsKey}.${props.executionId}.expandedActions`)
+export function showHideAllActions ({props, state}) {
+  const showActions = state.get('storage.showActions')
 
-  if (Object.keys(expandedActions).length) {
-    state.set(`${signalsKey}.${props.executionId}.expandedActions`, {})
+  const currentSignalExecutionId = state.get('currentSignalExecutionId')
+  const signalsKey = state.get(`signals.${currentSignalExecutionId}`) ? 'signals' : 'executedBySignals'
+
+  if (!showActions) {
+    state.set(`${signalsKey}.${currentSignalExecutionId}.expandedActions`, {})
   } else {
-    const functionsRun = state.get(`${signalsKey}.${props.executionId}.functionsRun`)
+    const functionsRun = state.get(`${signalsKey}.${currentSignalExecutionId}.functionsRun`)
     Object.keys(functionsRun).forEach((key) => {
-      state.set(`${signalsKey}.${props.executionId}.expandedActions.${key}`, true)
+      state.set(`${signalsKey}.${currentSignalExecutionId}.expandedActions.${key}`, true)
     })
   }
 }
