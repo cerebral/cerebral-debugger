@@ -1,6 +1,7 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
+import { nameToColors } from '../../../../../common/utils'
 
 function debounce (func, wait, immediate) {
   var timeout
@@ -22,8 +23,11 @@ class Sequence extends Component {
   constructor (props) {
     super(props)
     this.toggleStickyName = this.toggleStickyName.bind(this)
-    this.state = { containerStyle: null, nameStyle: null }
     this.signalLeft = 0
+    this.baseContainerStyle = {
+      flexBasis: '20px'
+    }
+    this.state = { containerStyle: this.baseContainerStyle, nameStyle: {} }
   }
   componentDidMount () {
     const signalEl = document.querySelector('#signal')
@@ -54,14 +58,14 @@ class Sequence extends Component {
 
     let change = {
       type: 'default',
-      containerStyle: null,
-      nameStyle: null
+      containerStyle: Object.assign({}, this.baseContainerStyle),
+      nameStyle: {}
     }
 
     if (nameBounds.top < signalEl.scrollTop) {
       change = {
         type: 'initialMoving',
-        containerStyle: null,
+        containerStyle: Object.assign({}, this.baseContainerStyle),
         nameStyle: {
           position: 'fixed',
           left: (nameBounds.left + this.signalLeft) + 'px',
@@ -76,7 +80,7 @@ class Sequence extends Component {
     if (this.state.scrollTo > signalEl.scrollTop) {
       change = {
         type: 'moving',
-        containerStyle: null,
+        containerStyle: Object.assign({}, this.baseContainerStyle),
         nameStyle: {
           position: 'fixed',
           left: (this.state.originalNameLeft + this.signalLeft) + 'px',
@@ -88,19 +92,24 @@ class Sequence extends Component {
     if (signalEl.scrollTop > this.state.scrollTo) {
       change = {
         type: 'bottom',
-        containerStyle: {
+        containerStyle: Object.assign({}, this.baseContainerStyle, {
           position: 'relative'
-        },
+        }),
         nameStyle: {
           position: 'absolute',
-          left: '10px',
+          // If sequence has name, adjust for thicker width
+          left: this.props.sequence.name ? '10px' : '5px',
           bottom: '5px'
         }
       }
     }
 
     if (this.state.originalNameTop > signalEl.scrollTop) {
-      change = {type: 'default', containerStyle: null, nameStyle: null}
+      change = {
+        type: 'default',
+        containerStyle: Object.assign({}, this.baseContainerStyle),
+        nameStyle: {}
+      }
     }
 
     if (this.state.type !== change.type) {
@@ -108,9 +117,25 @@ class Sequence extends Component {
     }
   }
   render () {
+    // Alter style based on sequence name
+    const containerStyle = Object.assign({}, this.state.containerStyle)
+    if (this.props.sequence.name) {
+      Object.assign(containerStyle, {
+        flexBasis: '30px',
+        backgroundColor: nameToColors(this.props.sequence.name, this.props.sequence.name, 0.9, 0.2).backgroundColor,
+        color: nameToColors(this.props.sequence.name, this.props.sequence.name).backgroundColor
+      })
+    } else {
+      Object.assign(containerStyle, {
+        flexBasis: '20px',
+        backgroundColor: 'inherit',
+        color: '#999'
+      })
+    }
+
     return (
       <div className='signal-sequence' onClick={(event) => event.stopPropagation()}>
-        <div style={this.state.containerStyle} className='signal-sequenceNameContainer'>
+        <div style={containerStyle} className='signal-sequenceNameContainer'>
           <div
             ref={(node) => { this.name = node }}
             className='signal-sequenceName'
