@@ -7,7 +7,7 @@
   "scripts": {
     "start": "concurrently -k \"cross-env NODE_ENV=development node electron/devServer.js\" \"cross-env NODE_ENV=development npm run electron\"",
     "electron": "electron .",
-    "build": "cross-env NODE_ENV=production webpack && npm run prepare:electron",
+    "build": "cross-env webpack && npm run prepare:electron",
     "prepare:electron": "rimraf electron/dist electron/node_modules && node scripts/createElectronSymlink",
     "package:win": "cross-env DEBUG=electron-builder:7z,electron-builder build -w",
     "package:mac": "cross-env DEBUG=electron-builder:7z,electron-builder build -m",
@@ -57,7 +57,7 @@
     "electron-default-menu": "^1.0.0",
     "electron-json-storage": "^4.0.2",
     "electron-log": "^2.2.2",
-    "electron-updater": "^2.17.6",
+    "electron-updater": "^2.20.1",
     "function-tree": "0.5.0-b-alpha.c00bd8f2",
     "inferno": "^1.5.3",
     "inferno-component": "^1.5.3",
