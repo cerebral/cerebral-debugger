@@ -13,11 +13,14 @@
       text-align: center;
     }
 		img {
-			height: 200px;
+			height: 100px;
 			margin-bottom: 10px;
 		}
 		table {
 			margin: 0 auto;
+		}
+		li {
+			margin-bottom: 10px;
 		}
 		.update {
       height: 40px;
@@ -67,20 +70,20 @@
       justify-content: center;
       align-items: center;
     }
+		.notes {
+			text-align: left;
+		}
 	</style>
 </head>
 	<body>
 		<h1>Update is available</h1>
 		<div style="text-align:center;">
 			<img src="logo.png"/>
-			<h3>A new version of the Cerebral Debugger is available!</h3>
 			<table>
 				<tr>
-					<td style="text-align:right;">Current Version:</td>
+					<td style="text-align:right;">From version</td>
 					<td class="old"></td>
-				</tr>
-				<tr>
-					<td style="text-align:right;">New Version:</td>
+					<td style="text-align:right;">to version</td>
 					<td class="new"></td>
 				</tr>
 			</table>
@@ -102,7 +105,6 @@
 				document.querySelector('.new').innerHTML = version;
 			});
 			ipc.on('new-notes', function(e, notes) {
-				console.log("got notes",notes)
 				document.querySelector('.notes').innerHTML = notes;
 			});
 			document.querySelectorAll('.response').forEach((item) => {
