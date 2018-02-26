@@ -1,7 +1,7 @@
 {
-  "name": "cerebral-debugger",
+  "name": "cerebra",
   "version": "2.3.0",
-  "description": "Cerebral Debugger",
+  "description": "Cerebra: The Cerebral Debugger",
   "private": true,
   "main": "electron/main.js",
   "scripts": {
@@ -25,7 +25,7 @@
   "homepage": "http://cerebraljs.com/docs/introduction/debugger.html",
   "author": "Christian Alfoni <christianalfoni@gmail.com>",
   "build": {
-    "productName": "Cerebral Debugger",
+    "productName": "Cerebra: Cerebral Debugger",
     "appId": "cerebral.debugger",
     "win": {
       "target": [

@@ -66,7 +66,7 @@ function createWindow () {
     {
       label: 'Application',
       submenu: [
-        { label: 'Cerebral Debugger v' + appVersion },
+        { label: 'Cerebra: The Cerebral Debugger v' + appVersion },
         { type: 'separator' },
         {
           label: 'Learn More',
