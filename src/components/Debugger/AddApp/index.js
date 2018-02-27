@@ -72,7 +72,11 @@ class AddApp extends Component {
         } else if (path.extname(file.name) === '.key') {
           files.key = file;
         } else {
+<<<<<<< HEAD
           alert(`Sorry, ${file.name} is not a valid file`); // eslint-disable-line
+=======
+          alert(`Sorry, ${file.name} is not a valid file`) // eslint-disable-line
+>>>>>>> Updates all files with prettier run
         }
 
         return files;

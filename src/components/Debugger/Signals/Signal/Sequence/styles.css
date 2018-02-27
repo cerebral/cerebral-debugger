@@ -19,7 +19,7 @@
   position: relative;
   display: inline-block;
   font-size: 10px;
-  color: "inherit";
+  color: 'inherit';
   writing-mode: vertical-rl;
   letter-spacing: 0.25em;
   text-indent: 5px;
