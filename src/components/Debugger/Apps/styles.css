@@ -1,9 +1,9 @@
 .apps-bar {
-  background-color: #DADADA;
+  background-color: #dadada;
   height: 40px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #ddd;
 }
 
 .apps-item {

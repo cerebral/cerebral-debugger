@@ -4,14 +4,14 @@
 }
 
 .error h4 {
-  color: #F44336;
+  color: #f44336;
 }
 
 .error button {
   height: 40px;
   border-radius: 3px;
-  border: 1px solid #EAEAEA;
-  background-color: #FAFAFA;
+  border: 1px solid #eaeaea;
+  background-color: #fafafa;
   padding: 10px 30px;
   cursor: pointer;
   font-size: 16px;
@@ -19,5 +19,5 @@
 }
 
 .error button:hover {
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
 }

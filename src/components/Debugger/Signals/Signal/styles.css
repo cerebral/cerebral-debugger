@@ -1,7 +1,7 @@
 .signal {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   border-radius: 3px;
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   height: calc(100vh - 106px);
   display: flex;
   flex-direction: column;
@@ -14,13 +14,13 @@
 
 .executedBy {
   height: auto;
-  box-shadow: 0 0 5px 2px rgba(0,0,0,0.05);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.05);
   overflow: auto;
 }
 
 .executedByLine {
   height: 3px;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #ddd;
 }
 
 .clickable {
@@ -35,8 +35,8 @@
   font-size: 18px;
   display: flex;
   align-items: center;
-  background-color: #FAFAFA;
-  border-bottom: 1px solid #DDD;
+  background-color: #fafafa;
+  border-bottom: 1px solid #ddd;
 }
 
 .signal-settingsContainer {
@@ -51,10 +51,10 @@
 
 .signal-async {
   flex: 1;
-  border-top: 1px solid #DDD;
-  border-left: 5px solid #DDD;
-  border-bottom: 1px solid #DDD;
-  border-right: 1px solid #DDD;
+  border-top: 1px solid #ddd;
+  border-left: 5px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
   border-radius: 2px;
   padding: 5px;
   margin-bottom: 10px;
@@ -70,7 +70,8 @@
   flex: 0 0 20px;
 }
 
-.signal-outputIcon {}
+.signal-outputIcon {
+}
 
 .signal-outputName {
   height: 20px;
@@ -95,5 +96,5 @@
   justify-content: center;
   height: 100%;
   font-size: 32px;
-  color: #CCC;
+  color: #ccc;
 }
