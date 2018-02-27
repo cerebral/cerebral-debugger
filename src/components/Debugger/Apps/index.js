@@ -2,23 +2,23 @@ import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import classnames from 'classnames'
 
-function Apps (props) {
+function Apps(props) {
   return (
-    <div className='apps-bar'>
-      {Object.keys(props.apps).map((port) => {
+    <div className="apps-bar">
+      {Object.keys(props.apps).map(port => {
         return (
           <div
             key={port}
             className={classnames('apps-item', {
-              'apps-item-active': port === props.currentPort
+              'apps-item-active': port === props.currentPort,
             })}
             onClick={() => props.changePort(port)}
           >
             <div>
               {props.apps[port].name} <small>({port})</small>
               <i
-                className='apps-remove'
-                onClick={(event) => {
+                className="apps-remove"
+                onClick={event => {
                   event.stopPropagation()
                   props.removePort(port)
                 }}
@@ -29,10 +29,7 @@ function Apps (props) {
           </div>
         )
       })}
-      <div
-        className='apps-item apps-add'
-        onClick={props.addNewPort}
-      >
+      <div className="apps-item apps-add" onClick={props.addNewPort}>
         +
       </div>
     </div>

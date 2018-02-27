@@ -1,22 +1,22 @@
-import {ipcRenderer} from 'electron'
+import { ipcRenderer } from 'electron'
 
 const addedPorts = []
 
 const connector = {
-  sendEvent (port, eventName, payload = null) {
+  sendEvent(port, eventName, payload = null) {
     ipcRenderer.send('message', {
       port,
       type: eventName,
-      data: payload
+      data: payload,
     })
   },
-  addPort (config, eventCallback) {
+  addPort(config, eventCallback) {
     if (addedPorts.indexOf(config.port) >= 0) {
       return
     }
 
     addedPorts.push(config.port)
-    ipcRenderer.on('port:added', function onPortAdded (event, addedPort) {
+    ipcRenderer.on('port:added', function onPortAdded(event, addedPort) {
       if (addedPort === config.port) {
         ipcRenderer.on('message', (event, message) => {
           if (message.port !== config.port) {
@@ -33,22 +33,22 @@ const connector = {
         connector.sendEvent(config.port, 'ping')
       }
     })
-    ipcRenderer.on('port:exists', function onPortExists () {
+    ipcRenderer.on('port:exists', function onPortExists() {
       eventCallback(new Error('Something running on this port already'))
     })
     ipcRenderer.send('port:add', config)
   },
-  onPortFocus (cb) {
-    ipcRenderer.on('port:focus', function onPortAdded (event, port) {
+  onPortFocus(cb) {
+    ipcRenderer.on('port:focus', function onPortAdded(event, port) {
       cb(port)
     })
   },
-  removePort (port) {
+  removePort(port) {
     ipcRenderer.send('port:remove', port)
   },
-  relaunch () {
+  relaunch() {
     ipcRenderer.send('relaunch')
-  }
+  },
 }
 
 export default connector

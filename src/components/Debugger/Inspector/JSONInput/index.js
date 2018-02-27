@@ -1,28 +1,26 @@
 import './styles.css'
 import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
-import {connect} from '@cerebral/inferno'
-import {
-  isObject,
-  isArray
-} from '../../../../common/utils'
+import { connect } from '@cerebral/inferno'
+import { isObject, isArray } from '../../../../common/utils'
 
-export default connect({},
+export default connect(
+  {},
   class JSONInput extends Component {
-    constructor (props) {
+    constructor(props) {
       super(props)
       this.state = {
         isValid: true,
         value: this.props.value,
-        initialValue: this.props.value
+        initialValue: this.props.value,
       }
       this.onChange = this.onChange.bind(this)
       this.onSubmit = this.onSubmit.bind(this)
     }
-    componentDidMount (prevProps, prevState) {
+    componentDidMount(prevProps, prevState) {
       this.input.select()
     }
-    onChange (event) {
+    onChange(event) {
       let value = event.target.value
       let isValid = true
       let parsedValue = value
@@ -41,32 +39,40 @@ export default connect({},
 
       this.setState({
         value,
-        isValid
+        isValid,
       })
     }
-    onBlur () {
+    onBlur() {
       this.setState({
-        value: this.state.initialValue
+        value: this.state.initialValue,
       })
       this.props.onBlur()
     }
-    onSubmit (event) {
+    onSubmit(event) {
       event.preventDefault()
       this.props.onSubmit(this.state.value)
     }
-    render () {
+    render() {
       return (
-        <form style={{display: 'inline'}} onSubmit={this.onSubmit}>
+        <form style={{ display: 'inline' }} onSubmit={this.onSubmit}>
           <input
-            ref={(node) => { this.input = node }}
-            type='Text'
+            ref={node => {
+              this.input = node
+            }}
+            type="Text"
             autoFocus
-            onKeyDown={(event) => { event.keyCode === 27 && this.onBlur() }}
-            className={this.state.isValid ? 'JSONinput-input' : 'JSONinput-input JSONinput-invalidInput'}
+            onKeyDown={event => {
+              event.keyCode === 27 && this.onBlur()
+            }}
+            className={
+              this.state.isValid
+                ? 'JSONinput-input'
+                : 'JSONinput-input JSONinput-invalidInput'
+            }
             value={String(this.state.value)}
             onInput={this.onChange}
             onBlur={() => this.onBlur()}
-            />
+          />
         </form>
       )
     }

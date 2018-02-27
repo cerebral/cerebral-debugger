@@ -11,13 +11,17 @@ const compiler = webpack(config)
 const app = express()
 
 app.get('/prism.js', (req, res) => {
-  res.send(fs.readFileSync(path.resolve('chromeExtension', 'prism.js')).toString())
+  res.send(
+    fs.readFileSync(path.resolve('chromeExtension', 'prism.js')).toString()
+  )
 })
 
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath,
-  stats: 'errors-only'
-}))
+app.use(
+  webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    stats: 'errors-only',
+  })
+)
 
 app.use(webpackHotMiddleware(compiler))
 
