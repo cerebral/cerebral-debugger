@@ -20,6 +20,10 @@
     "*.js": [
       "eslint --fix",
       "git add"
+    ],
+    "*.{html,md,css}": [
+      "prettier --write",
+      "git add"
     ]
   },
   "repository": {
