@@ -53,7 +53,7 @@ class AddApp extends Component {
     }
   }
   openDocs () {
-    shell.openExternal('https://cerebraljs.com/docs/introduction/html')
+    shell.openExternal('https://cerebraljs.com/docs/introduction/debugger.html')
   }
   openSsl () {
     shell.openExternal('https://github.com/christianalfoni/create-ssl-certificate')
