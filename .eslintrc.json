@@ -12,16 +12,13 @@
     "es6": true
   },
   "plugins": ["prettier"],
-  "extends": ["standard", "standard-jsx", "prettier", "prettier/react"],
+  "extends": [
+    "standard",
+    "standard-jsx",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "es5",
-        "singleQuote": true,
-        "semi": false
-      }
-    ],
     "standard/computed-property-even-spacing": "off"
   }
 }
