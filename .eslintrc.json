@@ -11,15 +11,8 @@
     "node": true,
     "es6": true
   },
-  "plugins": [
-    "prettier"
-  ],
-  "extends": [
-    "standard",
-    "standard-jsx",
-    "prettier",
-    "prettier/react"
-  ],
+  "plugins": ["prettier"],
+  "extends": ["standard", "standard-jsx", "prettier", "prettier/react"],
   "rules": {
     "prettier/prettier": [
       "error",
