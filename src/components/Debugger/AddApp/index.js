@@ -1,119 +1,113 @@
-import './styles.css';
-import Inferno from 'inferno'; // eslint-disable-line
-import Component from 'inferno-component'; // eslint-disable-line
-import { shell } from 'electron';
-import connector from 'connector';
-import path from 'path';
+import './styles.css'
+import Inferno from 'inferno' // eslint-disable-line
+import Component from 'inferno-component' // eslint-disable-line
+import { shell } from 'electron'
+import connector from 'connector'
+import path from 'path'
 
 class AddApp extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       port: '',
       name: '',
       type: 'c',
       ssl: null,
-      error: null
-    };
+      error: null,
+    }
   }
   onPortChange(port) {
     this.setState({
       port,
-      error: null
-    });
+      error: null,
+    })
   }
   onNameChange(name) {
     this.setState({
       name,
-      error: null
-    });
+      error: null,
+    })
   }
   onTypeChange(type) {
     this.setState({
-      type
-    });
+      type,
+    })
   }
   addPort() {
     const isAdded = this.props.addPort({
       type: this.state.type,
       name: this.state.name,
       port: this.state.port,
-      ssl: this.state.ssl
-    });
+      ssl: this.state.ssl,
+    })
 
     if (isAdded && this.state.ssl) {
-      alert('When adding SSL the debugger needs to restart'); // eslint-disable-line
-      connector.relaunch();
+      alert('When adding SSL the debugger needs to restart') // eslint-disable-line
+      connector.relaunch()
     }
 
     if (!isAdded) {
       this.setState({
-        error: 'Port in use'
-      });
+        error: 'Port in use',
+      })
     }
   }
   openDocs() {
-    shell.openExternal(
-      'https://cerebraljs.com/docs/introduction/debugger.html'
-    );
+    shell.openExternal('https://cerebraljs.com/docs/introduction/debugger.html')
   }
   openSsl() {
     shell.openExternal(
       'https://github.com/christianalfoni/create-ssl-certificate'
-    );
+    )
   }
   onDrop(event) {
-    event.preventDefault();
+    event.preventDefault()
     const sslFiles = Array.prototype.reduce.call(
       event.dataTransfer.files,
       (files, file) => {
         if (path.extname(file.name) === '.crt') {
-          files.cert = file;
+          files.cert = file
         } else if (path.extname(file.name) === '.key') {
-          files.key = file;
+          files.key = file
         } else {
-<<<<<<< HEAD
-          alert(`Sorry, ${file.name} is not a valid file`); // eslint-disable-line
-=======
           alert(`Sorry, ${file.name} is not a valid file`) // eslint-disable-line
->>>>>>> Updates all files with prettier run
         }
 
-        return files;
+        return files
       },
       {}
-    );
+    )
 
-    const fileTypes = Object.keys(sslFiles);
+    const fileTypes = Object.keys(sslFiles)
 
     Promise.all(
       fileTypes.map(fileType => {
-        return this.readFile(sslFiles[fileType]);
+        return this.readFile(sslFiles[fileType])
       })
     ).then(results => {
       const ssl = Object.assign(
         this.state.ssl || {},
         results.reduce((sslUpdate, result, index) => {
-          sslUpdate[fileTypes[index]] = result;
+          sslUpdate[fileTypes[index]] = result
 
-          return sslUpdate;
+          return sslUpdate
         }, {})
-      );
+      )
 
-      this.setState({ ssl });
-    });
+      this.setState({ ssl })
+    })
   }
   readFile(file) {
-    const reader = new FileReader(); // eslint-disable-line
+    const reader = new FileReader() // eslint-disable-line
 
     return new Promise((resolve, reject) => {
-      reader.onload = event => resolve(event.target.result);
-      reader.onerror = error => reject(error);
-      reader.readAsText(file);
-    });
+      reader.onload = event => resolve(event.target.result)
+      reader.onerror = error => reject(error)
+      reader.readAsText(file)
+    })
   }
   onDragOver(event) {
-    event.preventDefault();
+    event.preventDefault()
   }
   getSslText() {
     if (!this.state.ssl || !Object.keys(this.state.ssl).length) {
@@ -121,7 +115,7 @@ class AddApp extends Component {
         <span>
           <b>ssl.crt</b> and <b>ssl.key</b> files here
         </span>
-      );
+      )
     }
 
     if (this.state.ssl.cert) {
@@ -129,14 +123,14 @@ class AddApp extends Component {
         <span>
           <b>ssl.key</b> file here
         </span>
-      );
+      )
     }
 
     return (
       <span>
         <b>ssl.crt</b> file here
       </span>
-    );
+    )
   }
   render() {
     return (
@@ -164,8 +158,8 @@ class AddApp extends Component {
                   type="radio"
                   checked={this.state.type === 'c'}
                   onClick={event => {
-                    event.stopPropagation();
-                    this.onTypeChange('c');
+                    event.stopPropagation()
+                    this.onTypeChange('c')
                   }}
                 />
                 Cerebral
@@ -175,8 +169,8 @@ class AddApp extends Component {
                   type="radio"
                   checked={this.state.type === 'ft'}
                   onClick={event => {
-                    event.stopPropagation();
-                    this.onTypeChange('ft');
+                    event.stopPropagation()
+                    this.onTypeChange('ft')
                   }}
                 />
                 Function-Tree
@@ -186,8 +180,8 @@ class AddApp extends Component {
                   type="radio"
                   checked={this.state.type === 'cft'}
                   onClick={event => {
-                    event.stopPropagation();
-                    this.onTypeChange('cft');
+                    event.stopPropagation()
+                    this.onTypeChange('cft')
                   }}
                 />
                 Client (C) + Server (FT)
@@ -261,8 +255,8 @@ class AddApp extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default AddApp;
+export default AddApp

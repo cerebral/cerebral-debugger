@@ -1,12 +1,12 @@
-import './styles.css';
+import './styles.css'
 import Inferno from 'inferno'; // eslint-disable-line
 
-import Inspector from '../../../../Inspector';
+import Inspector from '../../../../Inspector'
 
 function Service({ service, pathClicked, showReturnValue }) {
   const serviceNameStyle = {
-    color: '#28a0aa'
-  };
+    color: '#28a0aa',
+  }
 
   return (
     <div className="service">
@@ -15,9 +15,7 @@ function Service({ service, pathClicked, showReturnValue }) {
       </span>
       <span className="service-serviceArgs">
         {service.args.map((arg, index) => {
-          return (
-            <Inspector key={index} value={arg} pathClicked={pathClicked} />
-          );
+          return <Inspector key={index} value={arg} pathClicked={pathClicked} />
         })}
       </span>
       <span className="service-returnValue">
@@ -31,7 +29,7 @@ function Service({ service, pathClicked, showReturnValue }) {
         ) : null}
       </span>
     </div>
-  );
+  )
 }
 
-export default Service;
+export default Service

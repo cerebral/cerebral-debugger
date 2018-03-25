@@ -1,14 +1,14 @@
-import './styles.css';
+import './styles.css'
 import Inferno from 'inferno'; // eslint-disable-line
 import Component from 'inferno-component'; // eslint-disable-line
-import { connect } from '@cerebral/inferno';
-import { state, signal } from 'cerebral/tags';
-import classnames from 'classnames';
+import { connect } from '@cerebral/inferno'
+import { state, signal } from 'cerebral/tags'
+import classnames from 'classnames'
 
-import Action from './Action';
-import Props from './Props';
-import Path from './Path';
-import Sequence from './Sequence';
+import Action from './Action'
+import Props from './Props'
+import Path from './Path'
+import Sequence from './Sequence'
 
 export default connect(
   {
@@ -26,79 +26,79 @@ export default connect(
     actionToggled: signal`actionToggled`,
     propsToggled: signal`propsToggled`,
     mutationClicked: signal`mutationClicked`,
-    pathClicked: signal`pathClicked`
+    pathClicked: signal`pathClicked`,
   },
   class Signal extends Component {
     constructor(props) {
-      super();
-      this.renderAction = this.renderAction.bind(this);
-      this.onMutationClick = this.onMutationClick.bind(this);
+      super()
+      this.renderAction = this.renderAction.bind(this)
+      this.onMutationClick = this.onMutationClick.bind(this)
     }
     shouldComponentUpdate(nextProps, nextState) {
       return (
         nextProps.currentPage === 'signals' || !nextProps.useragent.media.small
-      );
+      )
     }
     onMutationClick(path) {
       this.props.mutationClicked({
-        path
-      });
+        path,
+      })
     }
     actionHasSearchContent(action) {
       const data = this.props.signal.functionsRun[action.functionIndex]
         ? this.props.signal.functionsRun[action.functionIndex].data
-        : null;
+        : null
 
       if (
         action._functionTreePrimitive &&
         action.name &&
         action.name.toLowerCase().indexOf(this.props.searchValue) >= 0
       ) {
-        return true;
+        return true
       }
 
       return (data || []).reduce((currentHasSearchContent, dataItem) => {
         if (currentHasSearchContent) {
-          return currentHasSearchContent;
+          return currentHasSearchContent
         }
 
         if (
           dataItem.type === 'mutation' &&
           dataItem.args[0].join('.').indexOf(this.props.searchValue) >= 0
         ) {
-          return true;
+          return true
         }
 
-        return false;
-      }, false);
+        return false
+      }, false)
     }
     renderSequence(sequence, index) {
       return (
         <Sequence key={index} sequence={sequence}>
           {sequence.items.map(this.renderAction)}
         </Sequence>
-      );
+      )
     }
     renderAction(action, index) {
       const hasSearchContent =
-        this.props.searchValue && this.actionHasSearchContent(action);
+        this.props.searchValue && this.actionHasSearchContent(action)
 
       if (
         action._functionTreePrimitive &&
         action.items &&
         action.items.length
       ) {
-        return this.renderSequence(action, index);
+        return this.renderSequence(action, index)
       } else if (
         action._functionTreePrimitive &&
         (!action.items || !action.items.length)
       ) {
-        return null;
+        return null
       }
 
       const isExecuted = Boolean(
         this.props.signal.functionsRun[action.functionIndex]
-      );
+      )
       const executedBySignals =
         this.props.signal.functionsRun[action.functionIndex] &&
         this.props.signal.functionsRun[action.functionIndex].executedIds.length
@@ -107,23 +107,23 @@ export default connect(
             ].executedIds.map(
               executedId => this.props.executedBySignals[executedId]
             )
-          : [];
-      const execution = this.props.signal.functionsRun[action.functionIndex];
+          : []
+      const execution = this.props.signal.functionsRun[action.functionIndex]
       const output = Object.keys(action.outputs || {}).reduce(
         (currentOutput, output) => {
-          const isOutput = execution && execution.path === output;
+          const isOutput = execution && execution.path === output
 
           if (isOutput) {
-            return output;
+            return output
           }
 
-          return currentOutput;
+          return currentOutput
         },
         null
-      );
+      )
       const isPropsExpanded = Boolean(
         this.props.signal.expandedProps[action.functionIndex]
-      );
+      )
 
       return (
         <div className="action-container">
@@ -139,14 +139,14 @@ export default connect(
                 this.props.propsToggled({
                   action,
                   executionId: this.props.signal.executionId,
-                  expanded: true
+                  expanded: true,
                 })
               }
               onCollapse={() =>
                 this.props.propsToggled({
                   action,
                   executionId: this.props.signal.executionId,
-                  expanded: false
+                  expanded: false,
                 })
               }
             />
@@ -157,7 +157,7 @@ export default connect(
             actionToggled={() =>
               this.props.actionToggled({
                 action,
-                executionId: this.props.signal.executionId
+                executionId: this.props.signal.executionId,
               })
             }
             showProviderReturnValue={this.props.showProviderReturnValue}
@@ -174,7 +174,7 @@ export default connect(
                 key={index}
                 className={'executedBy'}
                 style={{
-                  backgroundColor: '#FAFAFA'
+                  backgroundColor: '#FAFAFA',
                 }}
                 executedBy
                 signal={executedBySignal}
@@ -196,11 +196,11 @@ export default connect(
           {output ? <Path output={output} /> : null}
           {output ? this.renderAction(action.outputs[output], index + 1) : null}
         </div>
-      );
+      )
     }
     render() {
       if (!this.props.signal) {
-        return <span className="signal-empty">No signals yet...</span>;
+        return <span className="signal-empty">No signals yet...</span>
       }
 
       return (
@@ -218,7 +218,7 @@ export default connect(
             className="signal-title"
             style={{
               backgroundColor: this.props.executedBy ? '#333' : null,
-              color: this.props.executedBy ? '#f0f0f0' : null
+              color: this.props.executedBy ? '#f0f0f0' : null,
             }}
           >
             {this.props.signal.name}
@@ -237,7 +237,7 @@ export default connect(
                   type="checkbox"
                   onChange={() =>
                     this.props.showActionsToggled({
-                      executionId: this.props.signal.executionId
+                      executionId: this.props.signal.executionId,
                     })
                   }
                   checked={this.props.showActions}
@@ -265,7 +265,7 @@ export default connect(
             />
           ) : null}
         </div>
-      );
+      )
     }
   }
-);
+)

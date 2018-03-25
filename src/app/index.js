@@ -1,7 +1,7 @@
-import { Module } from 'cerebral';
-import UserAgent from '@cerebral/useragent';
-import * as sequences from './sequences';
-import storage from './modules/storage';
+import { Module } from 'cerebral'
+import UserAgent from '@cerebral/useragent'
+import * as sequences from './sequences'
+import storage from './modules/storage'
 
 export default config =>
   Module({
@@ -9,9 +9,9 @@ export default config =>
       storage,
       useragent: UserAgent({
         media: {
-          small: '(max-width: 1270px)'
-        }
-      })
+          small: '(max-width: 1270px)',
+        },
+      }),
     },
     state: {
       config,
@@ -34,7 +34,7 @@ export default config =>
       searchValue: '',
       searchComponentValue: '',
       expandedPaths: [],
-      hasCreatedSignalTest: false
+      hasCreatedSignalTest: false,
     },
     signals: {
       pageChanged: sequences.changePage,
@@ -57,6 +57,6 @@ export default config =>
       showProviderReturnValueToggled: sequences.toggleShowProviderReturnValue,
       showProvidersInHistoryToggled: sequences.toggleProvidersInHistory,
       showPropsToggled: sequences.toggleShowProps,
-      createSignalTestClicked: sequences.createSignalTest
-    }
-  });
+      createSignalTestClicked: sequences.createSignalTest,
+    },
+  })

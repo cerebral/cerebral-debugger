@@ -41,32 +41,40 @@ export default connect(
                   ? 'SIGNALS'
                   : 'EXECUTION'}
               </li>
-              {
-                this.props.type === 'c' || this.props.type === 'cft' ? [
-                  <li
-                    className={classNames('toolbar-tab', {'toolbar-tab--active': this.props.currentPage === 'model'})}
-                    onClick={() => this.props.pageChanged({page: 'model'})}>
-                    <i className='icon icon-model' /> STATE-TREE
-                  </li>,
-                  <li
-                    className={classNames('toolbar-tab', {'toolbar-tab--active': this.props.currentPage === 'history'})}
-                    onClick={() => this.props.pageChanged({page: 'history'})}>
-                    <i className='icon icon-mutation' /> HISTORY
-                  </li>,
-                  <li
-                    className={classNames('toolbar-tab', {'toolbar-tab--active': this.props.currentPage === 'components'})}
-                    onClick={() => this.props.pageChanged({page: 'components'})}>
-                    <i className='icon icon-components' /> COMPONENTS
-                  </li>,
-                  <li className='toolbar-search'>
-                    <input
-                      type='text'
-                      placeholder='Search path...'
-                      value={this.props.searchValue}
-                      onInput={(event) => this.props.searchValueChanged({value: event.target.value})} />
-                  </li>,
-                  this.props.currentPage === 'components'
-                    ? <li className='toolbar-search'>
+              {this.props.type === 'c' || this.props.type === 'cft'
+                ? [
+                    <li
+                      className={classNames('toolbar-tab', {
+                        'toolbar-tab--active':
+                          this.props.currentPage === 'model',
+                      })}
+                      onClick={() => this.props.pageChanged({ page: 'model' })}
+                    >
+                      <i className="icon icon-model" /> STATE-TREE
+                    </li>,
+                    <li
+                      className={classNames('toolbar-tab', {
+                        'toolbar-tab--active':
+                          this.props.currentPage === 'history',
+                      })}
+                      onClick={() =>
+                        this.props.pageChanged({ page: 'history' })
+                      }
+                    >
+                      <i className="icon icon-mutation" /> HISTORY
+                    </li>,
+                    <li
+                      className={classNames('toolbar-tab', {
+                        'toolbar-tab--active':
+                          this.props.currentPage === 'components',
+                      })}
+                      onClick={() =>
+                        this.props.pageChanged({ page: 'components' })
+                      }
+                    >
+                      <i className="icon icon-components" /> COMPONENTS
+                    </li>,
+                    <li className="toolbar-search">
                       <input
                         type="text"
                         placeholder="Search path..."

@@ -1,15 +1,15 @@
-import './styles.css';
+import './styles.css'
 import Inferno from 'inferno'; // eslint-disable-line
 import Component from 'inferno-component'; // eslint-disable-line
-import classNames from 'classnames';
-import connector from 'connector';
-import { connect } from '@cerebral/inferno';
-import { state, signal } from 'cerebral/tags';
-import Toolbar from '../Toolbar';
-import Signals from '../Signals';
-import History from '../History';
-import Components from '../Components';
-import Model from '../Model';
+import classNames from 'classnames'
+import connector from 'connector'
+import { connect } from '@cerebral/inferno'
+import { state, signal } from 'cerebral/tags'
+import Toolbar from '../Toolbar'
+import Signals from '../Signals'
+import History from '../History'
+import Components from '../Components'
+import Model from '../Model'
 
 export default connect(
   {
@@ -22,23 +22,23 @@ export default connect(
     mutationsError: state`mutationsError`,
     escPressed: signal`escPressed`,
     payloadReceived: signal`payloadReceived`,
-    addPortErrored: signal`addPortErrored`
+    addPortErrored: signal`addPortErrored`,
   },
   class App extends Component {
     componentDidMount() {
       document.body.addEventListener('keydown', event => {
         if (event.keyCode === 27) {
-          this.props.escPressed();
+          this.props.escPressed()
         }
-      });
+      })
 
       connector.addPort(this.props.config, payload => {
         if (payload instanceof Error) {
-          this.props.addPortErrored({ error: payload.message });
+          this.props.addPortErrored({ error: payload.message })
         } else {
-          this.props.payloadReceived(payload);
+          this.props.payloadReceived(payload)
         }
-      });
+      })
     }
     renderLayout() {
       if (this.props.isSmall) {
@@ -48,27 +48,27 @@ export default connect(
               <div className="app-content">
                 <Signals />
               </div>
-            );
+            )
           case 'components':
             return (
               <div className="app-content">
                 <Components />
               </div>
-            );
+            )
           case 'history':
             return (
               <div className="app-content">
                 <History />
               </div>
-            );
+            )
           case 'model':
             return (
               <div className="app-content">
                 <Model />
               </div>
-            );
+            )
           default:
-            return null;
+            return null
         }
       } else {
         switch (this.props.currentPage) {
@@ -77,19 +77,19 @@ export default connect(
               <div className="app-content">
                 <Signals />
               </div>
-            );
+            )
           case 'components':
             return (
               <div className="app-content">
                 <Components />
               </div>
-            );
+            )
           case 'history':
             return (
               <div className="app-content">
                 <History />
               </div>
-            );
+            )
           case 'model':
             return (
               <div className="app-content">
@@ -98,9 +98,9 @@ export default connect(
                   <Model />
                 ) : null}
               </div>
-            );
+            )
           default:
-            return null;
+            return null
         }
       }
     }
@@ -110,10 +110,10 @@ export default connect(
           <div className="error-title">warning</div>
           {this.props.error}
         </div>
-      );
+      )
     }
     render() {
-      const mutationsError = this.props.mutationsError;
+      const mutationsError = this.props.mutationsError
 
       return (
         <div className="debugger">
@@ -141,12 +141,12 @@ export default connect(
             <div
               className={classNames('execution-led', {
                 'execution-led--idle': !this.props.executingSignalsCount,
-                'execution-led--executing': !!this.props.executingSignalsCount
+                'execution-led--executing': !!this.props.executingSignalsCount,
               })}
             />
           </div>
         </div>
-      );
+      )
     }
   }
-);
+)

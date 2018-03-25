@@ -1,41 +1,41 @@
 /* global Prism */
-import './styles.css';
+import './styles.css'
 import Inferno from 'inferno'; // eslint-disable-line
 import Component from 'inferno-component'; // eslint-disable-line
-import Inspector from '../../../Inspector';
-import Mutation from './Mutation';
-import Service from './Service';
-import classnames from 'classnames';
+import Inspector from '../../../Inspector'
+import Mutation from './Mutation'
+import Service from './Service'
+import classnames from 'classnames'
 
 function getActionName(action) {
-  var regex = /\(([^()]+)\)/;
-  var match = regex.exec(action.name);
+  var regex = /\(([^()]+)\)/
+  var match = regex.exec(action.name)
 
   return {
     name: match
       ? action.name.substr(0, match.index).trim()
       : action.name.trim(),
-    params: match ? match[1] : null
-  };
+    params: match ? match[1] : null,
+  }
 }
 
 function getLineNumber(error) {
   const variable =
     error.name === 'TypeError' && String(error.message).match(/'(.*?)'/)
       ? String(error.message).match(/'(.*?)'/)[1]
-      : String(error.message).split(' ')[0];
-  const lines = error.func.split('\n');
+      : String(error.message).split(' ')[0]
+  const lines = error.func.split('\n')
 
   return lines.reduce((lineNumber, line, index) => {
     if (lineNumber === -1 && line.indexOf(variable) >= 0) {
-      return index + 2;
+      return index + 2
     }
-    return lineNumber;
-  }, -1);
+    return lineNumber
+  }, -1)
 }
 
 function renderActionTitle(action) {
-  const actionName = getActionName(action);
+  const actionName = getActionName(action)
 
   return (
     <div className="action-actionTitle">
@@ -44,19 +44,19 @@ function renderActionTitle(action) {
         <span className="action-actionNameParams">{actionName.params}</span>
       ) : null}
     </div>
-  );
+  )
 }
 
 function renderDetails(execution, isExpanded) {
   const hasMutation =
     execution &&
     execution.data.filter(data => Boolean(data) && data.type === 'mutation')
-      .length;
+      .length
   const hasService =
     execution &&
     execution.data.filter(data => Boolean(data) && data.type !== 'mutation')
-      .length;
-  const hasOutput = execution && execution.output;
+      .length
+  const hasOutput = execution && execution.output
 
   return (
     <div className="action-actionDetails">
@@ -67,35 +67,35 @@ function renderDetails(execution, isExpanded) {
       {hasOutput ? <span className="action-hasOutput">output</span> : null}
       <span className={`icon icon-${isExpanded ? 'up' : 'down'}`} />
     </div>
-  );
+  )
 }
 
 function renderCode(error) {
   return error.func
     .split('\n')
     .map(line => line.replace(/\t/, ''))
-    .join('\n');
+    .join('\n')
 }
 
 class Action extends Component {
   constructor(props) {
-    super(props);
-    this.isHighlighted = false;
+    super(props)
+    this.isHighlighted = false
   }
   componentDidMount() {
     if (this.errorElement) {
-      Prism.highlightElement(this.errorElement);
-      this.isHighlighted = true;
+      Prism.highlightElement(this.errorElement)
+      this.isHighlighted = true
     }
   }
   componentDidUpdate() {
     // Inferno hack, this triggers too early
     setTimeout(() => {
       if (this.errorElement && !this.isHighlighted) {
-        Prism.highlightElement(this.errorElement);
-        this.isHighlighted = true;
+        Prism.highlightElement(this.errorElement)
+        this.isHighlighted = true
       }
-    });
+    })
   }
   render() {
     const {
@@ -108,15 +108,15 @@ class Action extends Component {
       children,
       onMutationClick,
       executed,
-      pathClicked
-    } = this.props;
+      pathClicked,
+    } = this.props
 
-    const error = execution && execution.error;
+    const error = execution && execution.error
     const titleClassname = classnames({
       'action-actionErrorHeader': error,
       'action-actionHeader': !error,
-      'action-faded': faded
-    });
+      'action-faded': faded,
+    })
 
     if (error) {
       return (
@@ -137,7 +137,7 @@ class Action extends Component {
             <pre data-line={getLineNumber(error) || null}>
               <code
                 ref={node => {
-                  this.errorElement = node;
+                  this.errorElement = node
                 }}
                 className="language-javascript"
                 dangerouslySetInnerHTML={{ __html: renderCode(error) }}
@@ -150,7 +150,7 @@ class Action extends Component {
             {executed}
           </div>
         </div>
-      );
+      )
     }
 
     if (isExpanded) {
@@ -158,8 +158,8 @@ class Action extends Component {
         <div
           className="action action-expanded"
           onClick={event => {
-            event.stopPropagation();
-            actionToggled();
+            event.stopPropagation()
+            actionToggled()
           }}
         >
           <div className="action-titleContainer">
@@ -223,15 +223,15 @@ class Action extends Component {
             </div>
           ) : null}
         </div>
-      );
+      )
     }
 
     return (
       <div
         className="action"
         onClick={event => {
-          event.stopPropagation();
-          actionToggled();
+          event.stopPropagation()
+          actionToggled()
         }}
       >
         <div className="action-titleContainer">
@@ -242,8 +242,8 @@ class Action extends Component {
           {renderDetails(execution, isExpanded)}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Action;
+export default Action
