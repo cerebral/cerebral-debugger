@@ -42,9 +42,9 @@ export default connect({
                     <i className='icon icon-model' /> STATE-TREE
                   </li>,
                   <li
-                    className={classNames('toolbar-tab', {'toolbar-tab--active': this.props.currentPage === 'mutations'})}
-                    onClick={() => this.props.pageChanged({page: 'mutations'})}>
-                    <i className='icon icon-mutation' /> MUTATIONS
+                    className={classNames('toolbar-tab', {'toolbar-tab--active': this.props.currentPage === 'history'})}
+                    onClick={() => this.props.pageChanged({page: 'history'})}>
+                    <i className='icon icon-mutation' /> HISTORY
                   </li>,
                   <li
                     className={classNames('toolbar-tab', {'toolbar-tab--active': this.props.currentPage === 'components'})}

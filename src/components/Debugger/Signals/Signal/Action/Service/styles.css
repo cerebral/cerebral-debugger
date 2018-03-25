@@ -1,6 +1,7 @@
 .service {
   margin: 3px 0;
   display: flex;
+  align-items: flex-start
 }
 
 .service i {
@@ -27,9 +28,16 @@
 .service-serviceArgs {
   display: flex;
   margin-left: 5px;
-  flex: 1;
   font-size: 12px;
   line-height: 20px;
+}
+
+.service-returnValue {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  line-height: 21px;
+  color: #CACACA;
 }
 
 .service-serviceArgs > * {
