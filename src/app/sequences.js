@@ -59,6 +59,16 @@ export const toggleShowActions = [
   actions.storeOptions
 ]
 
+export const toggleShowProviderReturnValue = [
+  toggle(state`storage.showProviderReturnValue`),
+  actions.storeOptions
+]
+
+export const toggleProvidersInHistory = [
+  toggle(state`storage.showProvidersInHistory`),
+  actions.storeOptions
+]
+
 export const toggleShowProps = [toggle(state`storage.showProps`), actions.storeOptions]
 
 export const setSignal = [

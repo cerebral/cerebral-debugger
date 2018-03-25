@@ -45,8 +45,8 @@ export function updateSignal ({props, state}) {
       executedIds: []
     })
   }
-  if (execution.data && (execution.data.type === 'mutation')) {
-    state.unshift('mutations', {
+  if (execution.data) {
+    state.unshift('history', {
       executionId: execution.executionId,
       signalName: signal.name,
       data: execution.data
@@ -208,7 +208,7 @@ export function parseAndRunMessages ({props, state, controller}) {
 export function remember ({props, state}) {
   state.set('model', state.get('initialModel'))
   state.set('currentRememberedMutationIndex', props.index)
-  const mutations = state.get('mutations')
+  const mutations = state.get('history').filter(record => record.data.type === 'mutation')
   let lastMutationIndex = props.index
 
   for (let x = mutations.length - 1; x >= lastMutationIndex; x--) {
@@ -234,7 +234,7 @@ export function reset ({state}) {
   })
     // Do update correctly
   state.set('signals', {})
-  state.set('mutations', [])
+  state.set('history', [])
   state.set('model', state.get('initialModel'))
 }
 
@@ -259,7 +259,7 @@ export function endSignalExecution ({props, state}) {
 export function createSignalTest ({ state }) {
   const currentExecutionId = state.get('currentSignalExecutionId')
   const signal = state.get(`signals.${currentExecutionId}`)
-  const mutations = state.get('mutations').reverse()
+  const mutations = state.get('history').filter(record => record.data.type === 'mutation').reverse()
   const filteredMutations = []
 
   for (let index = 0; index < mutations.length; index++) {

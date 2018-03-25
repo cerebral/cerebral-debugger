@@ -1,10 +1,40 @@
 .mutations {
-  flex: 1.25;
+  flex: 1;
   display: flex;
+  flex-direction: column;
   padding: 10px;
   overflow: hidden;
   font-size: 10px;
-    height: calc(100vh - 101px);
+  height: calc(100vh - 101px);
+}
+
+.mutations-title {
+  flex: 0 0 30px;
+  margin: 0;
+  height: 30px;
+  padding: 0 10px 0 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  background-color: #FAFAFA;
+  border-bottom: 1px solid #DDD;
+}
+
+.mutations-stat-mutations {
+  color: rgb(220, 100, 40);
+}
+
+.mutations-stat-providers {
+  color: rgb(40, 160, 170);
+}
+
+.mutations-stat-divider {
+  margin: 0 0.5rem;
+}
+
+.mutations-settingsContainer {
+  display: flex;
+  margin-left: auto;
 }
 
 .mutations .list {
@@ -62,6 +92,16 @@
   width: 5px;
   height: 100%;
   background-color: #4285f4;
+}
+
+.mutations .list-content {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mutations .list-content > div:first-child {
+  flex: 1;
 }
 
 .mutations .signal-name {

@@ -24,7 +24,7 @@ export default (config) => Module({
     currentRememberedMutationIndex: 0,
     signals: {},
     executedBySignals: {},
-    mutations: [],
+    history: [],
     expandedSignalGroups: [],
     currentMutationPath: null,
     componentsMap: {},
@@ -53,6 +53,8 @@ export default (config) => Module({
     actionToggled: sequences.toggleAction,
     propsToggled: sequences.toggleProps,
     showActionsToggled: sequences.toggleShowActions,
+    showProviderReturnValueToggled: sequences.toggleShowProviderReturnValue,
+    showProvidersInHistoryToggled: sequences.toggleProvidersInHistory,
     showPropsToggled: sequences.toggleShowProps,
     createSignalTestClicked: sequences.createSignalTest
   }

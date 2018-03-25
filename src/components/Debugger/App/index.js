@@ -7,7 +7,7 @@ import {connect} from '@cerebral/inferno'
 import {state, signal} from 'cerebral/tags'
 import Toolbar from '../Toolbar'
 import Signals from '../Signals'
-import Mutations from '../Mutations'
+import History from '../History'
 import Components from '../Components'
 import Model from '../Model'
 
@@ -54,10 +54,10 @@ export default connect({
                 <Components />
               </div>
             )
-          case 'mutations':
+          case 'history':
             return (
               <div className='app-content'>
-                <Mutations />
+                <History />
               </div>
             )
           case 'model':
@@ -83,10 +83,10 @@ export default connect({
                 <Components />
               </div>
             )
-          case 'mutations':
+          case 'history':
             return (
               <div className='app-content'>
-                <Mutations />
+                <History />
               </div>
             )
           case 'model':

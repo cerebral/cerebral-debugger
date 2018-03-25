@@ -139,7 +139,7 @@ class Action extends Component {
             <div>
               <div className={faded ? 'action-faded' : null}>
                 <div className='action-mutations'>
-                  {execution.data.filter((data) => Boolean(data)).map((data, index) => data.type === 'mutation' ? <Mutation mutation={data} key={index} onMutationClick={onMutationClick} pathClicked={pathClicked} /> : <Service service={data} key={index} pathClicked={pathClicked} />)}
+                  {execution.data.filter((data) => Boolean(data)).map((data, index) => data.type === 'mutation' ? <Mutation mutation={data} key={index} onMutationClick={onMutationClick} pathClicked={pathClicked} /> : <Service showReturnValue={this.props.showProviderReturnValue} service={data} key={index} pathClicked={pathClicked} />)}
                 </div>
                 {executed}
                 {execution.output && (
