@@ -1,4 +1,15 @@
 import ColorHash from 'color-hash'
+import traverse from 'traverse'
+
+export function getActionNameByIndex(signal, functionIndex) {
+  return traverse(signal.staticTree.items).reduce((acc, item) => {
+    if (item && item.functionIndex === functionIndex) {
+      return item.name
+    }
+
+    return acc
+  }, null)
+}
 
 export function nameToColors(
   moduleName,
