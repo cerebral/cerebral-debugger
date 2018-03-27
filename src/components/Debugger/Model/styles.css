@@ -1,11 +1,11 @@
 .model {
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 3px;
   margin: 0;
   width: 100%;
   box-sizing: border-box;
   padding: 10px;
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   height: calc(100vh - 101px);
   overflow-y: scroll;
 }

@@ -1,7 +1,7 @@
 const { app, ipcMain, BrowserWindow, dialog } = require('electron')
 const log = require('electron-log')
 
-const {autoUpdater} = require('electron-updater')
+const { autoUpdater } = require('electron-updater')
 autoUpdater.logger = log
 autoUpdater.logger.transports.file.level = 'info'
 autoUpdater.on('checking-for-update', () => {
@@ -34,33 +34,35 @@ autoUpdater.autoDownload = false
 
 let updateFile = {}
 try {
-  updateFile = JSON.parse(fs.readFileSync(path.join(userDataDir, updateStoreFile)))
+  updateFile = JSON.parse(
+    fs.readFileSync(path.join(userDataDir, updateStoreFile))
+  )
 } catch (err) {
   updateFile = {}
 }
 
-function updateDownloaded () {
-  dialog.showMessageBox({
-    title: 'Update Ready to Install',
-    message: 'Update has been downloaded',
-    buttons: [
-      'Install Later',
-      'Install Now'
-    ],
-    defaultId: 1
-  }, (response) => {
-    if (response === 0) {
-      dialog.showMessageBox({
-        title: 'Installing Later',
-        message: 'Update will be installed when you exit the app'
-      })
-    } else {
-      autoUpdater.quitAndInstall()
+function updateDownloaded() {
+  dialog.showMessageBox(
+    {
+      title: 'Update Ready to Install',
+      message: 'Update has been downloaded',
+      buttons: ['Install Later', 'Install Now'],
+      defaultId: 1,
+    },
+    response => {
+      if (response === 0) {
+        dialog.showMessageBox({
+          title: 'Installing Later',
+          message: 'Update will be installed when you exit the app',
+        })
+      } else {
+        autoUpdater.quitAndInstall()
+      }
     }
-  })
+  )
 }
 
-function updateAvailable ({version, releaseNotes}) {
+function updateAvailable({ version, releaseNotes }) {
   if (checkForUpdatesEvent) {
     checkForUpdatesEvent.sender.send('update-result', true)
   } else if (updateFile.skip === version) {
@@ -76,7 +78,7 @@ function updateAvailable ({version, releaseNotes}) {
     center: true,
     resizable: true,
     maximizable: false,
-    minimizable: false
+    minimizable: false,
   })
 
   window.loadURL(`file://${__dirname}/update.html`)
@@ -92,23 +94,36 @@ function updateAvailable ({version, releaseNotes}) {
     switch (type) {
       case 'skip':
         updateFile.skip = version
-        fs.writeFileSync(path.join(userDataDir, updateStoreFile), JSON.stringify(updateFile))
-        dialog.showMessageBox({
-          title: 'Skip Update',
-          message: 'We will notify you when the next update is available.'
-        }, () => window.close())
+        fs.writeFileSync(
+          path.join(userDataDir, updateStoreFile),
+          JSON.stringify(updateFile)
+        )
+        dialog.showMessageBox(
+          {
+            title: 'Skip Update',
+            message: 'We will notify you when the next update is available.',
+          },
+          () => window.close()
+        )
         break
       case 'remind':
-        dialog.showMessageBox({
-          title: 'Remind Later',
-          message: 'We will remind you next time you start the app'
-        }, () => window.close())
+        dialog.showMessageBox(
+          {
+            title: 'Remind Later',
+            message: 'We will remind you next time you start the app',
+          },
+          () => window.close()
+        )
         break
       case 'update':
-        dialog.showMessageBox({
-          title: 'Downloading Update',
-          message: 'You will be notified when the update is ready to be installed'
-        }, () => window.close())
+        dialog.showMessageBox(
+          {
+            title: 'Downloading Update',
+            message:
+              'You will be notified when the update is ready to be installed',
+          },
+          () => window.close()
+        )
         autoUpdater.downloadUpdate()
         break
     }
@@ -120,20 +135,23 @@ function updateAvailable ({version, releaseNotes}) {
   })
 }
 
-function checkForUpdates () {
+function checkForUpdates() {
   autoUpdater.on('update-available', updateAvailable)
 
-  autoUpdater.on('download-progress', ({percent}) => {
+  autoUpdater.on('download-progress', ({ percent }) => {
     console.log(`Update progress: ${percent}`)
   })
 
   autoUpdater.on('update-downloaded', updateDownloaded)
 
-    // Event from about window
+  // Event from about window
   ipcMain.on('check-for-updates', (e, autoUpdate) => {
     if (autoUpdate === true || autoUpdate === false) {
       updateFile.autoUpdate = autoUpdate
-      fs.writeFileSync(path.join(userDataDir, updateStoreFile), JSON.stringify(updateFile))
+      fs.writeFileSync(
+        path.join(userDataDir, updateStoreFile),
+        JSON.stringify(updateFile)
+      )
     } else if (autoUpdate === 'auto') {
       e.returnValue = updateFile.autoUpdate
     } else {

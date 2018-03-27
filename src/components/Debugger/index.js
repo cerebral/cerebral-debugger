@@ -3,8 +3,8 @@ import Inferno from 'inferno' // eslint-disable-line
 import Component from 'inferno-component' // eslint-disable-line
 import jsonStorage from 'electron-json-storage'
 import connector from 'connector'
-import {Controller} from 'cerebral'
-import {Container} from '@cerebral/inferno'
+import { Controller } from 'cerebral'
+import { Container } from '@cerebral/inferno'
 import app from '../../app'
 
 import AddApp from './AddApp'
@@ -12,14 +12,14 @@ import App from './App'
 import Apps from './Apps'
 
 class Debugger extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       isLoading: true,
       apps: {},
       currentApp: null,
       showAddApp: false,
-      error: null
+      error: null,
     }
     this.addPort = this.addPort.bind(this)
     this.addNewPort = this.addNewPort.bind(this)
@@ -27,9 +27,9 @@ class Debugger extends Component {
     this.changePort = this.changePort.bind(this)
     this.removePort = this.removePort.bind(this)
   }
-  componentDidMount () {
+  componentDidMount() {
     window.onerror = (_, _2, _3, _4, error) => {
-      this.setState({error})
+      this.setState({ error })
     }
 
     Promise.all([
@@ -50,42 +50,43 @@ class Debugger extends Component {
             resolve(typeof currentPort === 'string' ? currentPort : null)
           }
         })
-      })
-    ])
-      .then((results) => {
-        const storedApps = results[0]
-        const currentPort = results[1]
-        const ports = Object.keys(storedApps)
+      }),
+    ]).then(results => {
+      const storedApps = results[0]
+      const currentPort = results[1]
+      const ports = Object.keys(storedApps)
 
-        this.setState({
-          apps: ports.reduce((apps, port) => {
-            apps[port] = Object.assign(storedApps[port], {
-              controller: Controller(app({
+      this.setState({
+        apps: ports.reduce((apps, port) => {
+          apps[port] = Object.assign(storedApps[port], {
+            controller: Controller(
+              app({
                 port,
                 type: storedApps[port].type,
-                ssl: storedApps[port].ssl
-              }))
-            })
+                ssl: storedApps[port].ssl,
+              })
+            ),
+          })
 
-            return apps
-          }, {}),
-          currentPort: currentPort || ports[0] || null,
-          isLoading: false
-        })
+          return apps
+        }, {}),
+        currentPort: currentPort || ports[0] || null,
+        isLoading: false,
       })
+    })
 
-    connector.onPortFocus((port) => {
+    connector.onPortFocus(port => {
       this.setState({
-        currentPort: port
+        currentPort: port,
       })
     })
   }
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.currentPort !== prevState.currentPort) {
       jsonStorage.set('currentPort', this.state.currentPort)
     }
   }
-  addPort ({ type, name, port, ssl = null }) {
+  addPort({ type, name, port, ssl = null }) {
     if (this.state.apps[port]) {
       return false
     }
@@ -95,53 +96,58 @@ class Debugger extends Component {
         name,
         type,
         ssl,
-        controller: Controller(app({
-          port,
-          type,
-          ssl
-        }))
-      }
+        controller: Controller(
+          app({
+            port,
+            type,
+            ssl,
+          })
+        ),
+      },
     })
 
     this.setState({
       apps,
       currentPort: port,
-      showAddApp: false
+      showAddApp: false,
     })
 
     this.storeCurrentApps(apps)
 
     return true
   }
-  storeCurrentApps (apps) {
-    jsonStorage.set('apps', Object.keys(apps).reduce((appsToStore, port) => {
-      appsToStore[port] = {
-        name: apps[port].name,
-        type: apps[port].type,
-        ssl: apps[port].ssl
-      }
+  storeCurrentApps(apps) {
+    jsonStorage.set(
+      'apps',
+      Object.keys(apps).reduce((appsToStore, port) => {
+        appsToStore[port] = {
+          name: apps[port].name,
+          type: apps[port].type,
+          ssl: apps[port].ssl,
+        }
 
-      return appsToStore
-    }, {}))
+        return appsToStore
+      }, {})
+    )
   }
-  addNewPort () {
+  addNewPort() {
     this.setState({
-      showAddApp: true
+      showAddApp: true,
     })
   }
-  cancelAddNewPort () {
+  cancelAddNewPort() {
     this.setState({
-      showAddApp: false
+      showAddApp: false,
     })
   }
-  changePort (port) {
+  changePort(port) {
     this.setState({
-      currentPort: port
+      currentPort: port,
     })
   }
-  removePort (portToRemove) {
+  removePort(portToRemove) {
     const newApps = Object.keys(this.state.apps)
-      .filter((port) => port !== portToRemove)
+      .filter(port => port !== portToRemove)
       .reduce((apps, remainingPort) => {
         apps[remainingPort] = this.state.apps[remainingPort]
 
@@ -150,20 +156,32 @@ class Debugger extends Component {
 
     this.setState({
       apps: newApps,
-      currentPort: portToRemove === this.state.currentPort ? Object.keys(newApps)[0] : this.state.currentPort
+      currentPort:
+        portToRemove === this.state.currentPort
+          ? Object.keys(newApps)[0]
+          : this.state.currentPort,
     })
 
     connector.removePort(portToRemove)
     this.storeCurrentApps(newApps)
   }
-  render () {
+  render() {
     if (this.state.error) {
       return (
-        <div class='error'>
+        <div class="error">
           <h1>Ops, something bad happened :(</h1>
           <h4>{this.state.error.message}</h4>
-          {this.state.error.stack.split('\n').map((line) => <div style={{fontSize: '10px', textAlign: 'left'}}>{line}</div>)}
-          <button style={{marginTop: '10px'}}onClick={() => window.location.reload()}>restart debugger</button>
+          {this.state.error.stack
+            .split('\n')
+            .map(line => (
+              <div style={{ fontSize: '10px', textAlign: 'left' }}>{line}</div>
+            ))}
+          <button
+            style={{ marginTop: '10px' }}
+            onClick={() => window.location.reload()}
+          >
+            restart debugger
+          </button>
         </div>
       )
     }
@@ -181,7 +199,9 @@ class Debugger extends Component {
       )
     }
 
-    const currentApp = this.state.currentPort ? this.state.apps[this.state.currentPort] : null
+    const currentApp = this.state.currentPort
+      ? this.state.apps[this.state.currentPort]
+      : null
 
     return (
       <div>
@@ -193,7 +213,11 @@ class Debugger extends Component {
           changePort={this.changePort}
           removePort={this.removePort}
         />
-        <Container key={this.state.currentPort} controller={currentApp.controller} style={{height: '100%'}}>
+        <Container
+          key={this.state.currentPort}
+          controller={currentApp.controller}
+          style={{ height: '100%' }}
+        >
           <App key={this.state.currentPort} />
         </Container>
       </div>

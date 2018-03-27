@@ -1,0 +1,23 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "standard",
+    "standard-jsx",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
+  "rules": {
+    "standard/computed-property-even-spacing": "off"
+  }
+}

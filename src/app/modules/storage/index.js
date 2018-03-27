@@ -3,7 +3,7 @@ import jsonStorage from 'electron-json-storage'
 import * as sequences from './sequences'
 
 const storage = Provider({
-  get (key) {
+  get(key) {
     return new Promise((resolve, reject) => {
       jsonStorage.get(key, (error, data) => {
         if (error) {
@@ -14,9 +14,9 @@ const storage = Provider({
       })
     })
   },
-  set (key, value) {
+  set(key, value) {
     return new Promise((resolve, reject) => {
-      jsonStorage.set(key, value, (error) => {
+      jsonStorage.set(key, value, error => {
         if (error) {
           reject(error)
         } else {
@@ -24,7 +24,7 @@ const storage = Provider({
         }
       })
     })
-  }
+  },
 })
 
 export default Module(({ controller }) => {
@@ -38,13 +38,13 @@ export default Module(({ controller }) => {
       showProps: true,
       showActions: false,
       showProviderReturnValue: false,
-      showProvidersInHistory: false
+      showProvidersInHistory: false,
     },
     signals: {
-      initialized: sequences.initialize
+      initialized: sequences.initialize,
     },
     providers: {
-      storage
-    }
+      storage,
+    },
   }
 })

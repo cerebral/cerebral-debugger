@@ -1,6 +1,6 @@
 .action {
   font-size: 10px;
-  background-color: #FFF;
+  background-color: #fff;
   padding-left: 10px;
   margin-bottom: 1px;
   cursor: pointer;
@@ -17,13 +17,12 @@
   overflow: hidden;
 }
 
-
 .action-faded {
   opacity: 0.25;
 }
 
 .action-actionError {
-  border: 1px solid #F44336;
+  border: 1px solid #f44336;
   border-radius: 2px;
   padding-left: 0;
 }
@@ -37,7 +36,7 @@
 
 .action-actionDetails .icon {
   top: 0;
-  color: #BABABA;
+  color: #bababa;
   margin-left: 10px;
 }
 
@@ -63,11 +62,11 @@
 }
 
 .action-actionErrorHeader {
-  background-color: #F44336;
+  background-color: #f44336;
   padding: 5px;
   display: flex;
-  color: #FAFAFA;
-  background-color: #F44336;
+  color: #fafafa;
+  background-color: #f44336;
 }
 
 .action-actionErrorHeader > i {
@@ -96,7 +95,6 @@
 .action-stackLine {
   font-size: 12px;
 }
-
 
 .action-actionHeader > i {
   top: 0;
@@ -142,7 +140,6 @@
   line-height: 20px;
   padding-right: 5px;
 }
-
 
 .action-actionOutput {
   display: flex;

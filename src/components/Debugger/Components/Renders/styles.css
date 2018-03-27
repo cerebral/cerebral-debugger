@@ -4,12 +4,12 @@
 }
 
 .renders-renderWrapper {
-  background-color: #FFF;
+  background-color: #fff;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   margin: 0;
   padding: 0;
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   width: 100%;
   list-style-type: none;
   height: calc(100vh - 101px);
@@ -18,15 +18,15 @@
 
 .renders-item {
   position: relative;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #ddd;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .renders-itemHeader {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   padding: 0 15px;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #ddd;
   height: 30px;
   line-height: 30px;
 }
@@ -35,15 +35,17 @@
   display: flex;
 }
 
-.renders-pathsHeader, .renders-componentsHeader {
-  background-color: #FAFAFA;
-  border-bottom: 1px solid #DDD;
+.renders-pathsHeader,
+.renders-componentsHeader {
+  background-color: #fafafa;
+  border-bottom: 1px solid #ddd;
   padding-left: 15px;
   height: 20px;
   line-height: 20px;
 }
 
-.renders-pathsHeader > small, .renders-componentsHeader > small {
+.renders-pathsHeader > small,
+.renders-componentsHeader > small {
   opacity: 0.5;
 }
 
@@ -53,10 +55,11 @@
 
 .renders-components {
   flex: 1;
-  border-left: 1px solid #DDD;
+  border-left: 1px solid #ddd;
 }
 
-.renders-componentsList, .renders-pathsList {
+.renders-componentsList,
+.renders-pathsList {
   padding: 15px;
 }
 

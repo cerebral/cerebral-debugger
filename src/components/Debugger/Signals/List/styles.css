@@ -1,10 +1,10 @@
 .signals .list {
-  background-color: #FFF;
+  background-color: #fff;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   margin: 0;
   padding: 0;
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   width: 100%;
   list-style-type: none;
   height: calc(100vh - 206px);
@@ -17,7 +17,7 @@
   cursor: pointer;
   height: 30px;
   line-height: 30px;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #ddd;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -26,11 +26,11 @@
 }
 
 .signals .list-item:hover {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .signals .list-activeItem {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .signals .list-fadedItem {
@@ -42,7 +42,7 @@
 }
 
 .signals .list-withinExecution {
-  border-left: 5px solid #DDD;
+  border-left: 5px solid #ddd;
 }
 
 .signals .list-indicator {

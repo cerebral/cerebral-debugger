@@ -12,8 +12,19 @@
     "package:win": "cross-env NODE_ENV=production DEBUG=electron-builder:7z,electron-builder build -w",
     "package:mac": "cross-env NODE_ENV=production DEBUG=electron-builder:7z,electron-builder build -m",
     "package:linux": "cross-env NODE_ENV=production DEBUG=electron-builder:7z,electron-builder build -l",
-    "lint": "standard",
-    "test": "npm run lint"
+    "lint": "eslint \"**/*.js\"",
+    "test": "npm run lint",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{md,css,json}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -67,7 +78,6 @@
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
-    "babel-eslint": "^7.2.3",
     "babel-loader": "^6.4.1",
     "babel-plugin-inferno": "^3.2.0",
     "babel-preset-es2015": "^6.24.1",
@@ -76,21 +86,26 @@
     "css-loader": "^0.26.0",
     "electron": "^1.7.12",
     "electron-builder": "19.49.0",
+    "eslint": "^4.18.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard-jsx": "^5.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-standard": "^3.0.1",
     "express": "^4.14.0",
     "file-loader": "^0.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
+    "prettier": "1.11.0",
     "rimraf": "^2.5.4",
-    "standard": "^10.0.3",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2",
     "webpack-hot-middleware": "^2.13.2"
-  },
-  "standard": {
-    "parser": "babel-eslint",
-    "ignore": [
-      "**/node_modules/**",
-      "**/build/"
-    ]
   }
 }

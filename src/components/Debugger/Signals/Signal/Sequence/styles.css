@@ -12,7 +12,7 @@
 .signal-sequenceNameContainer {
   flex: 0 0;
   text-align: center;
-  border-right: 1px solid #F0F0F0;
+  border-right: 1px solid #f0f0f0;
 }
 
 .signal-sequenceName {
@@ -30,7 +30,7 @@
   position: fixed;
   background-color: #333;
   padding: 5px;
-  color: #F7F7F7;
+  color: #f7f7f7;
   border-radius: 2px;
   top: 10px;
   left: 10px;

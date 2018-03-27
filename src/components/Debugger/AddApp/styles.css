@@ -2,7 +2,7 @@
   outline: none;
   height: 30px;
   border-radius: 3px;
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   margin: 0 5px;
   width: 200px;
   padding: 5px 10px;
@@ -16,7 +16,7 @@
 .app-button {
   height: 40px;
   border: 1px solid #333;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 3px;
   margin: 15px 5px;
   padding: 5px 10px;
@@ -32,14 +32,14 @@
 }
 
 .app-button:hover {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .app-error {
   height: 30px;
   line-height: 30px;
-  background-color: #DD4A68;
-  color: #FFF;
+  background-color: #dd4a68;
+  color: #fff;
   padding: 5px 20px;
   border-radius: 3px;
   display: inline-block;
@@ -70,8 +70,8 @@
 }
 
 .app-drop-ssl {
-  background-color: #EAEAEA;
-  border: 2px dotted #DADADA;
+  background-color: #eaeaea;
+  border: 2px dotted #dadada;
   border-radius: 3px;
   display: flex;
   justify-content: center;
@@ -80,7 +80,7 @@
 }
 
 .app-drop-ssl-ready {
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
   border: 2px solid green;
   border-radius: 3px;
   display: flex;

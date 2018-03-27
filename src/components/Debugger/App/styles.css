@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  font-family: "Helvetica Neue", Arial;
+  font-family: 'Helvetica Neue', Arial;
   color: #333;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .app-toolbar {
@@ -21,8 +21,9 @@
   box-sizing: border-box;
 }
 
-.app-mutationsError h1, .app-mutationsError h4 {
-  color: #FFF;
+.app-mutationsError h1,
+.app-mutationsError h4 {
+  color: #fff;
   margin: 0;
   opacity: 0.8;
 }
@@ -53,7 +54,6 @@
   padding: 50px;
   text-align: center;
 }
-
 
 .execution {
   position: fixed;

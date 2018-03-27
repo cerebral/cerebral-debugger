@@ -16,8 +16,8 @@
   font-size: 14px;
   display: flex;
   align-items: center;
-  background-color: #FAFAFA;
-  border-bottom: 1px solid #DDD;
+  background-color: #fafafa;
+  border-bottom: 1px solid #ddd;
 }
 
 .mutations-stat-mutations {
@@ -38,12 +38,12 @@
 }
 
 .mutations .list {
-  background-color: #FFF;
+  background-color: #fff;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   margin: 0;
   padding: 0;
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   width: 100%;
   list-style-type: none;
   height: 100%;
@@ -56,14 +56,14 @@
   padding-left: 15px;
   min-height: 30px;
   line-height: 30px;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #ddd;
   overflow: hidden;
   text-overflow: ellipsis;
   align-items: center;
 }
 
 .mutations .list-item:hover {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .mutations .list-remembered {
@@ -121,19 +121,19 @@
 }
 
 .timetravel-button {
-  border: 1px solid #DADADA;
+  border: 1px solid #dadada;
   margin: 5px 10px 5px 0;
   border-radius: 3px;
   box-sizing: border-box;
   padding: 5px;
-  background-color: #FFF;
+  background-color: #fff;
   width: 50px;
   cursor: pointer;
 }
 
 .timetravel-button.active {
   background-color: #333;
-  color: #FFF;
+  color: #fff;
   cursor: default;
 }
 
