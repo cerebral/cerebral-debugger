@@ -1,6 +1,7 @@
 /* eslint-disable no-multi-spaces */
 
 import computedSignalsList from '../common/computed/signalsList'
+import { getActionNameByIndex } from '../common/utils'
 
 export function updateRenders({ props, state }) {
   if (props.data.render.components.length) {
@@ -47,10 +48,12 @@ export function updateSignal({ props, state }) {
       executedIds: [],
     })
   }
+
   if (execution.data) {
     state.unshift('history', {
       executionId: execution.executionId,
       signalName: signal.name,
+      actionName: getActionNameByIndex(signal, execution.functionIndex),
       data: execution.data,
     })
   }

@@ -15,8 +15,10 @@ export default connect(
     currentRememberedMutationIndex: state`currentRememberedMutationIndex`,
     searchValue: state`searchValue`,
     showProvidersInHistory: state`storage.showProvidersInHistory`,
+    showActionNamesInHistory: state`storage.showActionNamesInHistory`,
     executingSignalsCount: state`executingSignalsCount`,
     showProvidersInHistoryToggled: signal`showProvidersInHistoryToggled`,
+    showActionNamesInHistoryToggled: signal`showActionNamesInHistoryToggled`,
     mutationDoubleClicked: signal`mutationDoubleClicked`,
     mutationClicked: signal`mutationClicked`,
     signalClicked: signal`signalClicked`,
@@ -29,7 +31,9 @@ export default connect(
     searchValue,
     executingSignalsCount,
     showProvidersInHistory,
+    showActionNamesInHistory,
     showProvidersInHistoryToggled,
+    showActionNamesInHistoryToggled,
     mutationDoubleClicked,
     mutationClicked,
     signalClicked,
@@ -59,12 +63,20 @@ export default connect(
     return (
       <div className="mutations">
         <h3 className="mutations-title">
-          <span className="mutations-stat-mutations">Mutations </span>:{' '}
-          {counts.mutations}
+          <span className="mutations-stat-mutations">Mutations:</span>
+          {` ${counts.mutations}`}
           <span className="mutations-stat-divider">|</span>
-          <span className="mutations-stat-providers">Providers </span>:{' '}
-          {counts.providers}
+          <span className="mutations-stat-providers">Provider calls:</span>
+          {`${counts.providers}`}
           <div className="mutations-settingsContainer">
+            <label>
+              action names:{' '}
+              <input
+                type="checkbox"
+                onChange={() => showActionNamesInHistoryToggled()}
+                checked={showActionNamesInHistory}
+              />
+            </label>
             <label>
               providers:{' '}
               <input
@@ -105,37 +117,42 @@ export default connect(
                 >
                   {record.signalName}
                 </div>
-                {record.data.type === 'mutation' ? (
-                  <div className="list-content">
-                    <Mutation
-                      mutation={record.data}
-                      onMutationClick={path => mutationClicked({ path })}
+                <div className="record-wrapper">
+                  {showActionNamesInHistory ? (
+                    <div className="action-name">{record.actionName}</div>
+                  ) : null}
+                  {record.data.type === 'mutation' ? (
+                    <div className="list-content">
+                      <Mutation
+                        mutation={record.data}
+                        onMutationClick={path => mutationClicked({ path })}
+                        pathClicked={pathClicked}
+                      />
+                      {currentRememberedMutationIndex === index ? (
+                        <button disabled className="timetravel-button active">
+                          now
+                        </button>
+                      ) : (
+                        <button
+                          disabled={executingSignalsCount}
+                          onClick={() => {
+                            mutationDoubleClicked({ index })
+                            connector.sendEvent(port, 'remember', index)
+                          }}
+                          className="timetravel-button"
+                        >
+                          travel
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    <Service
+                      showReturnValue
+                      service={record.data}
                       pathClicked={pathClicked}
                     />
-                    {currentRememberedMutationIndex === index ? (
-                      <button disabled className="timetravel-button active">
-                        now
-                      </button>
-                    ) : (
-                      <button
-                        disabled={executingSignalsCount}
-                        onClick={() => {
-                          mutationDoubleClicked({ index })
-                          connector.sendEvent(port, 'remember', index)
-                        }}
-                        className="timetravel-button"
-                      >
-                        travel
-                      </button>
-                    )}
-                  </div>
-                ) : (
-                  <Service
-                    showReturnValue
-                    service={record.data}
-                    pathClicked={pathClicked}
-                  />
-                )}
+                  )}
+                </div>
               </li>
             )
           })}

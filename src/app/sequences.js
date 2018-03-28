@@ -70,6 +70,11 @@ export const toggleShowActions = [
   actions.storeOptions,
 ]
 
+export const toggleShowActionNamesInHistory = [
+  toggle(state`storage.showActionNamesInHistory`),
+  actions.storeOptions,
+]
+
 export const toggleShowProviderReturnValue = [
   toggle(state`storage.showProviderReturnValue`),
   actions.storeOptions,
