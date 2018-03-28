@@ -14,6 +14,7 @@
   height: 30px;
   padding: 0 10px 0 10px;
   font-size: 14px;
+  font-weight: normal;
   display: flex;
   align-items: center;
   background-color: #fafafa;
@@ -22,10 +23,12 @@
 
 .mutations-stat-mutations {
   color: rgb(220, 100, 40);
+  margin-right: 5px;
 }
 
 .mutations-stat-providers {
   color: rgb(40, 160, 170);
+  margin-right: 5px;
 }
 
 .mutations-stat-divider {
@@ -35,6 +38,10 @@
 .mutations-settingsContainer {
   display: flex;
   margin-left: auto;
+}
+
+.mutations-settingsContainer label {
+  margin-left: 10px;
 }
 
 .mutations .list {
@@ -94,10 +101,17 @@
   background-color: #4285f4;
 }
 
+.mutations .record-wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
 .mutations .list-content {
   flex: 1;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .mutations .list-content > div:first-child {
@@ -111,6 +125,20 @@
   cursor: pointer;
 }
 
+.mutations .action-name {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  height: 26px;
+  line-height: 1;
+  color: #bababa;
+}
+
+.mutations .mutation {
+  padding: 0 !important;
+  margin: 3px 0;
+}
+
 .mutations .signal-name:hover {
   color: #1e78c3;
 }
@@ -122,10 +150,9 @@
 
 .timetravel-button {
   border: 1px solid #dadada;
-  margin: 5px 10px 5px 0;
+  margin-right: 5px;
   border-radius: 3px;
   box-sizing: border-box;
-  padding: 5px;
   background-color: #fff;
   width: 50px;
   cursor: pointer;
