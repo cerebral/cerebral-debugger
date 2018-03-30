@@ -1,13 +1,13 @@
 {
   "name": "cerebral-debugger",
-  "version": "2.0.0",
+  "version": "2.5.0",
   "private": true,
   "main": "main.js",
   "repository": "https://github.com/cerebral/cerebral",
   "author": "Christian Alfoni",
   "dependencies": {
-    "electron-default-menu": "^1.0.0",
-    "electron-json-storage": "^2.1.1",
-    "ws": "^1.1.1"
+    "electron-default-menu": "^1.0.1",
+    "electron-json-storage": "^4.0.2",
+    "ws": "^5.1.0"
   }
 }

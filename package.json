@@ -17,8 +17,14 @@
         "precommit": "lint-staged"
     },
     "lint-staged": {
-        "*.js": [ "eslint --fix", "git add" ],
-        "*.{md,css,json}": [ "prettier --write", "git add" ]
+        "*.js": [
+            "eslint --fix",
+            "git add"
+        ],
+        "*.{md,css,json}": [
+            "prettier --write",
+            "git add"
+        ]
     },
     "repository": {
         "type": "git",
@@ -33,11 +39,20 @@
         "productName": "Cerebral Debugger",
         "appId": "cerebral.debugger",
         "win": {
-            "target": [ "nsis", "7z" ]
+            "target": [
+                "nsis",
+                "7z"
+            ]
         },
         "linux": {
             "packageCategory": "devel",
-            "target": [ "AppImage", "snap", "deb", "rpm", "tar.gz" ],
+            "target": [
+                "AppImage",
+                "snap",
+                "deb",
+                "rpm",
+                "tar.gz"
+            ],
             "category": "Development"
         },
         "mac": {
@@ -45,54 +60,54 @@
         }
     },
     "dependencies": {
-        "@cerebral/inferno": "^3.0.1",
-        "@cerebral/useragent": "^3.0.1",
-        "cerebral": "^4.0.1",
+        "@cerebral/inferno": "^3.2.1",
+        "@cerebral/useragent": "^3.2.1",
+        "cerebral": "^4.2.1",
         "classnames": "^2.2.5",
-        "color": "^0.11.4",
+        "color": "^3.0.0",
         "color-hash": "^1.0.3",
-        "electron-default-menu": "^1.0.0",
+        "electron-default-menu": "^1.0.1",
         "electron-json-storage": "^4.0.2",
         "electron-log": "^2.2.14",
         "electron-updater": "^2.21.4",
-        "function-tree": "0.5.0-b-alpha.c00bd8f2",
-        "inferno": "^1.5.3",
-        "inferno-component": "^1.5.3",
-        "inferno-create-element": "^1.5.3",
-        "prismjs": "^1.6.0",
+        "function-tree": "3.2.1",
+        "inferno": "^5.0.1",
+        "inferno-component": "^5.0.1",
+        "inferno-create-element": "^5.0.1",
+        "prismjs": "^1.13.0",
         "traverse": "^0.6.6",
-        "ws": "^1.1.1"
+        "ws": "^5.1.0"
     },
     "devDependencies": {
-        "babel-core": "^6.24.1",
-        "babel-loader": "^6.4.1",
-        "babel-plugin-inferno": "^3.2.0",
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.4",
+        "babel-plugin-inferno": "^5.0.1",
         "babel-preset-es2015": "^6.24.1",
-        "concurrently": "^3.1.0",
-        "cross-env": "^4.0.0",
-        "css-loader": "^0.26.0",
+        "concurrently": "^3.5.1",
+        "cross-env": "^5.1.4",
+        "css-loader": "^0.28.11",
         "electron": "^1.8.4",
         "electron-builder": "20.8.1",
-        "eslint": "^4.18.1",
+        "eslint": "^4.19.1",
         "eslint-config-prettier": "^2.9.0",
         "eslint-config-standard": "^11.0.0",
         "eslint-config-standard-jsx": "^5.0.0",
-        "eslint-plugin-import": "^2.9.0",
+        "eslint-plugin-import": "^2.10.0",
         "eslint-plugin-node": "^6.0.1",
         "eslint-plugin-prettier": "^2.6.0",
-        "eslint-plugin-promise": "^3.6.0",
+        "eslint-plugin-promise": "^3.7.0",
         "eslint-plugin-react": "^7.7.0",
         "eslint-plugin-standard": "^3.0.1",
-        "express": "^4.14.0",
-        "file-loader": "^0.11.1",
+        "express": "^4.16.3",
+        "file-loader": "^1.1.11",
         "husky": "^0.14.3",
         "lint-staged": "^7.0.0",
-        "prettier": "1.11.0",
-        "rimraf": "^2.5.4",
-        "style-loader": "^0.13.1",
-        "url-loader": "^0.5.7",
-        "webpack": "^1.13.3",
-        "webpack-dev-server": "^1.16.2",
-        "webpack-hot-middleware": "^2.13.2"
+        "prettier": "1.11.1",
+        "rimraf": "^2.6.2",
+        "style-loader": "^0.20.3",
+        "url-loader": "^1.0.1",
+        "webpack": "^4.4.1",
+        "webpack-dev-server": "^3.1.1",
+        "webpack-hot-middleware": "^2.21.2"
     }
 }
