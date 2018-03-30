@@ -1,112 +1,98 @@
 {
-  "name": "cerebral-debugger",
-  "version": "2.4.0",
-  "description": "Cerebral Debugger",
-  "private": true,
-  "main": "electron/main.js",
-  "scripts": {
-    "start": "concurrently -k \"cross-env NODE_ENV=development node electron/devServer.js\" \"cross-env NODE_ENV=development npm run electron\"",
-    "electron": "electron .",
-    "build": "cross-env NODE_ENV=production webpack && npm run prepare:electron",
-    "prepare:electron": "rimraf electron/dist electron/node_modules && node scripts/createElectronSymlink",
-    "package:win": "cross-env NODE_ENV=production DEBUG=electron-builder:7z,electron-builder build -w",
-    "package:mac": "cross-env NODE_ENV=production DEBUG=electron-builder:7z,electron-builder build -m",
-    "package:linux": "cross-env NODE_ENV=production DEBUG=electron-builder:7z,electron-builder build -l",
-    "lint": "eslint \"**/*.js\"",
-    "test": "npm run lint",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{md,css,json}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cerebral/cerebral-debugger.git"
-  },
-  "bugs": {
-    "url": "https://github.com/cerebral/cerebral-debugger/issues"
-  },
-  "homepage": "http://cerebraljs.com/docs/introduction/debugger.html",
-  "author": "Christian Alfoni <christianalfoni@gmail.com>",
-  "build": {
-    "productName": "Cerebral Debugger",
-    "appId": "cerebral.debugger",
-    "win": {
-      "target": [
-        "nsis",
-        "7z"
-      ]
+    "name": "cerebral-debugger",
+    "version": "2.4.0",
+    "description": "Cerebral Debugger",
+    "private": true,
+    "main": "electron/main.js",
+    "scripts": {
+        "start": "concurrently -k \"cross-env NODE_ENV=development node electron/devServer.js\" \"cross-env NODE_ENV=development npm run electron\"",
+        "electron": "electron .",
+        "build": "cross-env NODE_ENV=production webpack && npm run prepare:electron",
+        "prepare:electron": "rimraf electron/dist electron/node_modules && node scripts/createElectronSymlink",
+        "package:win": "cross-env NODE_ENV=production DEBUG=electron-builder:7z,electron-builder build -w",
+        "package:mac": "cross-env NODE_ENV=production DEBUG=electron-builder:7z,electron-builder build -m",
+        "package:linux": "cross-env NODE_ENV=production DEBUG=electron-builder:7z,electron-builder build -l",
+        "lint": "eslint \"**/*.js\"",
+        "test": "npm run lint",
+        "precommit": "lint-staged"
     },
-    "linux": {
-      "packageCategory": "devel",
-      "target": [
-        "AppImage",
-        "tar.gz",
-        "deb",
-        "rpm"
-      ],
-      "category": "Development"
+    "lint-staged": {
+        "*.js": [ "eslint --fix", "git add" ],
+        "*.{md,css,json}": [ "prettier --write", "git add" ]
     },
-    "mac": {
-      "category": "public.app-category.developer-tools"
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cerebral/cerebral-debugger.git"
+    },
+    "bugs": {
+        "url": "https://github.com/cerebral/cerebral-debugger/issues"
+    },
+    "homepage": "http://cerebraljs.com/docs/introduction/debugger.html",
+    "author": "Christian Alfoni <christianalfoni@gmail.com>",
+    "build": {
+        "productName": "Cerebral Debugger",
+        "appId": "cerebral.debugger",
+        "win": {
+            "target": [ "nsis", "7z" ]
+        },
+        "linux": {
+            "packageCategory": "devel",
+            "target": [ "AppImage", "tar.gz", "deb", "rpm" ],
+            "category": "Development"
+        },
+        "mac": {
+            "category": "public.app-category.developer-tools"
+        }
+    },
+    "dependencies": {
+        "@cerebral/inferno": "^3.0.1",
+        "@cerebral/useragent": "^3.0.1",
+        "cerebral": "^4.0.1",
+        "classnames": "^2.2.5",
+        "color": "^0.11.4",
+        "color-hash": "^1.0.3",
+        "electron-default-menu": "^1.0.0",
+        "electron-json-storage": "^4.0.2",
+        "electron-log": "^2.2.2",
+        "electron-updater": "^2.21.4",
+        "function-tree": "0.5.0-b-alpha.c00bd8f2",
+        "inferno": "^1.5.3",
+        "inferno-component": "^1.5.3",
+        "inferno-create-element": "^1.5.3",
+        "prismjs": "^1.6.0",
+        "traverse": "^0.6.6",
+        "ws": "^1.1.1"
+    },
+    "devDependencies": {
+        "babel-core": "^6.24.1",
+        "babel-loader": "^6.4.1",
+        "babel-plugin-inferno": "^3.2.0",
+        "babel-preset-es2015": "^6.24.1",
+        "concurrently": "^3.1.0",
+        "cross-env": "^4.0.0",
+        "css-loader": "^0.26.0",
+        "electron": "^1.8.4",
+        "electron-builder": "20.8.1",
+        "eslint": "^4.18.1",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-config-standard": "^11.0.0",
+        "eslint-config-standard-jsx": "^5.0.0",
+        "eslint-plugin-import": "^2.9.0",
+        "eslint-plugin-node": "^6.0.1",
+        "eslint-plugin-prettier": "^2.6.0",
+        "eslint-plugin-promise": "^3.6.0",
+        "eslint-plugin-react": "^7.7.0",
+        "eslint-plugin-standard": "^3.0.1",
+        "express": "^4.14.0",
+        "file-loader": "^0.11.1",
+        "husky": "^0.14.3",
+        "lint-staged": "^7.0.0",
+        "prettier": "1.11.0",
+        "rimraf": "^2.5.4",
+        "style-loader": "^0.13.1",
+        "url-loader": "^0.5.7",
+        "webpack": "^1.13.3",
+        "webpack-dev-server": "^1.16.2",
+        "webpack-hot-middleware": "^2.13.2"
     }
-  },
-  "dependencies": {
-    "@cerebral/inferno": "^3.0.1",
-    "@cerebral/useragent": "^3.0.1",
-    "cerebral": "^4.0.1",
-    "classnames": "^2.2.5",
-    "color": "^0.11.4",
-    "color-hash": "^1.0.3",
-    "electron-default-menu": "^1.0.0",
-    "electron-json-storage": "^4.0.2",
-    "electron-log": "^2.2.2",
-    "electron-updater": "^2.20.1",
-    "function-tree": "0.5.0-b-alpha.c00bd8f2",
-    "inferno": "^1.5.3",
-    "inferno-component": "^1.5.3",
-    "inferno-create-element": "^1.5.3",
-    "prismjs": "^1.6.0",
-    "traverse": "^0.6.6",
-    "ws": "^1.1.1"
-  },
-  "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^6.4.1",
-    "babel-plugin-inferno": "^3.2.0",
-    "babel-preset-es2015": "^6.24.1",
-    "concurrently": "^3.1.0",
-    "cross-env": "^4.0.0",
-    "css-loader": "^0.26.0",
-    "electron": "^1.8.4",
-    "electron-builder": "19.49.0",
-    "eslint": "^4.18.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-config-standard-jsx": "^5.0.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-react": "^7.7.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "express": "^4.14.0",
-    "file-loader": "^0.11.1",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.0.0",
-    "prettier": "1.11.0",
-    "rimraf": "^2.5.4",
-    "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7",
-    "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2",
-    "webpack-hot-middleware": "^2.13.2"
-  }
 }
