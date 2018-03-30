@@ -16,7 +16,9 @@ addons:
     sources:
       - deadsnakes
       - sourceline: 'ppa:ubuntu-toolchain-r/test'
+      - sourceline: 'ppa:jonathonf/backports'
     packages:
+      - snapcraft
       - rpm
       - bsdtar
       - libopenjp2-tools
