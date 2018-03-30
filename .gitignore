@@ -8,9 +8,9 @@ lib
 electron/build
 website/builder/docs
 *darwin-x64
-**/yarn.lock
-**/yarn-error.log
-!/yarn.lock
+yarn-error.log
+yarn.lock
+package-lock.json
 ssl.crt
 ssl.key
 dev-app-update.yml
