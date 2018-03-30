@@ -1,6 +1,6 @@
 sudo: false
 language: node_js
-node_js: '6'
+node_js: '8'
 cache:
   directories:
     - node_modules
@@ -18,7 +18,6 @@ addons:
       - sourceline: 'ppa:ubuntu-toolchain-r/test'
       - sourceline: 'ppa:jonathonf/backports'
     packages:
-      - snapd
       - rpm
       - bsdtar
       - libopenjp2-tools
