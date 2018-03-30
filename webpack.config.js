@@ -1,18 +1,17 @@
 const webpack = require('webpack')
 const path = require('path')
 
-const plugins = [
-  new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-    },
-  }),
-]
-if (process.env.NODE_ENV !== 'production') {
+const mode = process.env.NODE_ENV || 'development'
+
+const plugins = []
+let devtool = false
+if (mode !== 'production') {
   plugins.push(new webpack.HotModuleReplacementPlugin())
+  devtool = 'source-map'
 }
 
 const config = {
+  mode,
   target: 'electron-renderer',
   entry: (process.env.NODE_ENV === 'production'
     ? []
@@ -21,15 +20,15 @@ const config = {
       ]
   ).concat(['./src/index']),
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js?$/,
-        loaders: ['babel-loader'],
+        use: ['babel-loader'],
         exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        loader: 'style!css-loader',
+        loader: 'style-loader!css-loader',
       },
       {
         test: /\.(png|woff)$/,
@@ -47,7 +46,8 @@ const config = {
       connector: path.resolve('connector', 'index.js'),
     },
   },
-  plugins: plugins,
+  plugins,
+  devtool,
 }
 
 module.exports = config
