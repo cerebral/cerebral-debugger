@@ -1,5 +1,4 @@
 import './styles.css'
-import Inferno from 'inferno' // eslint-disable-line
 
 export default function StatePaths(props) {
   const componentsWithStatePaths = Object.keys(props.map).reduce(

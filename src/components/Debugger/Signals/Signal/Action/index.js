@@ -1,7 +1,6 @@
 /* global Prism */
 import './styles.css'
-import Inferno from 'inferno'; // eslint-disable-line
-import Component from 'inferno-component'; // eslint-disable-line
+import { Component } from 'inferno'
 import Inspector from '../../../Inspector'
 import Mutation from './Mutation'
 import Service from './Service'

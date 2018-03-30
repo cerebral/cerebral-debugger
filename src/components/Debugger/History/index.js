@@ -1,5 +1,4 @@
 import './styles.css'
-import Inferno from 'inferno' // eslint-disable-line
 import { connect } from '@cerebral/inferno'
 import { state, signal } from 'cerebral/tags'
 import classnames from 'classnames'

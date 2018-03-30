@@ -1,5 +1,4 @@
 import './styles.css'
-import Inferno from 'inferno' // eslint-disable-line
 
 import Inspector from '../../../Inspector'
 

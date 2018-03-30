@@ -1,6 +1,5 @@
 import './styles.css'
-import Inferno from 'inferno' // eslint-disable-line
-import Component from 'inferno-component' // eslint-disable-line
+import { Component } from 'inferno'
 import { nameToColors } from '../../../../../common/utils'
 
 class Sequence extends Component {

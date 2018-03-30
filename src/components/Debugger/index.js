@@ -1,6 +1,5 @@
 import './styles.css'
-import Inferno from 'inferno' // eslint-disable-line
-import Component from 'inferno-component' // eslint-disable-line
+import { Component } from 'inferno'
 import jsonStorage from 'electron-json-storage'
 import connector from 'connector'
 import { Controller } from 'cerebral'

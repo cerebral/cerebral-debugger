@@ -1,6 +1,5 @@
 import './styles.css'
-import Inferno from 'inferno'; // eslint-disable-line
-import Component from 'inferno-component'; // eslint-disable-line
+import { Component } from 'inferno'
 import classNames from 'classnames'
 import connector from 'connector'
 import { connect } from '@cerebral/inferno'

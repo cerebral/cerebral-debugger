@@ -1,6 +1,5 @@
 import './styles.css'
-import Inferno from 'inferno' // eslint-disable-line
-import Component from 'inferno-component' // eslint-disable-line
+import { Component } from 'inferno'
 import { connect } from '@cerebral/inferno'
 import { state, signal } from 'cerebral/tags'
 import { nameToColors } from '../../../../common/utils'
