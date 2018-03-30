@@ -65,9 +65,9 @@ function createWindow() {
     })
   )
 
-  //  if (process.env.NODE_ENV === 'development') {
-  mainWindow.webContents.openDevTools()
-  //  }
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools()
+  }
 
   electron.Menu.setApplicationMenu(
     electron.Menu.buildFromTemplate([
