@@ -1,6 +1,6 @@
 {
   "name": "cerebral-debugger",
-  "version": "2.4.7",
+  "version": "2.4.9",
   "private": true,
   "main": "main.js",
   "repository": "https://github.com/cerebral/cerebral",
