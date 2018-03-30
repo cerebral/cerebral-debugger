@@ -37,7 +37,7 @@
         },
         "linux": {
             "packageCategory": "devel",
-            "target": [ "AppImage", "tar.gz", "deb", "rpm" ],
+            "target": [ "AppImage", "snap", "deb", "rpm", "tar.gz" ],
             "category": "Development"
         },
         "mac": {
@@ -53,7 +53,7 @@
         "color-hash": "^1.0.3",
         "electron-default-menu": "^1.0.0",
         "electron-json-storage": "^4.0.2",
-        "electron-log": "^2.2.2",
+        "electron-log": "^2.2.14",
         "electron-updater": "^2.21.4",
         "function-tree": "0.5.0-b-alpha.c00bd8f2",
         "inferno": "^1.5.3",

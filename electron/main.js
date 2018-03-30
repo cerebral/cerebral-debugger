@@ -59,7 +59,7 @@ function createWindow() {
   })
   mainWindow.loadURL(
     url.format({
-            pathname: __dirname + '/index.html', // eslint-disable-line
+      pathname: __dirname + '/index.html', // eslint-disable-line
       protocol: 'file:',
       slashes: true,
     })

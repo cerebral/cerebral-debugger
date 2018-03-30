@@ -19,7 +19,7 @@ addons:
     packages:
       - rpm
       - bsdtar
-      - icnsutils
+      - libopenjp2-tools
       - gcc-4.9
       - gcc-multilib
       - g++-multilib
