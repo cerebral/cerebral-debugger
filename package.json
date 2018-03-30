@@ -1,6 +1,6 @@
 {
     "name": "cerebral-debugger",
-    "version": "2.4.7",
+    "version": "2.4.8",
     "description": "Cerebral Debugger",
     "private": true,
     "main": "electron/main.js",
@@ -82,7 +82,7 @@
         "babel-core": "^6.26.0",
         "babel-loader": "^7.1.4",
         "babel-plugin-inferno": "^5.0.1",
-        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-env": "^1.6.1",
         "concurrently": "^3.5.1",
         "cross-env": "^5.1.4",
         "css-loader": "^0.28.11",
