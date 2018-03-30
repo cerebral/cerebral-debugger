@@ -18,7 +18,7 @@ addons:
       - sourceline: 'ppa:ubuntu-toolchain-r/test'
       - sourceline: 'ppa:jonathonf/backports'
     packages:
-      - snapcraft
+      - snapd
       - rpm
       - bsdtar
       - libopenjp2-tools

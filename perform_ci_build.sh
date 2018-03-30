@@ -3,6 +3,8 @@ git config --global user.email "christianalfoni@gmail.com"
 git config --global user.name "Christian Alfoni"
 if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then npm run build;
   if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
+    systemctl restart snapd.service
+    snap install snapcraft --classic
     npm run package:linux -- --publish=always;
   fi
   if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
