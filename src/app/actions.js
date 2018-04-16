@@ -183,6 +183,9 @@ export function setCurrentExecutionId({ props, state }) {
 export function runMutation({ props, state }) {
   const execution = props.data.execution
   const data = execution.data
+  const signal =
+    state.get(`signals.${execution.executionId}`) ||
+    state.get(`executedBySignals.${execution.executionId}`)
 
   if (data && data.type === 'mutation') {
     try {
@@ -193,7 +196,7 @@ export function runMutation({ props, state }) {
       state[method](path, ...JSON.parse(JSON.stringify(args)))
     } catch (e) {
       state.set('mutationsError', {
-        signalName: execution.name,
+        signalName: signal && signal.name,
         mutation: data,
       })
     }

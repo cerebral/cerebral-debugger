@@ -57,6 +57,7 @@ export default config =>
       showProviderReturnValueToggled: sequences.toggleShowProviderReturnValue,
       showProvidersInHistoryToggled: sequences.toggleProvidersInHistory,
       showActionNamesInHistoryToggled: sequences.toggleShowActionNamesInHistory,
+      showOperatorNameToggled: sequences.toggleShowOperatorName,
       showPropsToggled: sequences.toggleShowProps,
       createSignalTestClicked: sequences.createSignalTest,
     },

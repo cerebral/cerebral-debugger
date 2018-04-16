@@ -33,8 +33,41 @@ function getLineNumber(error) {
   }, -1)
 }
 
-function renderActionTitle(action) {
-  const actionName = getActionName(action)
+function getOperatorName(actionName) {
+  const operatorPath = actionName.params.split(',')[0].match(/`(.*)`/)[1]
+  const nameArray = operatorPath
+    .split(/(\${.*\})/)
+    .map(path => {
+      return path
+        .replace('props`', 'props.')
+        .replace('state`', 'state.')
+        .replace(/`/, '')
+    })
+    .filter(path => path.length)
+    .reduce((current, path) => {
+      if (path.match(/\${.*\}/)) {
+        return current.concat(path.replace('${', '[').replace('}', ']'))
+      }
+
+      return current.concat(path.split('.').filter(part => part.length))
+    }, [])
+  const exactArray = nameArray
+    .reverse()
+    .slice(0, 2)
+    .reverse()
+    .map(part => part[0].toUpperCase() + part.substr(1))
+
+  return {
+    name: `${actionName.name}${exactArray.join('')}`,
+  }
+}
+
+function renderActionTitle(action, showOperatorName) {
+  let actionName = getActionName(action)
+
+  if (showOperatorName && actionName.name.indexOf('operator.') === 0) {
+    actionName = getOperatorName(actionName)
+  }
 
   return (
     <div className="action-actionTitle">
@@ -64,7 +97,7 @@ function renderDetails(execution, isExpanded) {
       ) : null}
       {hasService ? <span className="action-hasService">provider</span> : null}
       {hasOutput ? <span className="action-hasOutput">output</span> : null}
-      <span className={`icon icon-${isExpanded ? 'up' : 'down'}`} />
+      <span className={`icon icon - ${isExpanded ? 'up' : 'down'} `} />
     </div>
   )
 }
@@ -164,7 +197,7 @@ class Action extends Component {
           <div className="action-titleContainer">
             <div className={titleClassname}>
               {action.isAsync && <i className="icon icon-asyncAction" />}
-              {renderActionTitle(action)}
+              {renderActionTitle(action, this.props.showOperatorName)}
             </div>
             {renderDetails(execution, isExpanded)}
           </div>
@@ -198,7 +231,7 @@ class Action extends Component {
                   <div className="action-actionInput">
                     <div className="action-inputLabel">
                       {execution.output.path === output
-                        ? `path.${output}:`
+                        ? `path.${output}: `
                         : 'output:'}
                     </div>
                     <div className="action-inputValue">
@@ -236,7 +269,7 @@ class Action extends Component {
         <div className="action-titleContainer">
           <div className={titleClassname}>
             {action.isAsync && <i className="icon icon-asyncAction" />}
-            {renderActionTitle(action)}
+            {renderActionTitle(action, this.props.showOperatorName)}
           </div>
           {renderDetails(execution, isExpanded)}
         </div>

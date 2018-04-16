@@ -121,7 +121,7 @@ export default connect(
               <h1>Ops!</h1>
               <h4>
                 Signal "{mutationsError.signalName}" causes an error doing{' '}
-                <strong>{mutationsError.mutation.name}</strong>("{mutationsError.mutation.args[0].join(
+                <strong>{mutationsError.mutation.method}</strong>("{mutationsError.mutation.args[0].join(
                   '.'
                 )}",{' '}
                 {JSON.stringify(mutationsError.mutation.args)

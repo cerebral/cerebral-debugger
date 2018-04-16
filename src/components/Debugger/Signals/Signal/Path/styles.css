@@ -1,12 +1,12 @@
 .action-path {
-  background-color: #6a6a6a;
+  color: #cacaca;
   min-height: 25px;
-  margin-bottom: 1px;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
   font-size: 14px;
   display: flex;
   align-items: center;
   padding: 5px 10px;
-  color: #f7f7f7;
   box-sizing: border-box;
   font-weight: bold;
 }
