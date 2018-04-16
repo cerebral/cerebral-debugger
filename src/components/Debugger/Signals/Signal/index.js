@@ -18,11 +18,13 @@ export default connect(
     executedBySignals: state`executedBySignals`,
     showProps: state`storage.showProps`,
     showActions: state`storage.showActions`,
+    showOperatorName: state`storage.showOperatorName`,
     showProviderReturnValue: state`storage.showProviderReturnValue`,
     searchValue: state`searchValue`,
     showPropsToggled: signal`showPropsToggled`,
     showActionsToggled: signal`showActionsToggled`,
     showProviderReturnValueToggled: signal`showProviderReturnValueToggled`,
+    showOperatorNameToggled: signal`showOperatorNameToggled`,
     actionToggled: signal`actionToggled`,
     propsToggled: signal`propsToggled`,
     mutationClicked: signal`mutationClicked`,
@@ -153,6 +155,7 @@ export default connect(
           ) : null}
           <Action
             action={action}
+            showOperatorName={this.props.showOperatorName}
             output={output}
             actionToggled={() =>
               this.props.actionToggled({
@@ -224,7 +227,15 @@ export default connect(
             {this.props.signal.name}
             <div className="signal-settingsContainer">
               <label>
-                provider returnvalue:{' '}
+                operatorname:{' '}
+                <input
+                  type="checkbox"
+                  onChange={() => this.props.showOperatorNameToggled()}
+                  checked={this.props.showOperatorName}
+                />
+              </label>
+              <label>
+                returnvalue:{' '}
                 <input
                   type="checkbox"
                   onChange={() => this.props.showProviderReturnValueToggled()}
@@ -232,7 +243,7 @@ export default connect(
                 />
               </label>
               <label>
-                expand actions:{' '}
+                expand:{' '}
                 <input
                   type="checkbox"
                   onChange={() =>

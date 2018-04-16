@@ -59,17 +59,15 @@ function createWindow() {
   })
   mainWindow.loadURL(
     url.format({
-            pathname: __dirname + '/index.html', // eslint-disable-line
+      pathname: __dirname + '/index.html', // eslint-disable-line
       protocol: 'file:',
       slashes: true,
     })
   )
 
-  /*
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools()
   }
-  */
 
   electron.Menu.setApplicationMenu(
     electron.Menu.buildFromTemplate([
