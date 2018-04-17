@@ -64,7 +64,7 @@ class Sequence extends Component {
             }}
             className="signal-sequenceName"
           >
-            {this.props.sequence.name || this.props.sequence.type}
+            {this.props.sequence.name}
             {this.state.showName ? (
               <span
                 className="signal-sequenceNameHorizontal"

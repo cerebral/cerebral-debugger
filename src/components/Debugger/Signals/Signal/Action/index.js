@@ -97,7 +97,7 @@ function renderDetails(execution, isExpanded) {
       ) : null}
       {hasService ? <span className="action-hasService">provider</span> : null}
       {hasOutput ? <span className="action-hasOutput">output</span> : null}
-      <span className={`icon icon - ${isExpanded ? 'up' : 'down'} `} />
+      <span className={`icon icon-${isExpanded ? 'up' : 'down'} `} />
     </div>
   )
 }

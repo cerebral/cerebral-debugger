@@ -1,12 +1,9 @@
 .action-path {
-  color: #cacaca;
+  color: #333;
   min-height: 25px;
-  border-top: 1px solid #f0f0f0;
-  border-bottom: 1px solid #f0f0f0;
+  border-top: 1px solid #cacaca;
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
+  padding: 5px;
   box-sizing: border-box;
-  font-weight: bold;
+  border-left: 1px solid #cacaca;
 }
