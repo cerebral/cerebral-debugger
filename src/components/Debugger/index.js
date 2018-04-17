@@ -168,7 +168,7 @@ class Debugger extends Component {
     if (this.state.error) {
       return (
         <div class="error">
-          <h1>Ops, something bad happened :(</h1>
+          <h1>Oh my, something bad happened :(</h1>
           <h4>{this.state.error.message}</h4>
           {this.state.error.stack
             .split('\n')

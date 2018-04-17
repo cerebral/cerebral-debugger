@@ -2,8 +2,15 @@
   font-size: 10px;
   background-color: #fff;
   padding-left: 10px;
-  margin-bottom: 1px;
+  border-left: 1px solid #eaeaea;
   cursor: pointer;
+}
+
+.action-container {
+  margin-bottom: 1px;
+}
+.action-container:last-child {
+  margin: 0;
 }
 
 .action-expanded {
@@ -36,8 +43,9 @@
 
 .action-actionDetails .icon {
   top: 0;
-  color: #bababa;
+  color: #eaeaea;
   margin-left: 10px;
+  font-size: 12px;
 }
 
 .action-hasMutation {

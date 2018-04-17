@@ -24,132 +24,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-mutation {
+.icon-down:before {
+  content: '\e904';
+}
+.icon-up:before {
+  content: '\e905';
 }
 .icon-mutation:before {
   content: '\e900';
 }
-.icon-signals {
-}
 .icon-signals:before {
   content: '\e901';
 }
-.icon-model {
-}
-.icon-model:before {
+.icon-path:before {
   content: '\e902';
 }
-.icon-components {
+.icon-model:before {
+  content: '\e906';
 }
 .icon-components:before {
   content: '\e903';
 }
-
-.icon-up {
-}
-.icon-up:before {
-  content: '\e904';
-}
-.icon-down {
-}
-.icon-down:before {
-  content: '\e905';
-}
-
-/*
-.icon-empty {}
-.icon-empty:before {
-  content: ' ';
-}
-
-.icon-mutation {
-}
-.icon-mutation:before {
-  content: '\e161';
-}
-
-.icon-service {
-}
-.icon-service:before {
-  content: '\e8b8';
-}
-
-.icon-radio_button_unchecked:before {
-  content: '\e836';
-}
-.icon-history:before {
-  content: '\e889';
-}
-
-.icon-model {
-}
-.icon-model:before {
-  content: '\e1db';
-}
-
-.icon-parallel {
-}
-.icon-parallel:before {
-  content: '\e53b';
-}
-
-.icon-action {
-}
-.icon-action:before {
-  content: '\e86c';
-}
-
-.icon-asyncAction {
-}
-.icon-asyncAction:before {
-  content: '\e889';
-}
-
-.icon-skippedOutput {
-}
-.icon-skippedOutput:before {
-  content: '\e5cd';
-}
-
-.icon-signals {
-}
-.icon-signals:before {
-  content: '\e565';
-}
-
-.icon-right {
-}
-.icon-right:before {
-  content: '\e5cc';
-}
-
-.icon-up {
-}
-.icon-up:before {
-  content: '\e5ce';
-}
-
-.icon-runningAction {
-}
-.icon-runningAction:before {
-  content: '\e5d5';
-}
-
-.icon-down {
-}
-.icon-down:before {
-  content: '\e5cf';
-}
-
-.icon-warning {
-}
-.icon-warning:before {
-  content: '\e002';
-}
-
-.icon-components {
-}
-.icon-components:before {
-  content: '\e871';
-}
-*/

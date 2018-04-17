@@ -49,7 +49,7 @@ export default connect(
                       })}
                       onClick={() => this.props.pageChanged({ page: 'model' })}
                     >
-                      <i className="icon icon-model" /> STATE-TREE
+                      <i className="icon icon-model" /> STATE
                     </li>,
                     <li
                       className={classNames('toolbar-tab', {

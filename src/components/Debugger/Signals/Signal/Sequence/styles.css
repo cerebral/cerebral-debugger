@@ -1,6 +1,12 @@
 .signal-sequence {
   display: flex;
   flex: 1;
+  border-top: 1px solid #cacaca;
+  border-left: 1px solid #cacaca;
+}
+
+.signal-container > .signal-sequence {
+  border: 0;
 }
 
 .signal-sequenceContainer {
@@ -12,14 +18,14 @@
 .signal-sequenceNameContainer {
   flex: 0 0;
   text-align: center;
-  border-right: 1px solid #f0f0f0;
 }
 
 .signal-sequenceName {
   position: relative;
   display: inline-block;
   font-size: 10px;
-  color: 'inherit';
+  text-overflow: ellipsis;
+  color: inherit;
   writing-mode: vertical-rl;
   letter-spacing: 0.25em;
   text-indent: 5px;
