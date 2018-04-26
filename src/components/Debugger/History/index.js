@@ -41,6 +41,7 @@ export default connect(
     const filteredHistory = history.filter(
       record => record.data.type === 'mutation' || showProvidersInHistory
     )
+    const mutations = history.filter(record => record.data.type === 'mutation')
     const counts = history.reduce(
       (currentCounts, record) => {
         return {
@@ -127,7 +128,8 @@ export default connect(
                         onMutationClick={path => mutationClicked({ path })}
                         pathClicked={pathClicked}
                       />
-                      {currentRememberedMutationIndex === index ? (
+                      {currentRememberedMutationIndex ===
+                      mutations.indexOf(record) ? (
                         <button disabled className="timetravel-button active">
                           now
                         </button>
@@ -135,8 +137,11 @@ export default connect(
                         <button
                           disabled={executingSignalsCount}
                           onClick={() => {
-                            mutationDoubleClicked({ index })
-                            connector.sendEvent(port, 'remember', index)
+                            const mutationIndex = mutations.indexOf(record)
+                            mutationDoubleClicked({
+                              index: mutationIndex,
+                            })
+                            connector.sendEvent(port, 'remember', mutationIndex)
                           }}
                           className="timetravel-button"
                         >

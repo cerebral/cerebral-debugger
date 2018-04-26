@@ -18,21 +18,6 @@ function getActionName(action) {
   }
 }
 
-function getLineNumber(error) {
-  const variable =
-    error.name === 'TypeError' && String(error.message).match(/'(.*?)'/)
-      ? String(error.message).match(/'(.*?)'/)[1]
-      : String(error.message).split(' ')[0]
-  const lines = error.func.split('\n')
-
-  return lines.reduce((lineNumber, line, index) => {
-    if (lineNumber === -1 && line.indexOf(variable) >= 0) {
-      return index + 2
-    }
-    return lineNumber
-  }, -1)
-}
-
 function getOperatorName(actionName) {
   const operatorPath = actionName.params.split(',')[0].match(/`(.*)`/)[1]
   const nameArray = operatorPath
@@ -102,13 +87,6 @@ function renderDetails(execution, isExpanded) {
   )
 }
 
-function renderCode(error) {
-  return error.func
-    .split('\n')
-    .map(line => line.replace(/\t/, ''))
-    .join('\n')
-}
-
 class Action extends Component {
   constructor(props) {
     super(props)
@@ -159,26 +137,14 @@ class Action extends Component {
           <div className={titleClassname}>
             <i className="icon icon-warning" />
             {action.isAsync && <i className="icon icon-asyncAction" />}
-            {renderActionTitle(action)}
+            {renderActionTitle(action, this.props.showOperatorName)}
           </div>
           <div className="action-error">
             <div className="action-error-message">
               <strong>{error.name}:</strong>{' '}
               <Inspector value={error} pathClicked={pathClicked} />
             </div>
-            <pre data-line={getLineNumber(error) || null}>
-              <code
-                ref={node => {
-                  this.errorElement = node
-                }}
-                className="language-javascript"
-                dangerouslySetInnerHTML={{ __html: renderCode(error) }}
-              />
-            </pre>
-            <div>
-              <strong>Stack:</strong>
-              <pre style={{ overflowX: 'scroll' }}>{error.stack}</pre>
-            </div>
+            <pre style={{ overflowX: 'scroll' }}>{error.stack}</pre>
             {executed}
           </div>
         </div>

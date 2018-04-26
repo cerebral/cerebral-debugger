@@ -164,7 +164,8 @@ export default connect(
             }
             showProviderReturnValue={this.props.showProviderReturnValue}
             isExpanded={Boolean(
-              this.props.signal.expandedActions[action.functionIndex]
+              this.props.showActions ||
+                this.props.signal.expandedActions[action.functionIndex]
             )}
             faded={hasSearchContent === false || !isExecuted}
             execution={execution}
@@ -183,7 +184,9 @@ export default connect(
                 pathClicked={this.props.pathClicked}
                 showPropsToggled={this.props.showPropsToggled}
                 showActionsToggled={this.props.showActionsToggled}
+                showActions={this.props.showActions}
                 showProviderReturnValue={this.props.showProviderReturnValue}
+                showOperatorName={this.props.showOperatorName}
                 actionToggled={this.props.actionToggled}
                 propsToggled={this.props.propsToggled}
                 showProps={this.props.showProps}
@@ -225,34 +228,40 @@ export default connect(
           >
             {this.props.signal.name}
             <div className="signal-settingsContainer">
-              <label>
-                operatorname:{' '}
-                <input
-                  type="checkbox"
-                  onChange={() => this.props.showOperatorNameToggled()}
-                  checked={this.props.showOperatorName}
-                />
-              </label>
-              <label>
-                returnvalue:{' '}
-                <input
-                  type="checkbox"
-                  onChange={() => this.props.showProviderReturnValueToggled()}
-                  checked={this.props.showProviderReturnValue}
-                />
-              </label>
-              <label>
-                expand:{' '}
-                <input
-                  type="checkbox"
-                  onChange={() =>
-                    this.props.showActionsToggled({
-                      executionId: this.props.signal.executionId,
-                    })
-                  }
-                  checked={this.props.showActions}
-                />
-              </label>
+              {this.props.executedBy ? null : (
+                <label>
+                  operatorname:{' '}
+                  <input
+                    type="checkbox"
+                    onChange={() => this.props.showOperatorNameToggled()}
+                    checked={this.props.showOperatorName}
+                  />
+                </label>
+              )}
+              {this.props.executedBy ? null : (
+                <label>
+                  returnvalue:{' '}
+                  <input
+                    type="checkbox"
+                    onChange={() => this.props.showProviderReturnValueToggled()}
+                    checked={this.props.showProviderReturnValue}
+                  />
+                </label>
+              )}
+              {this.props.executedBy ? null : (
+                <label>
+                  expand:{' '}
+                  <input
+                    type="checkbox"
+                    onChange={() =>
+                      this.props.showActionsToggled({
+                        executionId: this.props.signal.executionId,
+                      })
+                    }
+                    checked={this.props.showActions}
+                  />
+                </label>
+              )}
               {this.props.executedBy ? null : (
                 <label>
                   props:{' '}
