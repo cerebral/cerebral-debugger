@@ -2,7 +2,7 @@ import './styles.css'
 
 import Inspector from '../../../../Inspector'
 
-function Service({ service, pathClicked, showReturnValue }) {
+function Provider({ service, pathClicked, showReturnValue }) {
   const serviceNameStyle = {
     color: '#28a0aa',
   }
@@ -31,4 +31,4 @@ function Service({ service, pathClicked, showReturnValue }) {
   )
 }
 
-export default Service
+export default Provider

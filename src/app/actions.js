@@ -3,12 +3,35 @@
 import computedSignalsList from '../common/computed/signalsList'
 import { getActionNameByIndex } from '../common/utils'
 
-export function updateRenders({ props, state }) {
-  if (props.data.render.components.length) {
-    state.unshift('renders', props.data.render)
-    if (state.get('renders').length > 20) {
-      state.pop('renders')
-    }
+export function updateWatchUpdates({ props, state }) {
+  if (props.data.updates.ids.length) {
+    state.unshift('watchUpdates', props.data.updates)
+  }
+}
+
+export function addWatchersToHistory({ props, state }) {
+  if (props.data.updates.ids.length) {
+    const allWatchers = Object.keys(props.data.map).reduce(
+      (watchers, stateKey) => {
+        const statePathWatchers = props.data.map[stateKey]
+
+        return statePathWatchers.reduce((allWatchers, watcher) => {
+          allWatchers[watcher.id] = watcher
+
+          return allWatchers
+        }, watchers)
+      },
+      {}
+    )
+    props.data.updates.ids.forEach(id => {
+      const watcher = allWatchers[id]
+      state.unshift('history', {
+        data: {
+          type: 'watcher',
+          watcher,
+        },
+      })
+    })
   }
 }
 

@@ -3,7 +3,7 @@ import './styles.css'
 import { Component } from 'inferno'
 import Inspector from '../../../Inspector'
 import Mutation from './Mutation'
-import Service from './Service'
+import Provider from './Provider'
 import classnames from 'classnames'
 
 function getActionName(action) {
@@ -183,7 +183,7 @@ class Action extends Component {
                             pathClicked={pathClicked}
                           />
                         ) : (
-                          <Service
+                          <Provider
                             showReturnValue={this.props.showProviderReturnValue}
                             service={data}
                             key={index}

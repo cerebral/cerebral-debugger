@@ -54,6 +54,17 @@ export default connect(
                     <li
                       className={classNames('toolbar-tab', {
                         'toolbar-tab--active':
+                          this.props.currentPage === 'stateEffects',
+                      })}
+                      onClick={() =>
+                        this.props.pageChanged({ page: 'stateEffects' })
+                      }
+                    >
+                      <i className="icon icon-components" /> STATE EFFECTS
+                    </li>,
+                    <li
+                      className={classNames('toolbar-tab', {
+                        'toolbar-tab--active':
                           this.props.currentPage === 'history',
                       })}
                       onClick={() =>
@@ -62,21 +73,10 @@ export default connect(
                     >
                       <i className="icon icon-mutation" /> HISTORY
                     </li>,
-                    <li
-                      className={classNames('toolbar-tab', {
-                        'toolbar-tab--active':
-                          this.props.currentPage === 'components',
-                      })}
-                      onClick={() =>
-                        this.props.pageChanged({ page: 'components' })
-                      }
-                    >
-                      <i className="icon icon-components" /> COMPONENTS
-                    </li>,
                     <li className="toolbar-search">
                       <input
                         type="text"
-                        placeholder="Search path..."
+                        placeholder="Search state path..."
                         value={this.props.searchValue}
                         onInput={event =>
                           this.props.searchValueChanged({
@@ -85,11 +85,11 @@ export default connect(
                         }
                       />
                     </li>,
-                    this.props.currentPage === 'components' ? (
+                    this.props.currentPage === 'stateEffects' ? (
                       <li className="toolbar-search">
                         <input
                           type="text"
-                          placeholder="Search component..."
+                          placeholder="Search state effects..."
                           value={this.props.searchComponentValue}
                           onInput={event =>
                             this.props.searchComponentValueChanged({

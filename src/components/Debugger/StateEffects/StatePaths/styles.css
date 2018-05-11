@@ -1,0 +1,34 @@
+.statePaths-wrapper {
+  flex: 1;
+}
+
+.statePaths-componentsWrapper {
+  background-color: #fff;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ddd;
+  width: 100%;
+  list-style-type: none;
+  height: calc(100vh - 101px);
+  overflow-y: scroll;
+}
+
+.statePaths-itemHeader {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  padding: 0 15px;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #fafafa;
+}
+
+.statePaths-itemHeader div {
+  font-weight: normal;
+  opacity: 0.5;
+}

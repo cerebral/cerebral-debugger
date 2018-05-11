@@ -1,0 +1,137 @@
+.update-itemDetails {
+  display: flex;
+}
+
+.update-pathName {
+  flex: 1;
+}
+
+.update-item {
+  position: relative;
+  padding: 0 15px;
+  line-height: 30px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.update-item:hover {
+  background-color: #fafafa;
+}
+
+.update-watchers {
+  position: relative;
+  flex: 0 0 125px;
+  display: flex;
+  top: 1px;
+}
+
+.update-watchers .icon {
+  font-size: 12px;
+}
+
+.update-watcher {
+  flex: 1;
+  font-size: 10px;
+}
+
+.update-watcher.disabled {
+  opacity: 0.2;
+}
+
+.update-performance {
+  position: relative;
+  display: flex;
+  font-size: 10px;
+  align-items: center;
+  margin-right: 10px;
+  top: 1px;
+}
+
+.performance {
+  position: relative;
+  top: -1px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #333;
+  border-radius: 2px;
+  margin-right: 5px;
+}
+
+.performance.performance-high {
+  background-color: #78db27;
+}
+
+.performance.performance-medium {
+  background-color: #dbb427;
+}
+
+.performance.performance-low {
+  background-color: #eb1e1e;
+}
+
+.update-watchers {
+  flex: 0 0 125px;
+  display: flex;
+  position: relative;
+  top: 1px;
+  margin-left: 5px;
+}
+
+.update-watchers .icon {
+  font-size: 12px;
+}
+
+.update-watchers-item {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.update-watchers-item .icon {
+  font-size: 10px;
+}
+
+.update-watcher {
+  flex: 1;
+  font-size: 10px;
+}
+
+.update-watcher.disabled {
+  opacity: 0.2;
+}
+
+.update-watchers-item-count {
+  margin-left: auto;
+}
+
+.update-arrow {
+  flex: 0 0 15px;
+}
+
+.update-arrow .icon {
+  top: 0;
+  color: #eaeaea;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.update-watchers-subTitle {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.update-watchers-wrapper {
+  font-size: 12px;
+}
+
+.update-watchers-item-count {
+  position: relative;
+  margin-left: auto;
+  color: #bababa;
+}

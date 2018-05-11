@@ -31,8 +31,14 @@
   margin-right: 5px;
 }
 
+.mutations-stat-stateEffects {
+  color: #333;
+  margin-right: 5px;
+}
+
 .mutations-stat-divider {
   margin: 0 0.5rem;
+  color: #bababa;
 }
 
 .mutations-settingsContainer {
@@ -118,11 +124,20 @@
   flex: 1;
 }
 
-.mutations .signal-name {
+.mutations .signal-name,
+.mutations .watcher-type {
   flex: 0 0 200px;
   font-size: 12px;
   text-overflow: ellipsis;
   cursor: pointer;
+}
+
+.mutations .watcher-type .icon {
+  font-size: 12px;
+}
+
+.mutations .watcher-name {
+  font-size: 12px;
 }
 
 .mutations .action-name {

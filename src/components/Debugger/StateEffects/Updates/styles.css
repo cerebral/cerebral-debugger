@@ -1,8 +1,8 @@
-.statePaths-wrapper {
+.updates-wrapper {
   flex: 1;
 }
 
-.statePaths-componentsWrapper {
+.updates-componentsWrapper {
   background-color: #fff;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -15,16 +15,7 @@
   overflow-y: scroll;
 }
 
-.statePaths-item {
-  position: relative;
-  padding: 0 15px;
-  line-height: 30px;
-  border-bottom: 1px solid #ddd;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.statePaths-itemHeader {
+.updates-itemHeader {
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -37,18 +28,7 @@
   background-color: #fafafa;
 }
 
-.statePaths-itemHeader div {
+.updates-itemHeader div {
   font-weight: normal;
   opacity: 0.5;
-}
-
-.statePaths-pathName {
-  font-weight: bold;
-}
-
-.statePaths-item:hover {
-  background-color: #fafafa;
-}
-
-.statePaths-components {
 }

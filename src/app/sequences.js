@@ -41,9 +41,10 @@ export const handlePayload = [
     executionPathStart: actions.updateSignalPath,
     executionEnd: actions.endSignalExecution,
     executionFunctionError: actions.updateActionError,
-    components: [
-      set(state`componentsMap`, props`data.map`),
-      actions.updateRenders,
+    watchMap: [
+      set(state`watchMap`, props`data.map`),
+      actions.updateWatchUpdates,
+      actions.addWatchersToHistory,
     ],
     recorderMutation: actions.runRecordedMutation,
   },
@@ -67,6 +68,11 @@ export const toggleShowActions = [
 
 export const toggleShowActionNamesInHistory = [
   toggle(state`storage.showActionNamesInHistory`),
+  actions.storeOptions,
+]
+
+export const toggleShowStateEffectsInHistory = [
+  toggle(state`storage.showStateEffectsInHistory`),
   actions.storeOptions,
 ]
 
