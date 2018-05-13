@@ -219,10 +219,11 @@ export function clean({ props, state }) {
     state.set('signals', {})
     state.set('mutationsError', false)
     state.set('history', [])
-    state.set('renders', [])
     state.set('currentRememberedMutationIndex', 0)
     state.set('executingSignalsCount', 0)
     state.set('executedBySignals', {})
+    state.set('watchMap', {})
+    state.set('watchUpdates', [])
   }
 }
 
