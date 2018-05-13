@@ -1,5 +1,6 @@
 import './styles.css'
 import { Component } from 'inferno'
+import Tooltip from '../../Tooltip'
 
 export default class Update extends Component {
   constructor() {
@@ -44,14 +45,27 @@ export default class Update extends Component {
                 update.watchers.views.length ? '' : 'disabled'
               }`}
             >
-              <i className="icon icon-view" /> {update.watchers.views.length}
+              {update.watchers.views.length ? (
+                <Tooltip text="Views affected by this update">
+                  <i className="icon icon-view" />
+                </Tooltip>
+              ) : (
+                <i className="icon icon-view" />
+              )}{' '}
+              {update.watchers.views.length}
             </div>
             <div
               className={`update-watcher ${
                 update.watchers.computeds.length ? '' : 'disabled'
               }`}
             >
-              <i className="icon icon-computed" />{' '}
+              {update.watchers.computeds.length ? (
+                <Tooltip text="Computed affected by this update">
+                  <i className="icon icon-computed" />
+                </Tooltip>
+              ) : (
+                <i className="icon icon-computed" />
+              )}{' '}
               {update.watchers.computeds.length}
             </div>
             <div
@@ -59,7 +73,13 @@ export default class Update extends Component {
                 update.watchers.reactions.length ? '' : 'disabled'
               }`}
             >
-              <i className="icon icon-reaction" />{' '}
+              {update.watchers.reactions.length ? (
+                <Tooltip text="Reactions affected by this update">
+                  <i className="icon icon-reaction" />
+                </Tooltip>
+              ) : (
+                <i className="icon icon-reaction" />
+              )}{' '}
               {update.watchers.reactions.length}
             </div>
           </div>

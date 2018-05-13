@@ -1,5 +1,6 @@
 import './styles.css'
 import { Component } from 'inferno'
+import Tooltip from '../../Tooltip'
 
 export default class StatePath extends Component {
   constructor() {
@@ -25,14 +26,27 @@ export default class StatePath extends Component {
                 statePath.watchers.views.length ? '' : 'disabled'
               }`}
             >
-              <i className="icon icon-view" /> {statePath.watchers.views.length}
+              {statePath.watchers.views.length ? (
+                <Tooltip text="Views depending on this state">
+                  <i className="icon icon-view" />
+                </Tooltip>
+              ) : (
+                <i className="icon icon-view" />
+              )}{' '}
+              {statePath.watchers.views.length}
             </div>
             <div
               className={`statePath-watcher ${
                 statePath.watchers.computeds.length ? '' : 'disabled'
               }`}
             >
-              <i className="icon icon-computed" />{' '}
+              {statePath.watchers.computeds.length ? (
+                <Tooltip text="Computed depending on this state">
+                  <i className="icon icon-computed" />
+                </Tooltip>
+              ) : (
+                <i className="icon icon-computed" />
+              )}{' '}
               {statePath.watchers.computeds.length}
             </div>
             <div
@@ -40,7 +54,13 @@ export default class StatePath extends Component {
                 statePath.watchers.reactions.length ? '' : 'disabled'
               }`}
             >
-              <i className="icon icon-reaction" />{' '}
+              {statePath.watchers.reactions.length ? (
+                <Tooltip text="Reactions depending on this state">
+                  <i className="icon icon-reaction" />
+                </Tooltip>
+              ) : (
+                <i className="icon icon-reaction" />
+              )}{' '}
               {statePath.watchers.reactions.length}
             </div>
           </div>

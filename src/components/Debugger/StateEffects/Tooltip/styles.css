@@ -1,0 +1,17 @@
+.tooltip-container {
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 999;
+  background-color: #333;
+  padding: 0 5px;
+  color: #f7f7f7;
+  border-radius: 2px;
+  top: 10px;
+  left: 10px;
+  writing-mode: horizontal-tb;
+  text-align: left;
+  text-indent: 0;
+  font-size: 12px;
+}
