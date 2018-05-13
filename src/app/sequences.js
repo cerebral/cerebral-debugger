@@ -36,18 +36,15 @@ export const handlePayload = [
     init: [actions.clean, actions.setInitialPayload],
     bulk: [actions.clean, actions.parseAndRunMessages],
     executionStart: actions.addSignal,
-    execution: [
-      actions.updateSignal,
-      actions.runMutation,
-      actions.showHideAllActions,
-    ],
+    execution: [actions.updateSignal, actions.runMutation],
     executionFunctionEnd: actions.updateActionOutput,
     executionPathStart: actions.updateSignalPath,
     executionEnd: actions.endSignalExecution,
     executionFunctionError: actions.updateActionError,
-    components: [
-      set(state`componentsMap`, props`data.map`),
-      actions.updateRenders,
+    watchMap: [
+      set(state`watchMap`, props`data.map`),
+      actions.updateWatchUpdates,
+      actions.addWatchersToHistory,
     ],
     recorderMutation: actions.runRecordedMutation,
   },
@@ -66,12 +63,16 @@ export const changeSearchComponentValue = set(
 
 export const toggleShowActions = [
   toggle(state`storage.showActions`),
-  actions.showHideAllActions,
   actions.storeOptions,
 ]
 
 export const toggleShowActionNamesInHistory = [
   toggle(state`storage.showActionNamesInHistory`),
+  actions.storeOptions,
+]
+
+export const toggleShowStateEffectsInHistory = [
+  toggle(state`storage.showStateEffectsInHistory`),
   actions.storeOptions,
 ]
 
@@ -98,7 +99,6 @@ export const toggleShowProps = [
 export const setSignal = [
   set(state`currentPage`, 'signals'),
   actions.setCurrentExecutionId,
-  actions.showHideAllActions,
 ]
 
 export const toggleFullPathName = [

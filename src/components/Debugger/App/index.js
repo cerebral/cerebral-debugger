@@ -7,7 +7,7 @@ import { state, signal } from 'cerebral/tags'
 import Toolbar from '../Toolbar'
 import Signals from '../Signals'
 import History from '../History'
-import Components from '../Components'
+import StateEffects from '../StateEffects'
 import Model from '../Model'
 
 export default connect(
@@ -48,10 +48,10 @@ export default connect(
                 <Signals />
               </div>
             )
-          case 'components':
+          case 'stateEffects':
             return (
               <div className="app-content">
-                <Components />
+                <StateEffects />
               </div>
             )
           case 'history':
@@ -77,10 +77,10 @@ export default connect(
                 <Signals />
               </div>
             )
-          case 'components':
+          case 'stateEffects':
             return (
               <div className="app-content">
-                <Components />
+                <StateEffects />
               </div>
             )
           case 'history':

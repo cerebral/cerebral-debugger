@@ -1,0 +1,72 @@
+.statePath-item {
+  position: relative;
+  padding: 0 15px;
+  line-height: 30px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.statePath-itemDetails {
+  display: flex;
+}
+
+.statePath-pathName {
+  flex: 1;
+}
+
+.statePath-item:hover {
+  background-color: #fafafa;
+}
+
+.statePath-watchers {
+  flex: 0 0 125px;
+  display: flex;
+  position: relative;
+  top: 1px;
+  margin-left: 5px;
+}
+
+.statePath-watchers .icon {
+  font-size: 12px;
+}
+
+.statePath-watchers-item {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.statePath-watchers-item .icon {
+  font-size: 10px;
+}
+
+.statePath-watcher {
+  flex: 1;
+  font-size: 10px;
+}
+
+.statePath-watcher.disabled {
+  opacity: 0.2;
+}
+
+.statePath-watchers-item-count {
+  position: relative;
+  margin-left: auto;
+  color: #bababa;
+}
+
+.statePath-arrow {
+  flex: 0 0 15px;
+}
+
+.statePath-arrow .icon {
+  top: 0;
+  color: #eaeaea;
+  margin-left: 10px;
+  font-size: 12px;
+}

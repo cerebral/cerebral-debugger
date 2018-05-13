@@ -2,12 +2,12 @@ import './styles.css'
 import { connect } from '@cerebral/inferno'
 import { state } from 'cerebral/tags'
 import StatePaths from './StatePaths'
-import Renders from './Renders'
+import Updates from './Updates'
 
 export default connect(
   {
-    map: state`componentsMap`,
-    renders: state`renders`,
+    map: state`watchMap`,
+    updates: state`watchUpdates`,
     searchValue: state`searchValue`,
     searchComponentValue: state`searchComponentValue`,
   },
@@ -19,8 +19,10 @@ export default connect(
           pathFilter={props.searchValue}
           componentNameFilter={props.searchComponentValue}
         />
-        <Renders
-          renders={props.renders}
+        <div>&nbsp;</div>
+        <Updates
+          updates={props.updates}
+          map={props.map}
           pathFilter={props.searchValue}
           componentNameFilter={props.searchComponentValue}
         />

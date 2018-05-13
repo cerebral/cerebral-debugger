@@ -3,12 +3,35 @@
 import computedSignalsList from '../common/computed/signalsList'
 import { getActionNameByIndex } from '../common/utils'
 
-export function updateRenders({ props, state }) {
-  if (props.data.render.components.length) {
-    state.unshift('renders', props.data.render)
-    if (state.get('renders').length > 20) {
-      state.pop('renders')
-    }
+export function updateWatchUpdates({ props, state }) {
+  if (props.data.updates.ids.length) {
+    state.unshift('watchUpdates', props.data.updates)
+  }
+}
+
+export function addWatchersToHistory({ props, state }) {
+  if (props.data.updates.ids.length) {
+    const allWatchers = Object.keys(props.data.map).reduce(
+      (watchers, stateKey) => {
+        const statePathWatchers = props.data.map[stateKey]
+
+        return statePathWatchers.reduce((allWatchers, watcher) => {
+          allWatchers[watcher.id] = watcher
+
+          return allWatchers
+        }, watchers)
+      },
+      {}
+    )
+    props.data.updates.ids.forEach(id => {
+      const watcher = allWatchers[id]
+      state.unshift('history', {
+        data: {
+          type: 'watcher',
+          watcher,
+        },
+      })
+    })
   }
 }
 
@@ -75,9 +98,13 @@ export function updateExpandedPaths({ state, props }) {
 }
 
 export function toggleAction({ props, state }) {
-  const expandPath = `signals.${props.executionId}.expandedActions.${
+  const signalPath = state.get(`signals.${props.executionId}`)
+    ? `signals.${props.executionId}`
+    : `executedBySignals.${props.executionId}`
+  const expandPath = `${signalPath}.expandedActions.${
     props.action.functionIndex
   }`
+
   if (state.get(expandPath)) {
     state.unset(expandPath)
   } else {
@@ -120,29 +147,6 @@ export function updateActionError({ props, state }) {
     `${signalPath}.functionsRun.${execution.functionIndex}.error`,
     execution.error
   )
-}
-
-export function showHideAllActions({ props, state }) {
-  const showActions = state.get('storage.showActions')
-
-  const currentSignalExecutionId = state.get('currentSignalExecutionId')
-  const signalsKey = state.get(`signals.${currentSignalExecutionId}`)
-    ? 'signals'
-    : 'executedBySignals'
-
-  if (!showActions) {
-    state.set(`${signalsKey}.${currentSignalExecutionId}.expandedActions`, {})
-  } else {
-    const functionsRun = state.get(
-      `${signalsKey}.${currentSignalExecutionId}.functionsRun`
-    )
-    Object.keys(functionsRun).forEach(key => {
-      state.set(
-        `${signalsKey}.${currentSignalExecutionId}.expandedActions.${key}`,
-        true
-      )
-    })
-  }
 }
 
 export function runRecordedMutation({ props, state }) {
@@ -242,8 +246,9 @@ export function remember({ props, state }) {
     const mutation = mutations[x].data
     const args = mutation.args.slice()
     const path = args.shift()
+    const method = mutation.method.split('.').pop()
 
-    state[mutation.method](['model', ...path].join('.'), ...args)
+    state[method](['model', ...path].join('.'), ...args)
   }
 }
 
