@@ -47,6 +47,7 @@ export const handlePayload = [
       actions.addWatchersToHistory,
     ],
     recorderMutation: actions.runRecordedMutation,
+    otherwise: [],
   },
 ]
 
