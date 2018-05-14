@@ -11,10 +11,10 @@ export default function StatePaths(props) {
       return allWatchers
     }, watchers)
   }, {})
-  const statePaths = Object.keys(props.map)
+  const paths = Object.keys(props.map)
     .map(key => {
       return {
-        path: key,
+        path: `state.${key}`,
         watchers: props.map[key].reduce(
           (currentWatchers, watcher) => {
             if (watcher.type === 'View') {
@@ -35,6 +35,31 @@ export default function StatePaths(props) {
         ),
       }
     })
+    .concat(
+      Object.keys(props.computedMap).map(key => {
+        return {
+          path: `computed.${key}`,
+          watchers: props.computedMap[key].reduce(
+            (currentWatchers, watcher) => {
+              if (watcher.type === 'View') {
+                currentWatchers.views.push(watcher)
+              } else if (watcher.type === 'Computed') {
+                currentWatchers.computeds.push(watcher)
+              } else if (watcher.type === 'Reaction') {
+                currentWatchers.reactions.push(watcher)
+              }
+
+              return currentWatchers
+            },
+            {
+              computeds: [],
+              views: [],
+              reactions: [],
+            }
+          ),
+        }
+      })
+    )
     .sort((a, b) => {
       const aTotalCount =
         a.watchers.computeds.length +
@@ -58,15 +83,15 @@ export default function StatePaths(props) {
       <div className="statePaths-componentsWrapper">
         <div key="header" className="statePaths-itemHeader">
           <div className="statePaths-pathName">
-            {Object.keys(props.map).length} <small>state paths</small>
+            {paths.length} <small>watched</small>
           </div>
           <div className="statePaths-watchers">
             <span>
-              {Object.keys(allWatchers).length} <small>watchers</small>
+              {Object.keys(allWatchers).length} <small>watching</small>
             </span>
           </div>
         </div>
-        {statePaths.map(statePath => {
+        {paths.map(statePath => {
           return <StatePath key={statePath.path} statePath={statePath} />
         })}
       </div>

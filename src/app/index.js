@@ -29,6 +29,7 @@ export default config =>
       expandedSignalGroups: [],
       currentMutationPath: null,
       watchMap: {},
+      computedMap: {},
       watchUpdates: [],
       mutationsError: false,
       searchValue: '',

@@ -42,7 +42,8 @@ export const handlePayload = [
     executionEnd: actions.endSignalExecution,
     executionFunctionError: actions.updateActionError,
     watchMap: [
-      set(state`watchMap`, props`data.map`),
+      set(state`watchMap`, props`data.watchMap`),
+      set(state`computedMap`, props`data.computedMap`),
       actions.updateWatchUpdates,
       actions.addWatchersToHistory,
     ],

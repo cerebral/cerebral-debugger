@@ -2,21 +2,10 @@ import './styles.css'
 import Update from './Update'
 
 export default function Updates(props) {
-  const allWatchers = Object.keys(props.map).reduce((watchers, stateKey) => {
-    const statePathWatchers = props.map[stateKey]
-
-    return statePathWatchers.reduce((allWatchers, watcher) => {
-      allWatchers[watcher.id] = watcher
-
-      return allWatchers
-    }, watchers)
-  }, {})
   const updatesWithWatchers = props.updates.map(update => {
-    return Object.assign(update, {
-      watchers: update.ids.reduce(
-        (currentWatchers, id) => {
-          const watcher = allWatchers[id]
-
+    return Object.assign({}, update, {
+      watchers: update.watchers.reduce(
+        (currentWatchers, watcher) => {
           if (watcher.type === 'View') {
             currentWatchers.views.push(watcher)
           } else if (watcher.type === 'Computed') {

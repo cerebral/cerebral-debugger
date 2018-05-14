@@ -5,15 +5,33 @@ import { getActionNameByIndex } from '../common/utils'
 
 export function updateWatchUpdates({ props, state }) {
   if (props.data.updates.ids.length) {
-    state.unshift('watchUpdates', props.data.updates)
+    const allWatchers = Object.keys(props.data.watchMap).reduce(
+      (watchers, stateKey) => {
+        const statePathWatchers = props.data.watchMap[stateKey]
+
+        return statePathWatchers.reduce((allWatchers, watcher) => {
+          allWatchers[watcher.id] = watcher
+
+          return allWatchers
+        }, watchers)
+      },
+      {}
+    )
+
+    state.unshift(
+      'watchUpdates',
+      Object.assign(props.data.updates, {
+        watchers: props.data.updates.ids.map(id => allWatchers[id]),
+      })
+    )
   }
 }
 
 export function addWatchersToHistory({ props, state }) {
   if (props.data.updates.ids.length) {
-    const allWatchers = Object.keys(props.data.map).reduce(
+    const allWatchers = Object.keys(props.data.watchMap).reduce(
       (watchers, stateKey) => {
-        const statePathWatchers = props.data.map[stateKey]
+        const statePathWatchers = props.data.watchMap[stateKey]
 
         return statePathWatchers.reduce((allWatchers, watcher) => {
           allWatchers[watcher.id] = watcher

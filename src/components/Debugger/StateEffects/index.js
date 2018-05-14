@@ -6,7 +6,8 @@ import Updates from './Updates'
 
 export default connect(
   {
-    map: state`watchMap`,
+    watchMap: state`watchMap`,
+    computedMap: state`computedMap`,
     updates: state`watchUpdates`,
     searchValue: state`searchValue`,
     searchComponentValue: state`searchComponentValue`,
@@ -15,14 +16,15 @@ export default connect(
     return (
       <div className="components-wrapper">
         <StatePaths
-          map={props.map}
+          map={props.watchMap}
+          computedMap={props.computedMap}
           pathFilter={props.searchValue}
           componentNameFilter={props.searchComponentValue}
         />
         <div>&nbsp;</div>
         <Updates
           updates={props.updates}
-          map={props.map}
+          map={props.watchMap}
           pathFilter={props.searchValue}
           componentNameFilter={props.searchComponentValue}
         />
