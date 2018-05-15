@@ -1,7 +1,7 @@
 import './styles.css'
-import StatePath from './StatePath'
+import Watched from './Watched'
 
-export default function StatePaths(props) {
+export default function WatchedList(props) {
   const allWatchers = Object.keys(props.map).reduce((watchers, stateKey) => {
     const statePathWatchers = props.map[stateKey]
 
@@ -61,19 +61,10 @@ export default function StatePaths(props) {
       })
     )
     .sort((a, b) => {
-      const aTotalCount =
-        a.watchers.computeds.length +
-        a.watchers.reactions.length +
-        a.watchers.views.length
-      const bTotalCount =
-        b.watchers.computeds.length +
-        b.watchers.reactions.length +
-        b.watchers.views.length
-
-      if (aTotalCount > bTotalCount) {
-        return -1
-      } else if (aTotalCount < bTotalCount) {
+      if (a.path > b.path) {
         return 1
+      } else if (a.path < b.path) {
+        return -1
       }
       return 0
     })
@@ -92,7 +83,7 @@ export default function StatePaths(props) {
           </div>
         </div>
         {paths.map(statePath => {
-          return <StatePath key={statePath.path} statePath={statePath} />
+          return <Watched key={statePath.path} statePath={statePath} />
         })}
       </div>
     </div>

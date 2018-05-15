@@ -2,7 +2,7 @@ import './styles.css'
 import { Component } from 'inferno'
 import Tooltip from '../../Tooltip'
 
-export default class StatePath extends Component {
+export default class Watched extends Component {
   constructor() {
     super()
     this.state = {

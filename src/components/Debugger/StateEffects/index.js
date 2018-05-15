@@ -1,7 +1,7 @@
 import './styles.css'
 import { connect } from '@cerebral/inferno'
 import { state } from 'cerebral/tags'
-import StatePaths from './StatePaths'
+import WatchedList from './WatchedList'
 import Updates from './Updates'
 
 export default connect(
@@ -15,7 +15,7 @@ export default connect(
   function Components(props) {
     return (
       <div className="components-wrapper">
-        <StatePaths
+        <WatchedList
           map={props.watchMap}
           computedMap={props.computedMap}
           pathFilter={props.searchValue}

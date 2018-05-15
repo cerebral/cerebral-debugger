@@ -4,45 +4,17 @@ import computedSignalsList from '../common/computed/signalsList'
 import { getActionNameByIndex } from '../common/utils'
 
 export function updateWatchUpdates({ props, state }) {
-  if (props.data.updates.ids.length) {
-    const allWatchers = Object.keys(props.data.watchMap).reduce(
-      (watchers, stateKey) => {
-        const statePathWatchers = props.data.watchMap[stateKey]
-
-        return statePathWatchers.reduce((allWatchers, watcher) => {
-          allWatchers[watcher.id] = watcher
-
-          return allWatchers
-        }, watchers)
-      },
-      {}
-    )
-
-    state.unshift(
-      'watchUpdates',
-      Object.assign(props.data.updates, {
-        watchers: props.data.updates.ids.map(id => allWatchers[id]),
-      })
-    )
-  }
+  state.set(
+    'watchUpdates',
+    props.data.updates
+      .filter(update => update.changes.length)
+      .concat(state.get('watchUpdates'))
+  )
 }
 
 export function addWatchersToHistory({ props, state }) {
-  if (props.data.updates.ids.length) {
-    const allWatchers = Object.keys(props.data.watchMap).reduce(
-      (watchers, stateKey) => {
-        const statePathWatchers = props.data.watchMap[stateKey]
-
-        return statePathWatchers.reduce((allWatchers, watcher) => {
-          allWatchers[watcher.id] = watcher
-
-          return allWatchers
-        }, watchers)
-      },
-      {}
-    )
-    props.data.updates.ids.forEach(id => {
-      const watcher = allWatchers[id]
+  props.data.updates.forEach(update => {
+    update.watchers.forEach(watcher => {
       state.unshift('history', {
         data: {
           type: 'watcher',
@@ -50,7 +22,7 @@ export function addWatchersToHistory({ props, state }) {
         },
       })
     })
-  }
+  })
 }
 
 export function storeOptions({ storage, state }) {
