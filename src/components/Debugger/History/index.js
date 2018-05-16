@@ -54,12 +54,23 @@ export default connect(
     signalClicked,
     pathClicked,
   }) {
-    const filteredHistory = history.filter(
-      record =>
-        record.data.type === 'mutation' ||
-        (showProvidersInHistory && record.data.type === 'provider') ||
-        (showStateEffectsInHistory && record.data.type === 'watcher')
-    )
+    const filteredHistory = history
+      .filter(
+        record =>
+          record.data.type === 'mutation' ||
+          (showProvidersInHistory && record.data.type === 'provider') ||
+          (showStateEffectsInHistory && record.data.type === 'watcher')
+      )
+      .sort((a, b) => {
+        if (a.data.datetime < b.data.datetime) {
+          return 1
+        } else if (a.data.datetime > b.data.datetime) {
+          return -1
+        }
+
+        return 0
+      })
+
     const mutations = history.filter(record => record.data.type === 'mutation')
     const counts = history.reduce(
       (currentCounts, record) => {

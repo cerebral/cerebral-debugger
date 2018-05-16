@@ -17,6 +17,7 @@ export function addWatchersToHistory({ props, state }) {
     update.watchers.forEach(watcher => {
       state.unshift('history', {
         data: {
+          datetime: props.data.datetime,
           type: 'watcher',
           watcher,
         },
