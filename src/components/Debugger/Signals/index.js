@@ -85,14 +85,14 @@ export default connect(
               className="signals-rewrite"
               disabled={!currentSignalExecutionId}
             >
-              Create signal test
+              Create sequence test
             </button>
             <button
               onClick={() => this.onCopySignalsClick()}
               className="signals-rewrite"
               disabled={!currentSignalExecutionId}
             >
-              Copy signals data
+              Copy sequence data
             </button>
             <button
               onClick={() => this.onResetClick()}

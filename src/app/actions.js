@@ -320,7 +320,7 @@ export function createSignalTest({ state }) {
       return mocks
     }, [])
 
-  const test = `return Snapshot(app)${
+  const test = `return Snapshot(main)${
     filteredMutations.length
       ? `\n  ${filteredMutations
           .map(mutation => {

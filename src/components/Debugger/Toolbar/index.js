@@ -35,10 +35,7 @@ export default connect(
                 })}
                 onClick={() => this.props.pageChanged({ page: 'signals' })}
               >
-                <i className="icon icon-signals" />{' '}
-                {this.props.type === 'c' || this.props.type === 'cft'
-                  ? 'SIGNALS'
-                  : 'EXECUTION'}
+                <i className="icon icon-signals" /> SEQUENCES
               </li>
               {this.props.type === 'c' || this.props.type === 'cft'
                 ? [
