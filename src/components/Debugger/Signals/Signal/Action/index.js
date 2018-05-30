@@ -50,7 +50,7 @@ function getOperatorName(actionName) {
 function renderActionTitle(action, showOperatorName) {
   let actionName = getActionName(action)
 
-  if (showOperatorName && actionName.name.indexOf('operator.') === 0) {
+  if (showOperatorName && actionName.name.indexOf('factory.') === 0) {
     actionName = getOperatorName(actionName)
   }
 
