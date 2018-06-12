@@ -33,7 +33,7 @@ export const updateExpandedPaths = actions.updateExpandedPaths
 export const handlePayload = [
   equals(props`type`),
   {
-    init: [actions.clean, actions.setInitialPayload],
+    init: [actions.clean, actions.setInitialPayload, actions.setComputedState],
     bulk: [actions.clean, actions.parseAndRunMessages],
     executionStart: actions.addSignal,
     execution: [actions.updateSignal, actions.runMutation],
@@ -48,6 +48,7 @@ export const handlePayload = [
       actions.addWatchersToHistory,
     ],
     recorderMutation: actions.runRecordedMutation,
+    computedUpdate: actions.setComputedStateUpdate,
     otherwise: [],
   },
 ]

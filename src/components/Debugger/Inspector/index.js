@@ -39,10 +39,20 @@ function renderType(
   highlightPath,
   modelChanged,
   pathClicked,
-  expandedPaths
+  expandedPaths,
+  computed,
+  isComputed
 ) {
   if (value === undefined) {
     return null
+  }
+
+  const isComputedValue = computed && path.join('%') in computed
+
+  isComputed = isComputed || isComputedValue
+
+  if (isComputedValue) {
+    value = computed[path.join('%')]
   }
 
   if (isArray(value)) {
@@ -56,6 +66,9 @@ function renderType(
         propertyKey={propertyKey}
         highlightPath={highlightPath}
         expandedPaths={expandedPaths}
+        computed={computed}
+        isComputed={isComputed}
+        isComputedParent={isComputedValue}
       />
     )
   }
@@ -70,6 +83,9 @@ function renderType(
         propertyKey={propertyKey}
         highlightPath={highlightPath}
         expandedPaths={expandedPaths}
+        computed={computed}
+        isComputed={isComputed}
+        isComputedParent={isComputedValue}
       />
     )
   }
@@ -84,6 +100,9 @@ function renderType(
       propertyKey={propertyKey}
       highlightPath={highlightPath}
       expandedPaths={expandedPaths}
+      computed={computed}
+      isComputed={isComputed}
+      isComputedParent={isComputedValue}
     />
   )
 }
@@ -158,7 +177,9 @@ class ObjectValue extends Component {
             this.props.highlightPath,
             this.props.modelChanged,
             this.props.pathClicked,
-            this.props.expandedPaths
+            this.props.expandedPaths,
+            this.props.computed,
+            this.props.isComputed
           )}
         </div>
       </div>
@@ -173,7 +194,7 @@ class ObjectValue extends Component {
     return keys.join(', ')
   }
   render() {
-    const { value, hasNext } = this.props
+    const { value, hasNext, isComputedParent } = this.props
     const isExactHighlightPath =
       this.props.highlightPath &&
       String(this.props.highlightPath) === String(this.props.path)
@@ -190,6 +211,9 @@ class ObjectValue extends Component {
               : 'inspector-object'
           }
           onClick={this.onExpandClick}
+          style={{
+            opacity: isComputedParent ? 0.5 : 1,
+          }}
         >
           {this.props.propertyKey ? this.props.propertyKey + ': ' : null}
           <strong>{'{ '}</strong>
@@ -210,6 +234,9 @@ class ObjectValue extends Component {
               ? 'inspector-object inspector-highlight'
               : 'inspector-object'
           }
+          style={{
+            opacity: isComputedParent ? 0.5 : 1,
+          }}
         >
           <div onClick={this.onCollapseClick}>
             {this.props.propertyKey}: <strong>{'{ '}</strong>
@@ -241,6 +268,9 @@ class ObjectValue extends Component {
               ? 'inspector-object inspector-highlight'
               : 'inspector-object'
           }
+          style={{
+            opacity: isComputedParent ? 0.5 : 1,
+          }}
         >
           <div onClick={this.onCollapseClick}>
             <strong>{'{ '}</strong>
@@ -319,7 +349,9 @@ class ArrayValue extends Component {
           this.props.highlightPath,
           this.props.modelChanged,
           this.props.pathClicked,
-          this.props.expandedPaths
+          this.props.expandedPaths,
+          this.props.computed,
+          this.props.isComputed
         )}
       </div>
     )
@@ -327,7 +359,7 @@ class ArrayValue extends Component {
     return arrayItem
   }
   render() {
-    const { value, hasNext } = this.props
+    const { value, hasNext, isComputedParent } = this.props
     const isExactHighlightPath =
       this.props.highlightPath &&
       String(this.props.highlightPath) === String(this.props.path)
@@ -341,6 +373,9 @@ class ArrayValue extends Component {
               : 'inspector-array'
           }
           onClick={this.onExpandClick}
+          style={{
+            opacity: isComputedParent ? 0.5 : 1,
+          }}
         >
           {this.props.propertyKey ? this.props.propertyKey + ': ' : null}
           <strong>{'[ '}</strong>
@@ -360,6 +395,9 @@ class ArrayValue extends Component {
               ? 'inspector-array inspector-highlight'
               : 'inspector-array'
           }
+          style={{
+            opacity: isComputedParent ? 0.5 : 1,
+          }}
         >
           <div onClick={this.onCollapseClick}>
             {this.props.propertyKey}: <strong>{'[ '}</strong>
@@ -389,6 +427,9 @@ class ArrayValue extends Component {
               ? 'inspector-array inspector-highlight'
               : 'inspector-array'
           }
+          style={{
+            opacity: isComputedParent ? 0.5 : 1,
+          }}
         >
           <div onClick={this.onCollapseClick}>
             <strong>{'[ '}</strong>
@@ -432,6 +473,9 @@ class Value extends Component {
     }
   }
   onClick() {
+    if (this.props.isComputed) {
+      return
+    }
     this.setState({
       isEditing: !!this.context.options.canEdit,
     })
@@ -501,6 +545,7 @@ class Value extends Component {
     }
   }
   render() {
+    const { isComputedParent } = this.props
     let className = 'inspector-string'
     if (isNumber(this.props.value)) className = 'inspector-number'
     if (isBoolean(this.props.value)) className = 'inspector-boolean'
@@ -511,6 +556,9 @@ class Value extends Component {
           this.node = node
         }}
         className={className}
+        style={{
+          opacity: isComputedParent ? 0.5 : 1,
+        }}
       >
         {this.renderValue(this.props.value, this.props.hasNext)}
       </div>
@@ -538,7 +586,9 @@ class Inspector extends Component {
       this.props.path,
       this.props.modelChanged,
       this.props.pathClicked,
-      this.props.expandedPaths
+      this.props.expandedPaths,
+      this.props.computed,
+      false
     )
   }
 }
