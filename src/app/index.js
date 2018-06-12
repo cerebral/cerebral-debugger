@@ -30,6 +30,7 @@ export default config =>
       currentMutationPath: null,
       watchMap: {},
       computedMap: {},
+      computedState: {},
       watchUpdates: [],
       mutationsError: false,
       searchValue: '',

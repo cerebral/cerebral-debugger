@@ -14,12 +14,12 @@ export default function WatchedList(props) {
   const paths = Object.keys(props.map)
     .map(key => {
       return {
-        path: `state.${key}`,
+        path: key,
         watchers: props.map[key].reduce(
           (currentWatchers, watcher) => {
             if (watcher.type === 'View') {
               currentWatchers.views.push(watcher)
-            } else if (watcher.type === 'Computed') {
+            } else if (watcher.type === 'Compute') {
               currentWatchers.computeds.push(watcher)
             } else if (watcher.type === 'Reaction') {
               currentWatchers.reactions.push(watcher)
@@ -38,12 +38,12 @@ export default function WatchedList(props) {
     .concat(
       Object.keys(props.computedMap).map(key => {
         return {
-          path: `computed.${key}`,
+          path: key,
           watchers: props.computedMap[key].reduce(
             (currentWatchers, watcher) => {
               if (watcher.type === 'View') {
                 currentWatchers.views.push(watcher)
-              } else if (watcher.type === 'Computed') {
+              } else if (watcher.type === 'Compute') {
                 currentWatchers.computeds.push(watcher)
               } else if (watcher.type === 'Reaction') {
                 currentWatchers.reactions.push(watcher)

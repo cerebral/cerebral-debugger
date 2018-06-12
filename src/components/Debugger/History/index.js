@@ -10,7 +10,7 @@ import connector from 'connector'
 function getWatcherIcon(record) {
   if (record.data.watcher.type === 'View') {
     return <i className="icon icon-view" />
-  } else if (record.data.watcher.type === 'Computed') {
+  } else if (record.data.watcher.type === 'Compute') {
     return <i className="icon icon-computed" />
   } else if (record.data.watcher.type === 'Reaction') {
     return <i className="icon icon-computed" />

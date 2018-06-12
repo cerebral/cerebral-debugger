@@ -8,7 +8,7 @@ export default function Updates(props) {
         (currentWatchers, watcher) => {
           if (watcher.type === 'View') {
             currentWatchers.views.push(watcher)
-          } else if (watcher.type === 'Computed') {
+          } else if (watcher.type === 'Compute') {
             currentWatchers.computeds.push(watcher)
           } else if (watcher.type === 'Reaction') {
             currentWatchers.reactions.push(watcher)

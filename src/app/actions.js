@@ -3,6 +3,24 @@
 import computedSignalsList from '../common/computed/signalsList'
 import { getActionNameByIndex } from '../common/utils'
 
+export function setComputedStateUpdate({ props, state }) {
+  state.set(
+    `computedState.${props.data.path.replace(/\./g, '%')}`,
+    props.data.value
+  )
+}
+
+export function setComputedState({ props, state }) {
+  state.set(
+    'computedState',
+    Object.keys(props.data.initialComputedState).reduce((converted, key) => {
+      converted[key.replace(/\./g, '%')] = props.data.initialComputedState[key]
+
+      return converted
+    }, {})
+  )
+}
+
 export function updateWatchUpdates({ props, state }) {
   state.set(
     'watchUpdates',

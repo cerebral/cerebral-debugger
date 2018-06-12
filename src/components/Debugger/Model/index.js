@@ -11,6 +11,7 @@ export default connect(
     currentPage: state`currentPage`,
     useragent: state`useragent`,
     model: state`model`,
+    computedState: state`computedState`,
     path: state`currentMutationPath`,
     pathClicked: signal`pathClicked`,
     searchValue: state`searchValue`,
@@ -40,6 +41,7 @@ export default connect(
           >
             <Inspector
               value={this.props.model}
+              computed={this.props.computedState || {}}
               expanded
               canEdit
               path={
