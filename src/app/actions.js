@@ -11,6 +11,10 @@ export function setComputedStateUpdate({ props, state }) {
 }
 
 export function setComputedState({ props, state }) {
+  if (!props.data.initialComputedState) {
+    return
+  }
+
   state.set(
     'computedState',
     Object.keys(props.data.initialComputedState).reduce((converted, key) => {
