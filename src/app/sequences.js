@@ -1,5 +1,6 @@
-import { set, toggle, equals, wait } from 'cerebral/operators'
-import { state, props } from 'cerebral/tags'
+import { equals, set, toggle, wait } from 'cerebral/operators'
+import { props, state } from 'cerebral/tags'
+
 import * as actions from './actions'
 
 export const toggleAction = actions.toggleAction
@@ -34,6 +35,7 @@ export const handlePayload = [
   equals(props`type`),
   {
     init: [actions.clean, actions.setInitialPayload, actions.setComputedState],
+    reinit: [actions.setInitialPayload, actions.setComputedState],
     bulk: [actions.clean, actions.parseAndRunMessages],
     executionStart: actions.addSignal,
     execution: [actions.updateSignal, actions.runMutation],

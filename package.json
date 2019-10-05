@@ -100,7 +100,7 @@
         "express": "^4.16.3",
         "file-loader": "^1.1.11",
         "husky": "^0.14.3",
-        "lint-staged": "^7.0.0",
+        "lint-staged": "^9.4.1",
         "prettier": "1.11.1",
         "rimraf": "^2.6.2",
         "style-loader": "^0.20.3",
