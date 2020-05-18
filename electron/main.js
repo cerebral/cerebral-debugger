@@ -80,7 +80,7 @@ function createWindow() {
             label: 'Learn More',
             click() {
               require('electron').shell.openExternal(
-                'https://cerebraljs.com/docs/introduction/debugger.html'
+                'https://cerebraljs.com/docs/introduction/devtools.html'
               )
             },
           },
