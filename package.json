@@ -33,7 +33,7 @@
     "bugs": {
         "url": "https://github.com/cerebral/cerebral-debugger/issues"
     },
-    "homepage": "http://cerebraljs.com/docs/introduction/debugger.html",
+    "homepage": "http://cerebraljs.com/docs/introduction/devtools.html",
     "author": "Christian Alfoni <christianalfoni@gmail.com>",
     "build": {
         "productName": "Cerebral Debugger",
