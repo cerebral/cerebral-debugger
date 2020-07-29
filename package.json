@@ -104,6 +104,7 @@
         "file-loader": "1.1.11",
         "husky": "0.14.3",
         "lint-staged": "9.4.1",
+        "npm-force-resolutions": "0.0.3",
         "prettier": "1.11.1",
         "rimraf": "2.6.2",
         "style-loader": "0.20.3",
@@ -112,5 +113,8 @@
         "webpack-cli": "3.3.12",
         "webpack-dev-server": "3.11.0",
         "webpack-hot-middleware": "2.21.2"
+    },
+    "resolutions": {
+        "feature.js": "1.0.0"
     }
 }
