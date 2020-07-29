@@ -61,9 +61,9 @@
         }
     },
     "dependencies": {
-        "@cerebral/inferno": "^3.2.1",
-        "@cerebral/useragent": "^3.2.1",
-        "cerebral": "^4.2.1",
+        "@cerebral/inferno": "3.0.0",
+        "@cerebral/useragent": "2.6.0",
+        "cerebral": "4.2.2",
         "classnames": "2.2.5",
         "color": "3.0.0",
         "color-hash": "1.0.3",
