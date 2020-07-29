@@ -48,11 +48,14 @@ function createWindow() {
   }
 
   mainWindow = new BrowserWindow({
-    icon: path.resolve('icons', 'icon.png'),
+    icon: path.resolve('icons', 'icon.ico'),
     height: 768,
     width: 768,
     minHeight: 768,
     minWidth: 768,
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
   mainWindow.on('closed', function() {
     mainWindow = null

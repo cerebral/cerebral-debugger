@@ -7,11 +7,12 @@ export default config =>
   Module({
     modules: {
       storage,
-      useragent: UserAgent({
+      useragent: Module(UserAgent({
         media: {
           small: '(max-width: 1270px)',
         },
-      }),
+      })),
+      
     },
     state: {
       config,
