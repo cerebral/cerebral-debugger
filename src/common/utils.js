@@ -2,6 +2,11 @@ import ColorHash from 'color-hash'
 import traverse from 'traverse'
 
 export function getActionNameByIndex(signal, functionIndex) {
+  // Guard against undefined signal, staticTree, or items
+  if (!signal || !signal.staticTree || !signal.staticTree.items) {
+    return null
+  }
+  
   return traverse(signal.staticTree.items).reduce((acc, item) => {
     if (item && item.functionIndex === functionIndex) {
       return item.name
