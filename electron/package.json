@@ -6,8 +6,8 @@
   "repository": "https://github.com/cerebral/cerebral",
   "author": "Christian Alfoni",
   "dependencies": {
-    "electron-default-menu": "^1.0.1",
-    "electron-json-storage": "^4.0.2",
-    "ws": "^5.1.0"
+    "electron-default-menu": "1.0.1",
+    "electron-json-storage": "4.0.2",
+    "ws": "5.1.0"
   }
 }
